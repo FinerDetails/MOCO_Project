@@ -1,0 +1,154 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.example.moco_project"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="28"
+8-->C:\Users\Erkka\AndroidStudioProjects\MOCOPROJECT\app\src\main\AndroidManifest.xml
+9        android:targetSdkVersion="33" />
+9-->C:\Users\Erkka\AndroidStudioProjects\MOCOPROJECT\app\src\main\AndroidManifest.xml
+10
+11    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+11-->C:\Users\Erkka\AndroidStudioProjects\MOCOPROJECT\app\src\main\AndroidManifest.xml:5:5-81
+11-->C:\Users\Erkka\AndroidStudioProjects\MOCOPROJECT\app\src\main\AndroidManifest.xml:5:22-78
+12    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+12-->C:\Users\Erkka\AndroidStudioProjects\MOCOPROJECT\app\src\main\AndroidManifest.xml:6:5-79
+12-->C:\Users\Erkka\AndroidStudioProjects\MOCOPROJECT\app\src\main\AndroidManifest.xml:6:22-76
+13
+14    <!-- Include required permissions for Google Maps API to run. -->
+15    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+15-->[com.google.android.gms:play-services-maps:18.1.0] C:\Users\Erkka\.gradle\caches\transforms-3\75af5e97870578068c76452f146cb9a9\transformed\play-services-maps-18.1.0\AndroidManifest.xml:23:5-79
+15-->[com.google.android.gms:play-services-maps:18.1.0] C:\Users\Erkka\.gradle\caches\transforms-3\75af5e97870578068c76452f146cb9a9\transformed\play-services-maps-18.1.0\AndroidManifest.xml:23:22-76
+16    <uses-permission android:name="android.permission.INTERNET" />
+16-->[com.google.android.gms:play-services-maps:18.1.0] C:\Users\Erkka\.gradle\caches\transforms-3\75af5e97870578068c76452f146cb9a9\transformed\play-services-maps-18.1.0\AndroidManifest.xml:24:5-67
+16-->[com.google.android.gms:play-services-maps:18.1.0] C:\Users\Erkka\.gradle\caches\transforms-3\75af5e97870578068c76452f146cb9a9\transformed\play-services-maps-18.1.0\AndroidManifest.xml:24:22-64
+17
+18    <uses-feature
+18-->[com.google.android.gms:play-services-maps:18.1.0] C:\Users\Erkka\.gradle\caches\transforms-3\75af5e97870578068c76452f146cb9a9\transformed\play-services-maps-18.1.0\AndroidManifest.xml:26:5-28:35
+19        android:glEsVersion="0x00020000"
+19-->[com.google.android.gms:play-services-maps:18.1.0] C:\Users\Erkka\.gradle\caches\transforms-3\75af5e97870578068c76452f146cb9a9\transformed\play-services-maps-18.1.0\AndroidManifest.xml:27:9-41
+20        android:required="true" />
+20-->[com.google.android.gms:play-services-maps:18.1.0] C:\Users\Erkka\.gradle\caches\transforms-3\75af5e97870578068c76452f146cb9a9\transformed\play-services-maps-18.1.0\AndroidManifest.xml:28:9-32
+21
+22    <queries>
+22-->[com.google.android.gms:play-services-maps:18.1.0] C:\Users\Erkka\.gradle\caches\transforms-3\75af5e97870578068c76452f146cb9a9\transformed\play-services-maps-18.1.0\AndroidManifest.xml:30:5-34:15
+23
+24        <!-- Needs to be explicitly declared on Android R+ -->
+25        <package android:name="com.google.android.apps.maps" />
+25-->[com.google.android.gms:play-services-maps:18.1.0] C:\Users\Erkka\.gradle\caches\transforms-3\75af5e97870578068c76452f146cb9a9\transformed\play-services-maps-18.1.0\AndroidManifest.xml:33:9-64
+25-->[com.google.android.gms:play-services-maps:18.1.0] C:\Users\Erkka\.gradle\caches\transforms-3\75af5e97870578068c76452f146cb9a9\transformed\play-services-maps-18.1.0\AndroidManifest.xml:33:18-61
+26    </queries>
+27
+28    <permission
+28-->[androidx.core:core:1.9.0] C:\Users\Erkka\.gradle\caches\transforms-3\8c25e88eb4ea76e8f3d0900731d8ae12\transformed\core-1.9.0\AndroidManifest.xml:22:5-24:47
+29        android:name="com.example.moco_project.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+29-->[androidx.core:core:1.9.0] C:\Users\Erkka\.gradle\caches\transforms-3\8c25e88eb4ea76e8f3d0900731d8ae12\transformed\core-1.9.0\AndroidManifest.xml:23:9-81
+30        android:protectionLevel="signature" />
+30-->[androidx.core:core:1.9.0] C:\Users\Erkka\.gradle\caches\transforms-3\8c25e88eb4ea76e8f3d0900731d8ae12\transformed\core-1.9.0\AndroidManifest.xml:24:9-44
+31
+32    <uses-permission android:name="com.example.moco_project.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+32-->[androidx.core:core:1.9.0] C:\Users\Erkka\.gradle\caches\transforms-3\8c25e88eb4ea76e8f3d0900731d8ae12\transformed\core-1.9.0\AndroidManifest.xml:26:5-97
+32-->[androidx.core:core:1.9.0] C:\Users\Erkka\.gradle\caches\transforms-3\8c25e88eb4ea76e8f3d0900731d8ae12\transformed\core-1.9.0\AndroidManifest.xml:26:22-94
+33
+34    <application
+34-->C:\Users\Erkka\AndroidStudioProjects\MOCOPROJECT\app\src\main\AndroidManifest.xml:8:5-38:19
+35        android:allowBackup="true"
+35-->C:\Users\Erkka\AndroidStudioProjects\MOCOPROJECT\app\src\main\AndroidManifest.xml:9:9-35
+36        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+36-->[androidx.core:core:1.9.0] C:\Users\Erkka\.gradle\caches\transforms-3\8c25e88eb4ea76e8f3d0900731d8ae12\transformed\core-1.9.0\AndroidManifest.xml:28:18-86
+37        android:dataExtractionRules="@xml/data_extraction_rules"
+37-->C:\Users\Erkka\AndroidStudioProjects\MOCOPROJECT\app\src\main\AndroidManifest.xml:10:9-65
+38        android:debuggable="true"
+39        android:extractNativeLibs="false"
+40        android:fullBackupContent="@xml/backup_rules"
+40-->C:\Users\Erkka\AndroidStudioProjects\MOCOPROJECT\app\src\main\AndroidManifest.xml:11:9-54
+41        android:icon="@mipmap/ic_launcher"
+41-->C:\Users\Erkka\AndroidStudioProjects\MOCOPROJECT\app\src\main\AndroidManifest.xml:12:9-43
+42        android:label="@string/app_name"
+42-->C:\Users\Erkka\AndroidStudioProjects\MOCOPROJECT\app\src\main\AndroidManifest.xml:13:9-41
+43        android:roundIcon="@mipmap/ic_launcher_round"
+43-->C:\Users\Erkka\AndroidStudioProjects\MOCOPROJECT\app\src\main\AndroidManifest.xml:14:9-54
+44        android:supportsRtl="true"
+44-->C:\Users\Erkka\AndroidStudioProjects\MOCOPROJECT\app\src\main\AndroidManifest.xml:15:9-35
+45        android:testOnly="true"
+46        android:theme="@style/Theme.MOCOPROJECT" >
+46-->C:\Users\Erkka\AndroidStudioProjects\MOCOPROJECT\app\src\main\AndroidManifest.xml:16:9-49
+47        <meta-data
+48            android:name="com.google.android.geo.API_KEY"
+48-->C:\Users\Erkka\AndroidStudioProjects\MOCOPROJECT\app\src\main\AndroidManifest.xml:20:13-58
+49            android:value="AIzaSyC1XfZwbIaJKxcY0NnLC9cifg3Lt0-ZXjc" />
+49-->C:\Users\Erkka\AndroidStudioProjects\MOCOPROJECT\app\src\main\AndroidManifest.xml:21:13-44
+50        <meta-data
+50-->C:\Users\Erkka\AndroidStudioProjects\MOCOPROJECT\app\src\main\AndroidManifest.xml:22:9-24:69
+51            android:name="com.google.android.gms.version"
+51-->C:\Users\Erkka\AndroidStudioProjects\MOCOPROJECT\app\src\main\AndroidManifest.xml:23:13-58
+52            android:value="@integer/google_play_services_version" />
+52-->C:\Users\Erkka\AndroidStudioProjects\MOCOPROJECT\app\src\main\AndroidManifest.xml:24:13-66
+53
+54        <activity
+54-->C:\Users\Erkka\AndroidStudioProjects\MOCOPROJECT\app\src\main\AndroidManifest.xml:25:9-27:40
+55            android:name="com.example.moco_project.MapActivity"
+55-->C:\Users\Erkka\AndroidStudioProjects\MOCOPROJECT\app\src\main\AndroidManifest.xml:26:13-40
+56            android:exported="false" />
+56-->C:\Users\Erkka\AndroidStudioProjects\MOCOPROJECT\app\src\main\AndroidManifest.xml:27:13-37
+57        <activity
+57-->C:\Users\Erkka\AndroidStudioProjects\MOCOPROJECT\app\src\main\AndroidManifest.xml:28:9-36:20
+58            android:name="com.example.moco_project.MainActivity"
+58-->C:\Users\Erkka\AndroidStudioProjects\MOCOPROJECT\app\src\main\AndroidManifest.xml:29:13-41
+59            android:exported="true" >
+59-->C:\Users\Erkka\AndroidStudioProjects\MOCOPROJECT\app\src\main\AndroidManifest.xml:30:13-36
+60            <intent-filter>
+60-->C:\Users\Erkka\AndroidStudioProjects\MOCOPROJECT\app\src\main\AndroidManifest.xml:31:13-35:29
+61                <action android:name="android.intent.action.MAIN" />
+61-->C:\Users\Erkka\AndroidStudioProjects\MOCOPROJECT\app\src\main\AndroidManifest.xml:32:17-69
+61-->C:\Users\Erkka\AndroidStudioProjects\MOCOPROJECT\app\src\main\AndroidManifest.xml:32:25-66
+62
+63                <category android:name="android.intent.category.LAUNCHER" />
+63-->C:\Users\Erkka\AndroidStudioProjects\MOCOPROJECT\app\src\main\AndroidManifest.xml:34:17-77
+63-->C:\Users\Erkka\AndroidStudioProjects\MOCOPROJECT\app\src\main\AndroidManifest.xml:34:27-74
+64            </intent-filter>
+65        </activity>
+66
+67        <!-- Needs to be explicitly declared on P+ -->
+68        <uses-library
+68-->[com.google.android.gms:play-services-maps:18.1.0] C:\Users\Erkka\.gradle\caches\transforms-3\75af5e97870578068c76452f146cb9a9\transformed\play-services-maps-18.1.0\AndroidManifest.xml:39:9-41:40
+69            android:name="org.apache.http.legacy"
+69-->[com.google.android.gms:play-services-maps:18.1.0] C:\Users\Erkka\.gradle\caches\transforms-3\75af5e97870578068c76452f146cb9a9\transformed\play-services-maps-18.1.0\AndroidManifest.xml:40:13-50
+70            android:required="false" />
+70-->[com.google.android.gms:play-services-maps:18.1.0] C:\Users\Erkka\.gradle\caches\transforms-3\75af5e97870578068c76452f146cb9a9\transformed\play-services-maps-18.1.0\AndroidManifest.xml:41:13-37
+71
+72        <activity
+72-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\Erkka\.gradle\caches\transforms-3\5a2b94c746ce46871975eb82e8b12f66\transformed\play-services-base-18.0.1\AndroidManifest.xml:20:9-22:45
+73            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+73-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\Erkka\.gradle\caches\transforms-3\5a2b94c746ce46871975eb82e8b12f66\transformed\play-services-base-18.0.1\AndroidManifest.xml:20:19-85
+74            android:exported="false"
+74-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\Erkka\.gradle\caches\transforms-3\5a2b94c746ce46871975eb82e8b12f66\transformed\play-services-base-18.0.1\AndroidManifest.xml:22:19-43
+75            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+75-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\Erkka\.gradle\caches\transforms-3\5a2b94c746ce46871975eb82e8b12f66\transformed\play-services-base-18.0.1\AndroidManifest.xml:21:19-78
+76
+77        <provider
+77-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Erkka\.gradle\caches\transforms-3\0fef484d2d7d3612c69865f977f8c08f\transformed\emoji2-1.2.0\AndroidManifest.xml:24:9-32:20
+78            android:name="androidx.startup.InitializationProvider"
+78-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Erkka\.gradle\caches\transforms-3\0fef484d2d7d3612c69865f977f8c08f\transformed\emoji2-1.2.0\AndroidManifest.xml:25:13-67
+79            android:authorities="com.example.moco_project.androidx-startup"
+79-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Erkka\.gradle\caches\transforms-3\0fef484d2d7d3612c69865f977f8c08f\transformed\emoji2-1.2.0\AndroidManifest.xml:26:13-68
+80            android:exported="false" >
+80-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Erkka\.gradle\caches\transforms-3\0fef484d2d7d3612c69865f977f8c08f\transformed\emoji2-1.2.0\AndroidManifest.xml:27:13-37
+81            <meta-data
+81-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Erkka\.gradle\caches\transforms-3\0fef484d2d7d3612c69865f977f8c08f\transformed\emoji2-1.2.0\AndroidManifest.xml:29:13-31:52
+82                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+82-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Erkka\.gradle\caches\transforms-3\0fef484d2d7d3612c69865f977f8c08f\transformed\emoji2-1.2.0\AndroidManifest.xml:30:17-75
+83                android:value="androidx.startup" />
+83-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Erkka\.gradle\caches\transforms-3\0fef484d2d7d3612c69865f977f8c08f\transformed\emoji2-1.2.0\AndroidManifest.xml:31:17-49
+84            <meta-data
+84-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\Erkka\.gradle\caches\transforms-3\ae3e8265de2d7f874c642be745cd48da\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:31:13-33:52
+85                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+85-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\Erkka\.gradle\caches\transforms-3\ae3e8265de2d7f874c642be745cd48da\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:32:17-78
+86                android:value="androidx.startup" />
+86-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\Erkka\.gradle\caches\transforms-3\ae3e8265de2d7f874c642be745cd48da\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:33:17-49
+87        </provider>
+88    </application>
+89
+90</manifest>

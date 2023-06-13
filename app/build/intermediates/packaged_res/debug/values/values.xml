@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="black_overlay">#66000000</color>
+    <color name="light_blue_600">#FF039BE5</color>
+    <color name="light_blue_900">#FF01579B</color>
+    <color name="light_blue_A200">#FF40C4FF</color>
+    <color name="light_blue_A400">#FF00B0FF</color>
+    <color name="white">#FFFFFFFF</color>
+    <string name="app_name">MOCO-PROJECT</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="location_permission_denied">This sample requires location permission to enable the \'my location\' layer. Please try again and grant access to use the location.\nIf the permission has been permanently denied, it can be enabled from the System Settings > Apps > \'Google Maps API Demos\'.</string>
+    <string name="permission_rationale_location">Access to the location service is required to demonstrate the \'my location\' feature, which shows your current location on the map.</string>
+    <string name="permission_required_toast">Location permission is required for this demo.</string>
+    <string name="title_activity_map">MapActivity</string>
+    <style name="Base.Theme.MOCOPROJECT" parent="Theme.Material3.DayNight.NoActionBar">
+        
+        
+    </style>
+    <style name="Theme.MOCOPROJECT" parent="Base.Theme.MOCOPROJECT"/>
+    <style name="Theme.MOCOPROJECT.Fullscreen" parent="Theme.MOCOPROJECT">
+        <item name="android:actionBarStyle">@style/Widget.Theme.MOCOPROJECT.ActionBar.Fullscreen
+        </item>
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:windowBackground">@null</item>
+    </style>
+    <style name="ThemeOverlay.MOCOPROJECT.FullscreenContainer" parent="">
+        <item name="fullscreenBackgroundColor">@color/light_blue_600</item>
+        <item name="fullscreenTextColor">@color/light_blue_A200</item>
+    </style>
+    <style name="Widget.Theme.MOCOPROJECT.ActionBar.Fullscreen" parent="Widget.AppCompat.ActionBar">
+        <item name="android:background">@color/black_overlay</item>
+    </style>
+    <style name="Widget.Theme.MOCOPROJECT.ButtonBar.Fullscreen" parent="">
+        <item name="android:background">@color/black_overlay</item>
+        <item name="android:buttonBarStyle">?android:attr/buttonBarStyle</item>
+    </style>
+    <declare-styleable name="FullscreenAttrs">
+        <attr format="color" name="fullscreenBackgroundColor"/>
+        <attr format="color" name="fullscreenTextColor"/>
+    </declare-styleable>
+</resources>
