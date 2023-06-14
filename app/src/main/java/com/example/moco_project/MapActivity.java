@@ -14,13 +14,11 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.UiSettings;
-import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnSuccessListener;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
 
@@ -31,15 +29,7 @@ import androidx.core.content.ContextCompat;
 
 import android.os.Looper;
 
-import java.util.Random;
 
-/**
- * This demo shows how GMS Location can be used to check for changes to the users location.  The "My
- * Location" button uses GMS Location to set the blue dot representing the users location.
- * Permission for {@link android.Manifest.permission#ACCESS_FINE_LOCATION} and {@link
- * android.Manifest.permission#ACCESS_COARSE_LOCATION} are requested at run time. If either
- * permission is not granted, the Activity is finished with an error message.
- */
 public class MapActivity extends AppCompatActivity
         implements
         OnMapReadyCallback,
@@ -60,6 +50,7 @@ public class MapActivity extends AppCompatActivity
 
     private GoogleMap map;
 
+    private Zone zone;
     private LocationCallback locationCallback;
     private FusedLocationProviderClient fusedLocationClient;
 
@@ -205,44 +196,9 @@ public class MapActivity extends AppCompatActivity
                         // Got last known location. In some rare situations this can be null.
                         if (location != null) {
                             // Create Zone based on the location
-                            createZones(location);
+                            zone = new Zone(location,map);
                         }
                     }
                 });
-    }
-
-    private void createZones(Location location) {
-        double currentLat = location.getLatitude();
-        double currentLng = location.getLongitude();
-        double [] latLng = generatePoints(currentLat, currentLng);
-
-        map.addCircle(new CircleOptions()
-                .center(new LatLng(latLng[0], latLng[1]))
-                .radius(100) // Set radius of circle
-                .strokeWidth(8)
-                .strokeColor(Color.rgb(64, 39, 89))
-                .fillColor(Color.argb(215, 64, 39, 89))
-                .clickable(false));
-    }
-
-    public double[] generatePoints(double currentLat, double currentLng) {
-        Random random = new Random();
-        final double conversionRate = 0.000009;
-        final double minDistance = 150.0; // Minimum radius from user location to center point of circle.
-        final double maxDistance = 300.0; // Maximum radius from user location to center point of circle.
-        double angle = random.nextDouble() * 2 * Math.PI;
-        double distance = minDistance + random.nextDouble() * (maxDistance - minDistance);
-
-        if (distance > maxDistance) {
-            distance = maxDistance;  // Cap the distance to the maximum distance
-        }
-
-        double latChange = distance * conversionRate * Math.cos(angle);
-        double lngChange = distance * conversionRate * Math.sin(angle);
-
-        double lat = currentLat + latChange;
-        double lng = currentLng + lngChange;
-
-        return new double[]{lat, lng};
     }
 }

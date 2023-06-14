@@ -21,6 +21,7 @@ string app_name
 string dummy_button
 string dummy_content
 string location_permission_denied
+string map_id
 string permission_rationale_location
 string permission_required_toast
 string title_activity_map

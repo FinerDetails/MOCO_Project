@@ -3326,6 +3326,7 @@ int string m3_sys_typescale_label_small_font 0x7f0e0056
 int string m3_sys_typescale_title_large_font 0x7f0e0057
 int string m3_sys_typescale_title_medium_font 0x7f0e0058
 int string m3_sys_typescale_title_small_font 0x7f0e0059
+int string map_id 0x7f0e009c
 int string material_clock_display_divider 0x7f0e005a
 int string material_clock_toggle_content_description 0x7f0e005b
 int string material_hour_selection 0x7f0e005c
