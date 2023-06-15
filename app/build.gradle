@@ -6,9 +6,6 @@ android {
     namespace 'com.example.moco_project'
     compileSdk 33
 
-    dataBinding {
-        enabled = true
-    }
     defaultConfig {
         applicationId "com.example.moco_project"
         minSdk 28

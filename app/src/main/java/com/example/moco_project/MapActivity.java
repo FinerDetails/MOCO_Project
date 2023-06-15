@@ -11,11 +11,14 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.OnMapsSdkInitializedCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.maps.MapsInitializer.Renderer;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
@@ -28,10 +31,12 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.os.Looper;
+import android.util.Log;
 
 
 public class MapActivity extends AppCompatActivity
         implements
+        OnMapsSdkInitializedCallback,
         OnMapReadyCallback,
         ActivityCompat.OnRequestPermissionsResultCallback {
 
@@ -58,6 +63,9 @@ public class MapActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //Use new maps renderer
+        MapsInitializer.initialize(getApplicationContext(), Renderer.LATEST, this);
+
         setContentView(R.layout.activity_map);
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         locationCallback = new LocationCallback() {
@@ -72,11 +80,12 @@ public class MapActivity extends AppCompatActivity
                 }
             }
         };
-
+        // Inputs the Map into the fragment
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
     }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -200,5 +209,17 @@ public class MapActivity extends AppCompatActivity
                         }
                     }
                 });
+    }
+
+    @Override
+    public void onMapsSdkInitialized(@NonNull Renderer renderer) {
+        switch (renderer) {
+            case LATEST:
+                Log.d("MapsDemo", "The latest version of the renderer is used.");
+                break;
+            case LEGACY:
+                Log.d("MapsDemo", "The legacy version of the renderer is used.");
+                break;
+        }
     }
 }
