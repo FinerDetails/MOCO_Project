@@ -1,14 +1,14 @@
 [
     {
-        "merged": "C:\\Users\\Erkka\\.gradle\\daemon\\8.0\\com.example.moco_project.app-mergeDebugResources-32:\\layout\\activity_map.xml",
-        "source": "C:\\Users\\Erkka\\.gradle\\daemon\\8.0\\com.example.moco_project.app-main-35:\\layout\\activity_map.xml"
+        "merged": "C:\\Users\\Erkka\\.gradle\\daemon\\8.0\\com.example.moco_project.app-mergeDebugResources-30:\\layout\\activity_main.xml",
+        "source": "C:\\Users\\Erkka\\.gradle\\daemon\\8.0\\com.example.moco_project.app-main-33:\\layout\\activity_main.xml"
     },
     {
-        "merged": "C:\\Users\\Erkka\\.gradle\\daemon\\8.0\\com.example.moco_project.app-mergeDebugResources-32:\\layout\\activity_main.xml",
-        "source": "C:\\Users\\Erkka\\.gradle\\daemon\\8.0\\com.example.moco_project.app-main-35:\\layout\\activity_main.xml"
+        "merged": "C:\\Users\\Erkka\\.gradle\\daemon\\8.0\\com.example.moco_project.app-mergeDebugResources-30:\\layout\\activity_map.xml",
+        "source": "C:\\Users\\Erkka\\.gradle\\daemon\\8.0\\com.example.moco_project.app-main-33:\\layout\\activity_map.xml"
     },
     {
-        "merged": "com.example.moco_project.app-mergeDebugResources-32:/layout/activity_map.xml",
-        "source": "com.example.moco_project.app-main-35:/layout/activity_map.xml"
+        "merged": "com.example.moco_project.app-mergeDebugResources-30:/layout/activity_ar.xml",
+        "source": "com.example.moco_project.app-main-33:/layout/activity_ar.xml"
     }
 ]

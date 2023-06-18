@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.moco_project.app-mergeDebugResources-31:/values-ne/values-ne.xml",
+            "outputFile": "com.example.moco_project.app-mergeDebugResources-29:/values-ne/values-ne.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Erkka\\.gradle\\caches\\transforms-3\\613aa6a6e876d8d829803615b9c31fb8\\transformed\\play-services-basement-18.0.0\\res\\values-ne\\values.xml",

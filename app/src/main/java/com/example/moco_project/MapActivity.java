@@ -21,6 +21,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.maps.MapsInitializer.Renderer;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -30,8 +31,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
+import android.widget.Toast;
 
 
 public class MapActivity extends AppCompatActivity
@@ -54,7 +57,7 @@ public class MapActivity extends AppCompatActivity
     private boolean permissionDenied = false;
 
     private GoogleMap map;
-
+    private boolean cameraInitialized = false;
     private Zone zone;
     private LocationCallback locationCallback;
     private FusedLocationProviderClient fusedLocationClient;
@@ -75,8 +78,13 @@ public class MapActivity extends AppCompatActivity
                     return;
                 }
                 for (Location location : locationResult.getLocations()) {
-                    // Update UI with location data
+                    // Move camera to location data
                     moveCameraTo(location);
+                    cameraInitialized = true;
+                    //Check whether or not user is inside the zone
+                    if (zone != null){
+                        whenUserInsideZone(location);
+                    }
                 }
             }
         };
@@ -106,8 +114,7 @@ public class MapActivity extends AppCompatActivity
         UiSettings uiSettings = map.getUiSettings();
         // Disable the My Location button
         uiSettings.setMyLocationButtonEnabled(false);
-        getLocation();
-
+        waitForCameraAndCallgetLocation();
     }
 
     /**
@@ -132,7 +139,7 @@ public class MapActivity extends AppCompatActivity
         // Create a CameraUpdate object to specify the new camera position
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(
                 new LatLng(location.getLatitude(), location.getLongitude()),
-                15f); // Zoom level: 15
+                17f); // Zoom level: 17
 
         // Animate the camera movement to the new position
         map.animateCamera(cameraUpdate);
@@ -196,8 +203,28 @@ public class MapActivity extends AppCompatActivity
         fusedLocationClient.removeLocationUpdates(locationCallback);
     }
 
+    private void waitForCameraAndCallgetLocation() {
+        final Handler handler = new Handler();
+        final int delay = 500; // Delay in milliseconds
+
+        Runnable delayRunnable = new Runnable() {
+            @Override
+            public void run() {
+                if (!cameraInitialized) {
+                    handler.postDelayed(this, delay);
+                }
+                else{
+                    getLocation();
+                }
+            }
+        };
+
+        handler.postDelayed(delayRunnable, delay);
+    }
+
     @SuppressLint("MissingPermission")
     private void getLocation() {
+
         fusedLocationClient.getLastLocation()
                 .addOnSuccessListener(this, new OnSuccessListener<Location>() {
                     @Override
@@ -205,7 +232,7 @@ public class MapActivity extends AppCompatActivity
                         // Got last known location. In some rare situations this can be null.
                         if (location != null) {
                             // Create Zone based on the location
-                            zone = new Zone(location,map);
+                            zone = new Zone(location,map,300);
                         }
                     }
                 });
@@ -222,4 +249,20 @@ public class MapActivity extends AppCompatActivity
                 break;
         }
     }
+    public void whenUserInsideZone(Location location) {
+        Location centerLocation = new Location("");
+        centerLocation.setLatitude(zone.getLocation().latitude);
+        centerLocation.setLongitude(zone.getLocation().longitude);
+
+        float distanceBetweenZoneAndUser = location.distanceTo(centerLocation);
+
+        if (distanceBetweenZoneAndUser < zone.getRadius()){
+            Toast.makeText(this, "Entering the zone", Toast.LENGTH_LONG).show();
+            // Launch ArActivity
+            Intent intent = new Intent(MapActivity.this, ArActivity.class);
+            startActivity(intent);
+        }
+    }
 }
+
+

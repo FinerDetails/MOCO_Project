@@ -10,34 +10,47 @@ import com.google.android.gms.maps.model.LatLng;
 import java.util.Random;
 
 public class Zone {
-    private Location location;
+    public LatLng getLocation() {
+        return location;
+    }
+
+    private Location userLocation;
+    private LatLng location;
     private GoogleMap map;
 
-    public Zone(Location location, GoogleMap map) {
-        this.location = location;
+    public double getRadius() {
+        return radius;
+    }
+
+    private double radius;
+
+    public Zone(Location userLocation, GoogleMap map, double radius) {
+        this.userLocation = userLocation;
         this.map = map;
+        this.radius = radius;
         createZones();
     }
 
     private void createZones() {
-        double currentLat = location.getLatitude();
-        double currentLng = location.getLongitude();
-        double [] latLng = generatePoints(currentLat, currentLng);
+        double currentLat = userLocation.getLatitude();
+        double currentLng = userLocation.getLongitude();
+        location = generatePoints(currentLat, currentLng);
 
         map.addCircle(new CircleOptions()
-                .center(new LatLng(latLng[0], latLng[1]))
-                .radius(100) // Set radius of circle
+                //.center(new LatLng(latLng[0], latLng[1]))
+                .center(location)
+                .radius(radius) // Set radius of circle
                 .strokeWidth(8)
                 .strokeColor(Color.rgb(64, 39, 89))
                 .fillColor(Color.argb(215, 64, 39, 89))
                 .clickable(false));
     }
 
-    public double[] generatePoints(double currentLat, double currentLng) {
+    public LatLng generatePoints(double currentLat, double currentLng) {
         Random random = new Random();
         final double conversionRate = 0.000009;
-        final double minDistance = 150.0; // Minimum radius from user location to center point of circle.
-        final double maxDistance = 300.0; // Maximum radius from user location to center point of circle.
+        final double minDistance = radius + 100.0; // Minimum radius from user location to center point of circle.
+        final double maxDistance = radius + 200.0; // Maximum radius from user location to center point of circle.
         double angle = random.nextDouble() * 2 * Math.PI;
         double distance = minDistance + random.nextDouble() * (maxDistance - minDistance);
 
@@ -51,6 +64,6 @@ public class Zone {
         double lat = currentLat + latChange;
         double lng = currentLng + lngChange;
 
-        return new double[]{lat, lng};
+        return new LatLng(lat, lng);
     }
 }

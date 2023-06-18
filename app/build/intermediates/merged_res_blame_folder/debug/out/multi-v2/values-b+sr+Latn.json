@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.moco_project.app-mergeDebugResources-31:/values-b+sr+Latn/values-b+sr+Latn.xml",
+            "outputFile": "com.example.moco_project.app-mergeDebugResources-29:/values-b+sr+Latn/values-b+sr+Latn.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Erkka\\.gradle\\caches\\transforms-3\\8c25e88eb4ea76e8f3d0900731d8ae12\\transformed\\core-1.9.0\\res\\values-b+sr+Latn\\values-b+sr+Latn.xml",

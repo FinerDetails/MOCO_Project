@@ -44,6 +44,10 @@
         android:supportsRtl="true"
         android:testOnly="true"
         android:theme="@style/Theme.MOCOPROJECT" >
+        <activity
+            android:name="com.example.moco_project.ArActivity"
+            android:exported="false" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyC1XfZwbIaJKxcY0NnLC9cifg3Lt0-ZXjc" />
@@ -63,7 +67,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <!-- Needs to be explicitly declared on P+ -->
         <uses-library
             android:name="org.apache.http.legacy"

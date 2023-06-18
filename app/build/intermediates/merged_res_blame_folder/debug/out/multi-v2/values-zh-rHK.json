@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.moco_project.app-mergeDebugResources-31:/values-zh-rHK/values-zh-rHK.xml",
+            "outputFile": "com.example.moco_project.app-mergeDebugResources-29:/values-zh-rHK/values-zh-rHK.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Erkka\\.gradle\\caches\\transforms-3\\8c25e88eb4ea76e8f3d0900731d8ae12\\transformed\\core-1.9.0\\res\\values-zh-rHK\\values-zh-rHK.xml",

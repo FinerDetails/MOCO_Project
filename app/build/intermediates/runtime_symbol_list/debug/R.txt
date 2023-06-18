@@ -2712,7 +2712,6 @@ int id custom 0x7f08008a
 int id customPanel 0x7f08008b
 int id cut 0x7f08008c
 int id dark 0x7f08008d
-int id dataBinding 0x7f08008e
 int id date_picker_actions 0x7f08008f
 int id decelerate 0x7f080090
 int id decelerateAndComplete 0x7f080091
@@ -2888,8 +2887,6 @@ int id notification_main_column 0x7f080139
 int id notification_main_column_container 0x7f08013a
 int id off 0x7f08013b
 int id on 0x7f08013c
-int id onAttachStateChangeListener 0x7f08013d
-int id onDateChanged 0x7f08013e
 int id onInterceptTouchReturnSwipe 0x7f08013f
 int id outline 0x7f080140
 int id outward 0x7f080141
@@ -3008,7 +3005,6 @@ int id textSpacerNoButtons 0x7f0801b1
 int id textSpacerNoTitle 0x7f0801b2
 int id textStart 0x7f0801b3
 int id textTop 0x7f0801b4
-int id textWatcher 0x7f0801b5
 int id text_input_end_icon 0x7f0801b6
 int id text_input_error_icon 0x7f0801b7
 int id text_input_start_icon 0x7f0801b8
@@ -3144,6 +3140,7 @@ int layout abc_search_dropdown_item_icons_2line 0x7f0b0018
 int layout abc_search_view 0x7f0b0019
 int layout abc_select_dialog_material 0x7f0b001a
 int layout abc_tooltip 0x7f0b001b
+int layout activity_ar 0x7f0b0075
 int layout activity_main 0x7f0b001c
 int layout activity_map 0x7f0b001d
 int layout custom_dialog 0x7f0b001e
