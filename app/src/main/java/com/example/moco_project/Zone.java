@@ -13,6 +13,12 @@ public class Zone {
     private Location location;
     private GoogleMap map;
 
+
+    /**
+     * Adventure Zone for AI mode
+     * @param location
+     * @param map
+     */
     public Zone(Location location, GoogleMap map) {
         this.location = location;
         this.map = map;

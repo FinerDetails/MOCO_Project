@@ -74,6 +74,7 @@ public class MapActivity extends AppCompatActivity
                 if (locationResult == null) {
                     return;
                 }
+                // location is GPS-Location on Map
                 for (Location location : locationResult.getLocations()) {
                     // Update UI with location data
                     moveCameraTo(location);
