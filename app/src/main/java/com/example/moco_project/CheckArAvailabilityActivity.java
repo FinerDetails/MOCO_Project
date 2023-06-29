@@ -5,7 +5,6 @@ import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.content.pm.PackageManager;
@@ -13,20 +12,16 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 import android.Manifest;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.ar.core.ArCoreApk;
-import com.google.ar.core.Camera;
-import com.google.ar.core.Config;
 import com.google.ar.core.Session;
 import com.google.ar.core.exceptions.UnavailableApkTooOldException;
 import com.google.ar.core.exceptions.UnavailableArcoreNotInstalledException;
 import com.google.ar.core.exceptions.UnavailableDeviceNotCompatibleException;
 import com.google.ar.core.exceptions.UnavailableSdkTooOldException;
 import com.google.ar.core.exceptions.UnavailableUserDeclinedInstallationException;
-//import com.google.ar.core.examples.java.common.helpers.SnackbarHelper;
 
 public class CheckArAvailabilityActivity extends AppCompatActivity {
 
