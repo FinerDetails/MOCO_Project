@@ -11,8 +11,10 @@ color light_blue_A400
 color white
 drawable ic_launcher_background
 drawable ic_launcher_foreground
+id arButton
 id map
 id mapContainer
+layout activity_check_ar_availability
 layout activity_main
 layout activity_map
 mipmap ic_launcher
