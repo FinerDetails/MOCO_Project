@@ -1,35 +1,35 @@
-com.example.moco_project.app-drawerlayout-1.1.1-0 C:\Users\hanna\.gradle\caches\transforms-3\169fbc0cc288bcafd707ff1de5b5d1ef\transformed\drawerlayout-1.1.1\res
-com.example.moco_project.app-constraintlayout-2.1.4-1 C:\Users\hanna\.gradle\caches\transforms-3\1b1fc35cfff048765e7b5057facd7433\transformed\constraintlayout-2.1.4\res
-com.example.moco_project.app-jetified-savedstate-1.2.0-2 C:\Users\hanna\.gradle\caches\transforms-3\20fe64e8a4977a47decc438a506b4dcc\transformed\jetified-savedstate-1.2.0\res
-com.example.moco_project.app-jetified-play-services-maps-18.1.0-3 C:\Users\hanna\.gradle\caches\transforms-3\2e8863cb2556c92b377b95f70aab9609\transformed\jetified-play-services-maps-18.1.0\res
-com.example.moco_project.app-lifecycle-livedata-core-2.5.1-4 C:\Users\hanna\.gradle\caches\transforms-3\39a903a6a5736151d5c8c6b114f3352a\transformed\lifecycle-livedata-core-2.5.1\res
-com.example.moco_project.app-jetified-emoji2-1.2.0-5 C:\Users\hanna\.gradle\caches\transforms-3\3d235ed602f65236d1e967aa3ae41734\transformed\jetified-emoji2-1.2.0\res
-com.example.moco_project.app-jetified-emoji2-views-helper-1.2.0-6 C:\Users\hanna\.gradle\caches\transforms-3\3f217ec338d6d83ed8ff70dfe0e7d6e1\transformed\jetified-emoji2-views-helper-1.2.0\res
-com.example.moco_project.app-lifecycle-viewmodel-2.5.1-7 C:\Users\hanna\.gradle\caches\transforms-3\53cbd816d1f0ce2619bbae9b8dcd2d8b\transformed\lifecycle-viewmodel-2.5.1\res
-com.example.moco_project.app-coordinatorlayout-1.1.0-8 C:\Users\hanna\.gradle\caches\transforms-3\602e0f40a2e4890a6c140b4e0e9297aa\transformed\coordinatorlayout-1.1.0\res
-com.example.moco_project.app-jetified-play-services-basement-18.1.0-9 C:\Users\hanna\.gradle\caches\transforms-3\69d5ce78cc97fe1a04a23073b9bb6ddc\transformed\jetified-play-services-basement-18.1.0\res
-com.example.moco_project.app-material-1.9.0-10 C:\Users\hanna\.gradle\caches\transforms-3\731866f4f07c37e8f6d282fe1dd76996\transformed\material-1.9.0\res
-com.example.moco_project.app-jetified-lifecycle-process-2.4.1-11 C:\Users\hanna\.gradle\caches\transforms-3\74479ed0ca537f847c79c9f1d11b43a4\transformed\jetified-lifecycle-process-2.4.1\res
-com.example.moco_project.app-cardview-1.0.0-12 C:\Users\hanna\.gradle\caches\transforms-3\7653a5192b1a36a00121994a24b4bb76\transformed\cardview-1.0.0\res
-com.example.moco_project.app-jetified-lifecycle-viewmodel-savedstate-2.5.1-13 C:\Users\hanna\.gradle\caches\transforms-3\7713754c0b6a5337acbb563590ba0db1\transformed\jetified-lifecycle-viewmodel-savedstate-2.5.1\res
-com.example.moco_project.app-appcompat-1.6.1-14 C:\Users\hanna\.gradle\caches\transforms-3\7ba610368285ef737a15a687544ee720\transformed\appcompat-1.6.1\res
-com.example.moco_project.app-jetified-core-1.37.0-15 C:\Users\hanna\.gradle\caches\transforms-3\7f5cdc2e5d76a74c5de2da5187c14539\transformed\jetified-core-1.37.0\res
-com.example.moco_project.app-core-1.9.0-16 C:\Users\hanna\.gradle\caches\transforms-3\8c25e88eb4ea76e8f3d0900731d8ae12\transformed\core-1.9.0\res
-com.example.moco_project.app-jetified-play-services-base-18.1.0-17 C:\Users\hanna\.gradle\caches\transforms-3\9036a528b1406275d26d7622c1327b73\transformed\jetified-play-services-base-18.1.0\res
-com.example.moco_project.app-recyclerview-1.1.0-18 C:\Users\hanna\.gradle\caches\transforms-3\9a156e10bc2cc6926719f38d9612f7be\transformed\recyclerview-1.1.0\res
-com.example.moco_project.app-jetified-annotation-experimental-1.3.0-19 C:\Users\hanna\.gradle\caches\transforms-3\a0988ddd25878a8ff7bd12a362afe1bd\transformed\jetified-annotation-experimental-1.3.0\res
-com.example.moco_project.app-jetified-viewpager2-1.0.0-20 C:\Users\hanna\.gradle\caches\transforms-3\a44244b32f4b5581acb881385646f7be\transformed\jetified-viewpager2-1.0.0\res
-com.example.moco_project.app-jetified-core-ktx-1.9.0-21 C:\Users\hanna\.gradle\caches\transforms-3\b1a932d7f6d54d7db5205ce92f1df456\transformed\jetified-core-ktx-1.9.0\res
-com.example.moco_project.app-jetified-startup-runtime-1.1.1-22 C:\Users\hanna\.gradle\caches\transforms-3\bc2921a120bc3ce612125877e6732f6d\transformed\jetified-startup-runtime-1.1.1\res
-com.example.moco_project.app-fragment-1.3.6-23 C:\Users\hanna\.gradle\caches\transforms-3\c7fdf132750f580e9799a5455b4a5c84\transformed\fragment-1.3.6\res
-com.example.moco_project.app-lifecycle-runtime-2.5.1-24 C:\Users\hanna\.gradle\caches\transforms-3\f1cbfa66c793c84195ed08fdc711e3af\transformed\lifecycle-runtime-2.5.1\res
-com.example.moco_project.app-jetified-appcompat-resources-1.6.1-25 C:\Users\hanna\.gradle\caches\transforms-3\f21d0c30ed2918ef3e98cec07dd99bf6\transformed\jetified-appcompat-resources-1.6.1\res
-com.example.moco_project.app-jetified-activity-1.6.0-26 C:\Users\hanna\.gradle\caches\transforms-3\f51999b096a3a19fce6b86792fa31edf\transformed\jetified-activity-1.6.0\res
-com.example.moco_project.app-transition-1.2.0-27 C:\Users\hanna\.gradle\caches\transforms-3\f550c9bc53f117cb9e3852beae837a10\transformed\transition-1.2.0\res
-com.example.moco_project.app-pngs-28 D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\build\generated\res\pngs\debug
-com.example.moco_project.app-resValues-29 D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\build\generated\res\resValues\debug
-com.example.moco_project.app-packageDebugResources-30 D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\build\intermediates\incremental\debug\packageDebugResources\merged.dir
-com.example.moco_project.app-packageDebugResources-31 D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\build\intermediates\incremental\debug\packageDebugResources\stripped.dir
-com.example.moco_project.app-merged_res-32 D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\build\intermediates\merged_res\debug
-com.example.moco_project.app-debug-33 D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\debug\res
-com.example.moco_project.app-main-34 D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\res
+com.example.moco_project.app-drawerlayout-1.1.1-0 C:\Users\Erkka\.gradle\caches\transforms-3\169fbc0cc288bcafd707ff1de5b5d1ef\transformed\drawerlayout-1.1.1\res
+com.example.moco_project.app-constraintlayout-2.1.4-1 C:\Users\Erkka\.gradle\caches\transforms-3\1b1fc35cfff048765e7b5057facd7433\transformed\constraintlayout-2.1.4\res
+com.example.moco_project.app-jetified-savedstate-1.2.0-2 C:\Users\Erkka\.gradle\caches\transforms-3\20fe64e8a4977a47decc438a506b4dcc\transformed\jetified-savedstate-1.2.0\res
+com.example.moco_project.app-jetified-play-services-maps-18.1.0-3 C:\Users\Erkka\.gradle\caches\transforms-3\2e8863cb2556c92b377b95f70aab9609\transformed\jetified-play-services-maps-18.1.0\res
+com.example.moco_project.app-lifecycle-livedata-core-2.5.1-4 C:\Users\Erkka\.gradle\caches\transforms-3\39a903a6a5736151d5c8c6b114f3352a\transformed\lifecycle-livedata-core-2.5.1\res
+com.example.moco_project.app-jetified-emoji2-1.2.0-5 C:\Users\Erkka\.gradle\caches\transforms-3\3d235ed602f65236d1e967aa3ae41734\transformed\jetified-emoji2-1.2.0\res
+com.example.moco_project.app-jetified-emoji2-views-helper-1.2.0-6 C:\Users\Erkka\.gradle\caches\transforms-3\3f217ec338d6d83ed8ff70dfe0e7d6e1\transformed\jetified-emoji2-views-helper-1.2.0\res
+com.example.moco_project.app-lifecycle-viewmodel-2.5.1-7 C:\Users\Erkka\.gradle\caches\transforms-3\53cbd816d1f0ce2619bbae9b8dcd2d8b\transformed\lifecycle-viewmodel-2.5.1\res
+com.example.moco_project.app-coordinatorlayout-1.1.0-8 C:\Users\Erkka\.gradle\caches\transforms-3\602e0f40a2e4890a6c140b4e0e9297aa\transformed\coordinatorlayout-1.1.0\res
+com.example.moco_project.app-jetified-play-services-basement-18.1.0-9 C:\Users\Erkka\.gradle\caches\transforms-3\69d5ce78cc97fe1a04a23073b9bb6ddc\transformed\jetified-play-services-basement-18.1.0\res
+com.example.moco_project.app-material-1.9.0-10 C:\Users\Erkka\.gradle\caches\transforms-3\731866f4f07c37e8f6d282fe1dd76996\transformed\material-1.9.0\res
+com.example.moco_project.app-jetified-lifecycle-process-2.4.1-11 C:\Users\Erkka\.gradle\caches\transforms-3\74479ed0ca537f847c79c9f1d11b43a4\transformed\jetified-lifecycle-process-2.4.1\res
+com.example.moco_project.app-cardview-1.0.0-12 C:\Users\Erkka\.gradle\caches\transforms-3\7653a5192b1a36a00121994a24b4bb76\transformed\cardview-1.0.0\res
+com.example.moco_project.app-jetified-lifecycle-viewmodel-savedstate-2.5.1-13 C:\Users\Erkka\.gradle\caches\transforms-3\7713754c0b6a5337acbb563590ba0db1\transformed\jetified-lifecycle-viewmodel-savedstate-2.5.1\res
+com.example.moco_project.app-appcompat-1.6.1-14 C:\Users\Erkka\.gradle\caches\transforms-3\7ba610368285ef737a15a687544ee720\transformed\appcompat-1.6.1\res
+com.example.moco_project.app-jetified-core-1.37.0-15 C:\Users\Erkka\.gradle\caches\transforms-3\7f5cdc2e5d76a74c5de2da5187c14539\transformed\jetified-core-1.37.0\res
+com.example.moco_project.app-core-1.9.0-16 C:\Users\Erkka\.gradle\caches\transforms-3\8c25e88eb4ea76e8f3d0900731d8ae12\transformed\core-1.9.0\res
+com.example.moco_project.app-jetified-play-services-base-18.1.0-17 C:\Users\Erkka\.gradle\caches\transforms-3\9036a528b1406275d26d7622c1327b73\transformed\jetified-play-services-base-18.1.0\res
+com.example.moco_project.app-recyclerview-1.1.0-18 C:\Users\Erkka\.gradle\caches\transforms-3\9a156e10bc2cc6926719f38d9612f7be\transformed\recyclerview-1.1.0\res
+com.example.moco_project.app-jetified-annotation-experimental-1.3.0-19 C:\Users\Erkka\.gradle\caches\transforms-3\a0988ddd25878a8ff7bd12a362afe1bd\transformed\jetified-annotation-experimental-1.3.0\res
+com.example.moco_project.app-jetified-viewpager2-1.0.0-20 C:\Users\Erkka\.gradle\caches\transforms-3\a44244b32f4b5581acb881385646f7be\transformed\jetified-viewpager2-1.0.0\res
+com.example.moco_project.app-jetified-core-ktx-1.9.0-21 C:\Users\Erkka\.gradle\caches\transforms-3\b1a932d7f6d54d7db5205ce92f1df456\transformed\jetified-core-ktx-1.9.0\res
+com.example.moco_project.app-jetified-startup-runtime-1.1.1-22 C:\Users\Erkka\.gradle\caches\transforms-3\bc2921a120bc3ce612125877e6732f6d\transformed\jetified-startup-runtime-1.1.1\res
+com.example.moco_project.app-fragment-1.3.6-23 C:\Users\Erkka\.gradle\caches\transforms-3\c7fdf132750f580e9799a5455b4a5c84\transformed\fragment-1.3.6\res
+com.example.moco_project.app-lifecycle-runtime-2.5.1-24 C:\Users\Erkka\.gradle\caches\transforms-3\f1cbfa66c793c84195ed08fdc711e3af\transformed\lifecycle-runtime-2.5.1\res
+com.example.moco_project.app-jetified-appcompat-resources-1.6.1-25 C:\Users\Erkka\.gradle\caches\transforms-3\f21d0c30ed2918ef3e98cec07dd99bf6\transformed\jetified-appcompat-resources-1.6.1\res
+com.example.moco_project.app-jetified-activity-1.6.0-26 C:\Users\Erkka\.gradle\caches\transforms-3\f51999b096a3a19fce6b86792fa31edf\transformed\jetified-activity-1.6.0\res
+com.example.moco_project.app-transition-1.2.0-27 C:\Users\Erkka\.gradle\caches\transforms-3\f550c9bc53f117cb9e3852beae837a10\transformed\transition-1.2.0\res
+com.example.moco_project.app-pngs-28 C:\Users\Erkka\AndroidStudioProjects\MOCOPROJECT\app\build\generated\res\pngs\debug
+com.example.moco_project.app-resValues-29 C:\Users\Erkka\AndroidStudioProjects\MOCOPROJECT\app\build\generated\res\resValues\debug
+com.example.moco_project.app-packageDebugResources-30 C:\Users\Erkka\AndroidStudioProjects\MOCOPROJECT\app\build\intermediates\incremental\debug\packageDebugResources\merged.dir
+com.example.moco_project.app-packageDebugResources-31 C:\Users\Erkka\AndroidStudioProjects\MOCOPROJECT\app\build\intermediates\incremental\debug\packageDebugResources\stripped.dir
+com.example.moco_project.app-merged_res-32 C:\Users\Erkka\AndroidStudioProjects\MOCOPROJECT\app\build\intermediates\merged_res\debug
+com.example.moco_project.app-debug-33 C:\Users\Erkka\AndroidStudioProjects\MOCOPROJECT\app\src\debug\res
+com.example.moco_project.app-main-34 C:\Users\Erkka\AndroidStudioProjects\MOCOPROJECT\app\src\main\res

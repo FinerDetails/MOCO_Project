@@ -1,9 +1,9 @@
-#Thu Jun 29 15:07:18 CEST 2023
-base.0=D\:\\Dokumente\\Studium HSB\\SoSe 23\\MOCO\\MOCO_Project\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
-base.1=D\:\\Dokumente\\Studium HSB\\SoSe 23\\MOCO\\MOCO_Project\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
-base.2=D\:\\Dokumente\\Studium HSB\\SoSe 23\\MOCO\\MOCO_Project\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\3\\classes.dex
-base.3=D\:\\Dokumente\\Studium HSB\\SoSe 23\\MOCO\\MOCO_Project\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\7\\classes.dex
-base.4=D\:\\Dokumente\\Studium HSB\\SoSe 23\\MOCO\\MOCO_Project\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes2.dex
+#Tue Jul 04 15:06:25 CEST 2023
+base.0=C\:\\Users\\Erkka\\AndroidStudioProjects\\MOCOPROJECT\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
+base.1=C\:\\Users\\Erkka\\AndroidStudioProjects\\MOCOPROJECT\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
+base.2=C\:\\Users\\Erkka\\AndroidStudioProjects\\MOCOPROJECT\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\3\\classes.dex
+base.3=C\:\\Users\\Erkka\\AndroidStudioProjects\\MOCOPROJECT\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\7\\classes.dex
+base.4=C\:\\Users\\Erkka\\AndroidStudioProjects\\MOCOPROJECT\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes2.dex
 path.0=classes.dex
 path.1=0/classes.dex
 path.2=3/classes.dex

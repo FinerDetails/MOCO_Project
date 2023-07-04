@@ -24,7 +24,7 @@
         android:theme="@style/Theme.MOCOPROJECT"
         tools:targetApi="31">
         <activity
-            android:name=".CheckArAvailabilityActivity"
+            android:name=".ArActivity"
             android:exported="true" />
 
         <meta-data

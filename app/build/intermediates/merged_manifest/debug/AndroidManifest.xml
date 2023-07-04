@@ -53,7 +53,7 @@
         android:testOnly="true"
         android:theme="@style/Theme.MOCOPROJECT" >
         <activity
-            android:name="com.example.moco_project.CheckArAvailabilityActivity"
+            android:name="com.example.moco_project.ArActivity"
             android:exported="true" />
 
         <meta-data
