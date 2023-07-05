@@ -16,13 +16,20 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.OnMapsSdkInitializedCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.UiSettings;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.maps.MapsInitializer.Renderer;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.os.Bundle;
 
@@ -36,12 +43,15 @@ import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.util.Random;
+
 
 public class MapActivity extends AppCompatActivity
         implements
         OnMapsSdkInitializedCallback,
         OnMapReadyCallback,
-        ActivityCompat.OnRequestPermissionsResultCallback {
+        ActivityCompat.OnRequestPermissionsResultCallback,
+        GoogleMap.OnMarkerClickListener {
 
     /**
      * Request code for location permission request.
@@ -59,8 +69,13 @@ public class MapActivity extends AppCompatActivity
     private GoogleMap map;
     private boolean cameraInitialized = false;
     private Zone zone;
+
+    private boolean userInsideZone = false;
     private LocationCallback locationCallback;
     private FusedLocationProviderClient fusedLocationClient;
+
+    private int mushrooms = 0;
+
 
 
     @Override
@@ -115,6 +130,18 @@ public class MapActivity extends AppCompatActivity
         // Disable the My Location button
         uiSettings.setMyLocationButtonEnabled(false);
         waitForCameraAndCallgetLocation();
+    }
+
+    @Override
+    public boolean onMarkerClick(final Marker marker) {
+
+        // We return false to indicate that we have not consumed the event and that we wish
+        // for the default behavior to occur (which is for the camera to move such that the
+        // marker is centered and for the marker's info window to open, if it has one).
+        mushrooms++;
+        Toast.makeText(this, "mushrooms: "+mushrooms, Toast.LENGTH_SHORT).show();
+        marker.remove();
+        return true;
     }
 
     /**
@@ -218,13 +245,11 @@ public class MapActivity extends AppCompatActivity
                 }
             }
         };
-
         handler.postDelayed(delayRunnable, delay);
     }
 
     @SuppressLint("MissingPermission")
     private void getLocation() {
-
         fusedLocationClient.getLastLocation()
                 .addOnSuccessListener(this, new OnSuccessListener<Location>() {
                     @Override
@@ -233,6 +258,7 @@ public class MapActivity extends AppCompatActivity
                         if (location != null) {
                             // Create Zone based on the location
                             zone = new Zone(location,map,300);
+                            generateMarkers();
                         }
                     }
                 });
@@ -256,11 +282,41 @@ public class MapActivity extends AppCompatActivity
 
         float distanceBetweenZoneAndUser = location.distanceTo(centerLocation);
 
-        if (distanceBetweenZoneAndUser < zone.getRadius()){
+        if (distanceBetweenZoneAndUser < zone.getZoneRadius() && !userInsideZone){
+
             Toast.makeText(this, "Entering the zone", Toast.LENGTH_LONG).show();
+            userInsideZone = true;
             // Launch ArActivity
-            Intent intent = new Intent(MapActivity.this, ArActivity.class);
-            startActivity(intent);
+            /*Intent intent = new Intent(MapActivity.this, ArActivity.class);
+            startActivity(intent);*/
+        }
+        else if(distanceBetweenZoneAndUser > zone.getZoneRadius() && userInsideZone){
+            userInsideZone = false;
+        }
+    }
+    private void generateMarkers(){
+        int width = 50; //In pixels
+        int height = 50;
+        int minMarkers = 2;
+        int maxMarkers = 4;
+        Random random = new Random();
+        int randomMarkerAmount = random.nextInt(maxMarkers - minMarkers + 1) + minMarkers;
+        Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.mushroom_icon_edited);
+        Bitmap scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, width, height, false);
+        BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory.fromBitmap(scaledBitmap);
+        LatLng location = zone.getLocation();
+        double zoneRadius = zone.getZoneRadius();
+        for (int i = 0; i < randomMarkerAmount; i++ ) {
+
+
+            MarkerOptions markerOptions = new MarkerOptions()
+                    .position(Zone.generatePoints(location.latitude, location.longitude, 0, zoneRadius))
+                    .flat(true)
+                    .icon(bitmapDescriptor);
+
+            // Add the marker to the map
+            map.addMarker(markerOptions);
+            map.setOnMarkerClickListener(this);
         }
     }
 }

@@ -1,5 +1,5 @@
 package com.example.moco_project;
-
+import android.content.Context;
 import android.graphics.Color;
 import android.location.Location;
 
@@ -18,39 +18,36 @@ public class Zone {
     private LatLng location;
     private GoogleMap map;
 
-    public double getRadius() {
-        return radius;
+    public double getZoneRadius() {
+        return zoneRadius;
     }
 
-    private double radius;
+    private double zoneRadius;
 
-    public Zone(Location userLocation, GoogleMap map, double radius) {
+    public Zone(Location userLocation, GoogleMap map, double zoneRadius) {
         this.userLocation = userLocation;
         this.map = map;
-        this.radius = radius;
+        this.zoneRadius = zoneRadius;
         createZones();
     }
 
     private void createZones() {
         double currentLat = userLocation.getLatitude();
         double currentLng = userLocation.getLongitude();
-        location = generatePoints(currentLat, currentLng);
+        location = generatePoints(currentLat, currentLng, zoneRadius + 100, zoneRadius + 200);
 
         map.addCircle(new CircleOptions()
-                //.center(new LatLng(latLng[0], latLng[1]))
                 .center(location)
-                .radius(radius) // Set radius of circle
+                .radius(zoneRadius) // Set radius of circle
                 .strokeWidth(8)
                 .strokeColor(Color.rgb(64, 39, 89))
                 .fillColor(Color.argb(215, 64, 39, 89))
                 .clickable(false));
     }
 
-    public LatLng generatePoints(double currentLat, double currentLng) {
+    public static LatLng generatePoints(double currentLat, double currentLng, double minDistance, double maxDistance) {
         Random random = new Random();
         final double conversionRate = 0.000009;
-        final double minDistance = radius + 100.0; // Minimum radius from user location to center point of circle.
-        final double maxDistance = radius + 200.0; // Maximum radius from user location to center point of circle.
         double angle = random.nextDouble() * 2 * Math.PI;
         double distance = minDistance + random.nextDouble() * (maxDistance - minDistance);
 

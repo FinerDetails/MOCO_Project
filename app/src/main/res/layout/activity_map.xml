@@ -19,10 +19,10 @@
             map:uiRotateGestures="false"
             map:uiScrollGestures="false"
             map:uiTiltGestures="false"
-            map:uiZoomControls="false"
-            map:uiZoomGestures="false"
             map:cameraTilt="30"
             tools:layout="@layout/activity_map" />
+        <!--map:uiZoomControls="false"
+            map:uiZoomGestures="false"-->
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2554,6 +2554,7 @@ drawable mtrl_navigation_bar_item_background
 drawable mtrl_popupmenu_background
 drawable mtrl_popupmenu_background_overlay
 drawable mtrl_tabs_default_indicator
+drawable mushroom_icon_edited
 drawable navigation_empty_icon
 drawable notification_action_background
 drawable notification_bg
