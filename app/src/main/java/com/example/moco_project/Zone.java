@@ -1,5 +1,4 @@
 package com.example.moco_project;
-import android.content.Context;
 import android.graphics.Color;
 import android.location.Location;
 
@@ -14,15 +13,15 @@ public class Zone {
         return location;
     }
 
-    private Location userLocation;
+    private final Location userLocation;
     private LatLng location;
-    private GoogleMap map;
+    private final GoogleMap map;
 
     public double getZoneRadius() {
         return zoneRadius;
     }
 
-    private double zoneRadius;
+    private final double zoneRadius;
 
     public Zone(Location userLocation, GoogleMap map, double zoneRadius) {
         this.userLocation = userLocation;
@@ -34,7 +33,8 @@ public class Zone {
     private void createZones() {
         double currentLat = userLocation.getLatitude();
         double currentLng = userLocation.getLongitude();
-        location = generatePoints(currentLat, currentLng, zoneRadius + 100, zoneRadius + 200);
+        //location = generatePoints(currentLat, currentLng, zoneRadius + 100, zoneRadius + 200); lower variant for testing
+        location = generatePoints(currentLat, currentLng, zoneRadius -150, zoneRadius -150);
 
         map.addCircle(new CircleOptions()
                 .center(location)

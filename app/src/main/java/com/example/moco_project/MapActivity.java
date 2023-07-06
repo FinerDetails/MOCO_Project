@@ -21,11 +21,9 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.maps.MapsInitializer.Renderer;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -41,8 +39,13 @@ import androidx.core.content.ContextCompat;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
+import android.view.View;
+import android.widget.Switch;
 import android.widget.Toast;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 
@@ -55,9 +58,8 @@ public class MapActivity extends AppCompatActivity
 
     /**
      * Request code for location permission request.
-     *
-     * @see #onRequestPermissionsResult(int, String[], int[])
      */
+    Switch arcoreSwitch;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
 
     /**
@@ -73,6 +75,7 @@ public class MapActivity extends AppCompatActivity
     private boolean userInsideZone = false;
     private LocationCallback locationCallback;
     private FusedLocationProviderClient fusedLocationClient;
+    public List<MarkerOptions> markerData = new ArrayList<>();
 
     private int mushrooms = 0;
 
@@ -83,8 +86,25 @@ public class MapActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         //Use new maps renderer
         MapsInitializer.initialize(getApplicationContext(), Renderer.LATEST, this);
-
         setContentView(R.layout.activity_map);
+
+        // Switch to allow pausing and resuming of ArActivity.
+        arcoreSwitch = findViewById(R.id.arcore_switch);
+        arcoreSwitch.setVisibility(View.GONE);
+        arcoreSwitch.setChecked(SwitchState.isArActivity());
+        arcoreSwitch.setOnCheckedChangeListener(
+                (view, checked) -> {
+                    // Update the switch state
+                    SwitchState.setArActivity(true);
+                    if (checked) {
+                        Intent intent = new Intent(MapActivity.this, ArActivity.class);
+                        // Share markerData with ArActivity
+                        intent.putExtra("markerData", (Serializable) markerData);
+                        startActivity(intent);
+                    }
+                }
+        );
+
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         locationCallback = new LocationCallback() {
             @Override
@@ -211,7 +231,7 @@ public class MapActivity extends AppCompatActivity
                 .newInstance(true).show(getSupportFragmentManager(), "dialog");
     }
 
-    protected LocationRequest createLocationRequest() {
+    private LocationRequest createLocationRequest() {
         LocationRequest locationRequest = LocationRequest.create();
         locationRequest.setInterval(3000);
         locationRequest.setFastestInterval(1000);
@@ -251,15 +271,12 @@ public class MapActivity extends AppCompatActivity
     @SuppressLint("MissingPermission")
     private void getLocation() {
         fusedLocationClient.getLastLocation()
-                .addOnSuccessListener(this, new OnSuccessListener<Location>() {
-                    @Override
-                    public void onSuccess(Location location) {
-                        // Got last known location. In some rare situations this can be null.
-                        if (location != null) {
-                            // Create Zone based on the location
-                            zone = new Zone(location,map,300);
-                            generateMarkers();
-                        }
+                .addOnSuccessListener(this, location -> {
+                    // Got last known location. In some rare situations this can be null.
+                    if (location != null) {
+                        // Create Zone based on the location
+                        zone = new Zone(location,map,300);
+                        generateMarkers();
                     }
                 });
     }
@@ -286,19 +303,22 @@ public class MapActivity extends AppCompatActivity
 
             Toast.makeText(this, "Entering the zone", Toast.LENGTH_LONG).show();
             userInsideZone = true;
+            arcoreSwitch.setVisibility(View.VISIBLE);
             // Launch ArActivity
             /*Intent intent = new Intent(MapActivity.this, ArActivity.class);
             startActivity(intent);*/
         }
         else if(distanceBetweenZoneAndUser > zone.getZoneRadius() && userInsideZone){
+            Toast.makeText(this, "Exiting the zone", Toast.LENGTH_LONG).show();
             userInsideZone = false;
+            arcoreSwitch.setVisibility(View.GONE);
         }
     }
     private void generateMarkers(){
         int width = 50; //In pixels
         int height = 50;
-        int minMarkers = 2;
-        int maxMarkers = 4;
+        int minMarkers = 100;
+        int maxMarkers = 100;
         Random random = new Random();
         int randomMarkerAmount = random.nextInt(maxMarkers - minMarkers + 1) + minMarkers;
         Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.mushroom_icon_edited);
@@ -307,13 +327,11 @@ public class MapActivity extends AppCompatActivity
         LatLng location = zone.getLocation();
         double zoneRadius = zone.getZoneRadius();
         for (int i = 0; i < randomMarkerAmount; i++ ) {
-
-
             MarkerOptions markerOptions = new MarkerOptions()
                     .position(Zone.generatePoints(location.latitude, location.longitude, 0, zoneRadius))
                     .flat(true)
                     .icon(bitmapDescriptor);
-
+            markerData.add(markerOptions);
             // Add the marker to the map
             map.addMarker(markerOptions);
             map.setOnMarkerClickListener(this);

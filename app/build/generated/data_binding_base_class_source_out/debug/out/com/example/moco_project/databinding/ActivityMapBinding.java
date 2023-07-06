@@ -4,24 +4,31 @@ package com.example.moco_project.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Switch;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewbinding.ViewBinding;
+import androidx.viewbinding.ViewBindings;
 import com.example.moco_project.R;
 import java.lang.NullPointerException;
 import java.lang.Override;
+import java.lang.String;
 
 public final class ActivityMapBinding implements ViewBinding {
   @NonNull
   private final ConstraintLayout rootView;
 
   @NonNull
+  public final Switch arcoreSwitch;
+
+  @NonNull
   public final ConstraintLayout mapContainer;
 
-  private ActivityMapBinding(@NonNull ConstraintLayout rootView,
+  private ActivityMapBinding(@NonNull ConstraintLayout rootView, @NonNull Switch arcoreSwitch,
       @NonNull ConstraintLayout mapContainer) {
     this.rootView = rootView;
+    this.arcoreSwitch = arcoreSwitch;
     this.mapContainer = mapContainer;
   }
 
@@ -48,12 +55,21 @@ public final class ActivityMapBinding implements ViewBinding {
 
   @NonNull
   public static ActivityMapBinding bind(@NonNull View rootView) {
-    if (rootView == null) {
-      throw new NullPointerException("rootView");
+    // The body of this method is generated in a way you would not otherwise write.
+    // This is done to optimize the compiled bytecode for size and performance.
+    int id;
+    missingId: {
+      id = R.id.arcore_switch;
+      Switch arcoreSwitch = ViewBindings.findChildViewById(rootView, id);
+      if (arcoreSwitch == null) {
+        break missingId;
+      }
+
+      ConstraintLayout mapContainer = (ConstraintLayout) rootView;
+
+      return new ActivityMapBinding((ConstraintLayout) rootView, arcoreSwitch, mapContainer);
     }
-
-    ConstraintLayout mapContainer = (ConstraintLayout) rootView;
-
-    return new ActivityMapBinding((ConstraintLayout) rootView, mapContainer);
+    String missingId = rootView.getResources().getResourceName(id);
+    throw new NullPointerException("Missing required view with ID: ".concat(missingId));
   }
 }

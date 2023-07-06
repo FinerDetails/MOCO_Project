@@ -2655,6 +2655,7 @@ id animateToStart
 id antiClockwise
 id anticipate
 id arc
+id arcore_switch
 id asConfigured
 id async
 id auto
@@ -2770,6 +2771,7 @@ id fragment_container_view_tag
 id frost
 id ghost_view
 id ghost_view_holder
+id glsurfaceview
 id gone
 id graph
 id graph_wrap
@@ -2791,6 +2793,7 @@ id ifRoom
 id ignore
 id ignoreRequest
 id image
+id image_text_layout
 id immediateStop
 id included
 id info
@@ -3010,6 +3013,7 @@ id textTop
 id text_input_end_icon
 id text_input_error_icon
 id text_input_start_icon
+id text_view
 id textinput_counter
 id textinput_error
 id textinput_helper_text
@@ -3143,6 +3147,7 @@ layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
 layout activity_ar
+layout activity_check_ar_availability
 layout activity_main
 layout activity_map
 layout custom_dialog
@@ -3265,6 +3270,7 @@ string abc_toolbar_collapse_description
 string androidx_startup
 string app_name
 string appbar_scrolling_view_behavior
+string ar
 string bottom_sheet_behavior
 string bottomsheet_action_expand_halfway
 string character_counter_content_description
@@ -3391,6 +3397,7 @@ string permission_rationale_location
 string permission_required_toast
 string search_menu_title
 string status_bar_notification_info_overflow
+string status_messages_appear_here_at_runtime
 string title_activity_map
 style AlertDialog_AppCompat
 style AlertDialog_AppCompat_Light

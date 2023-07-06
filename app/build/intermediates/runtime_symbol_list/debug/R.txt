@@ -2654,6 +2654,7 @@ int id animateToStart 0x7f08004f
 int id antiClockwise 0x7f080050
 int id anticipate 0x7f080051
 int id arc 0x7f080052
+int id arcore_switch 0x7f0801e4
 int id asConfigured 0x7f080053
 int id async 0x7f080054
 int id auto 0x7f080055
@@ -2769,6 +2770,7 @@ int id fragment_container_view_tag 0x7f0800c2
 int id frost 0x7f0800c3
 int id ghost_view 0x7f0800c4
 int id ghost_view_holder 0x7f0800c5
+int id glsurfaceview 0x7f0801e5
 int id gone 0x7f0800c6
 int id graph 0x7f0800c7
 int id graph_wrap 0x7f0800c8
@@ -2790,6 +2792,7 @@ int id ifRoom 0x7f0800d7
 int id ignore 0x7f0800d8
 int id ignoreRequest 0x7f0800d9
 int id image 0x7f0800da
+int id image_text_layout 0x7f0801e6
 int id immediateStop 0x7f0800db
 int id included 0x7f0800dc
 int id info 0x7f0800dd
@@ -3009,6 +3012,7 @@ int id textTop 0x7f0801b2
 int id text_input_end_icon 0x7f0801b3
 int id text_input_error_icon 0x7f0801b4
 int id text_input_start_icon 0x7f0801b5
+int id text_view 0x7f0801e7
 int id textinput_counter 0x7f0801b6
 int id textinput_error 0x7f0801b7
 int id textinput_helper_text 0x7f0801b8
@@ -3142,6 +3146,7 @@ int layout abc_search_view 0x7f0b0019
 int layout abc_select_dialog_material 0x7f0b001a
 int layout abc_tooltip 0x7f0b001b
 int layout activity_ar 0x7f0b001c
+int layout activity_check_ar_availability 0x7f0b0076
 int layout activity_main 0x7f0b001d
 int layout activity_map 0x7f0b001e
 int layout custom_dialog 0x7f0b001f
@@ -3264,6 +3269,7 @@ int string abc_toolbar_collapse_description 0x7f0e001a
 int string androidx_startup 0x7f0e001b
 int string app_name 0x7f0e001c
 int string appbar_scrolling_view_behavior 0x7f0e001d
+int string ar 0x7f0e009d
 int string bottom_sheet_behavior 0x7f0e001e
 int string bottomsheet_action_expand_halfway 0x7f0e001f
 int string character_counter_content_description 0x7f0e0020
@@ -3390,6 +3396,7 @@ int string permission_rationale_location 0x7f0e0098
 int string permission_required_toast 0x7f0e0099
 int string search_menu_title 0x7f0e009a
 int string status_bar_notification_info_overflow 0x7f0e009b
+int string status_messages_appear_here_at_runtime 0x7f0e009e
 int string title_activity_map 0x7f0e009c
 int style AlertDialog_AppCompat 0x7f0f0000
 int style AlertDialog_AppCompat_Light 0x7f0f0001
