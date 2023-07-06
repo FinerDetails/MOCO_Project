@@ -11,21 +11,28 @@ color light_blue_A400
 color white
 drawable ic_launcher_background
 drawable ic_launcher_foreground
-id arButton
+id arcore_switch
+id end
+id glsurfaceview
+id image_text_layout
 id map
 id mapContainer
+id start
+id text_view
 layout activity_check_ar_availability
 layout activity_main
 layout activity_map
 mipmap ic_launcher
 mipmap ic_launcher_round
 string app_name
+string ar
 string dummy_button
 string dummy_content
 string location_permission_denied
 string map_id
 string permission_rationale_location
 string permission_required_toast
+string status_messages_appear_here_at_runtime
 string title_activity_map
 style Base.Theme.MOCOPROJECT
 style ThemeOverlay.MOCOPROJECT.FullscreenContainer
@@ -34,5 +41,6 @@ style Theme.MOCOPROJECT.Fullscreen
 style Widget.Theme.MOCOPROJECT.ActionBar.Fullscreen
 style Widget.Theme.MOCOPROJECT.ButtonBar.Fullscreen
 styleable FullscreenAttrs fullscreenBackgroundColor fullscreenTextColor
+xml activity_check_ar_availability_scene
 xml backup_rules
 xml data_extraction_rules

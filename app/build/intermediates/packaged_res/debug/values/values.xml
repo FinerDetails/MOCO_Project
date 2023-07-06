@@ -8,12 +8,14 @@
     <color name="light_blue_A400">#FF00B0FF</color>
     <color name="white">#FFFFFFFF</color>
     <string name="app_name">MOCO-PROJECT</string>
+    <string name="ar">AR</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="location_permission_denied">This sample requires location permission to enable the \'my location\' layer. Please try again and grant access to use the location.\nIf the permission has been permanently denied, it can be enabled from the System Settings > Apps > \'Google Maps API Demos\'.</string>
     <string name="map_id">16a18dd4978bf105</string>
     <string name="permission_rationale_location">Access to the location service is required to demonstrate the \'my location\' feature, which shows your current location on the map.</string>
     <string name="permission_required_toast">Location permission is required for this demo.</string>
+    <string name="status_messages_appear_here_at_runtime">Status messages appear here at runtime.</string>
     <string name="title_activity_map">MapActivity</string>
     <style name="Base.Theme.MOCOPROJECT" parent="Theme.Material3.DayNight.NoActionBar">
         

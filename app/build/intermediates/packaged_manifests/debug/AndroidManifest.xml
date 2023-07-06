@@ -86,7 +86,7 @@
         <!-- The minimal version code of ARCore APK required for an app using this SDK. -->
         <meta-data
             android:name="com.google.ar.core.min_apk_version"
-            android:value="230900000" /> <!-- This activity is critical for installing ARCore when it is not already present. -->
+            android:value="231000000" /> <!-- This activity is critical for installing ARCore when it is not already present. -->
         <activity
             android:name="com.google.ar.core.InstallActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"

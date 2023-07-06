@@ -1,11 +1,15 @@
 [
     {
-        "merged": "com.example.moco_project.app-mergeDebugResources-31:/layout/activity_map.xml",
-        "source": "com.example.moco_project.app-main-34:/layout/activity_map.xml"
+        "merged": "C:\\Users\\hanna\\.gradle\\daemon\\8.0\\com.example.moco_project.app-mergeDebugResources-31:\\layout\\activity_map.xml",
+        "source": "C:\\Users\\hanna\\.gradle\\daemon\\8.0\\com.example.moco_project.app-main-34:\\layout\\activity_map.xml"
     },
     {
-        "merged": "com.example.moco_project.app-mergeDebugResources-31:/layout/activity_main.xml",
-        "source": "com.example.moco_project.app-main-34:/layout/activity_main.xml"
+        "merged": "C:\\Users\\hanna\\.gradle\\daemon\\8.0\\com.example.moco_project.app-mergeDebugResources-31:\\layout\\activity_main.xml",
+        "source": "C:\\Users\\hanna\\.gradle\\daemon\\8.0\\com.example.moco_project.app-main-34:\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\hanna\\.gradle\\daemon\\8.0\\com.example.moco_project.app-mergeDebugResources-31:\\layout\\activity_check_ar_availability.xml",
+        "source": "C:\\Users\\hanna\\.gradle\\daemon\\8.0\\com.example.moco_project.app-main-34:\\layout\\activity_check_ar_availability.xml"
     },
     {
         "merged": "com.example.moco_project.app-mergeDebugResources-31:/layout/activity_check_ar_availability.xml",
