@@ -77,7 +77,6 @@ public class MapActivity extends AppCompatActivity
     private FusedLocationProviderClient fusedLocationClient;
     public List<MarkerOptions> markerData = new ArrayList<>();
 
-    private int mushrooms = 0;
 
 
 
@@ -91,16 +90,13 @@ public class MapActivity extends AppCompatActivity
         // Switch to allow pausing and resuming of ArActivity.
         arcoreSwitch = findViewById(R.id.arcore_switch);
         arcoreSwitch.setVisibility(View.GONE);
-        arcoreSwitch.setChecked(SwitchState.isArActivity());
+        arcoreSwitch.setChecked(GameData.isArActivity());
         arcoreSwitch.setOnCheckedChangeListener(
                 (view, checked) -> {
                     // Update the switch state
-                    SwitchState.setArActivity(true);
+                    GameData.setArActivity(true);
                     if (checked) {
-                        Intent intent = new Intent(MapActivity.this, ArActivity.class);
-                        // Share markerData with ArActivity
-                        intent.putExtra("markerData", (Serializable) markerData);
-                        startActivity(intent);
+                        startActivity(new Intent(MapActivity.this, ArActivity.class));
                     }
                 }
         );
@@ -116,6 +112,7 @@ public class MapActivity extends AppCompatActivity
                     // Move camera to location data
                     moveCameraTo(location);
                     cameraInitialized = true;
+                    GameData.setUserLocation(location);
                     //Check whether or not user is inside the zone
                     if (zone != null){
                         whenUserInsideZone(location);
@@ -158,8 +155,9 @@ public class MapActivity extends AppCompatActivity
         // We return false to indicate that we have not consumed the event and that we wish
         // for the default behavior to occur (which is for the camera to move such that the
         // marker is centered and for the marker's info window to open, if it has one).
-        mushrooms++;
-        Toast.makeText(this, "mushrooms: "+mushrooms, Toast.LENGTH_SHORT).show();
+        GameData.addMushrooms(1);
+        Toast.makeText(this, "mushrooms: "+GameData.getMushrooms(), Toast.LENGTH_SHORT).show();
+        GameData.deleteMarkerByTitle(marker.getTitle());
         marker.remove();
         return true;
     }
@@ -304,9 +302,6 @@ public class MapActivity extends AppCompatActivity
             Toast.makeText(this, "Entering the zone", Toast.LENGTH_LONG).show();
             userInsideZone = true;
             arcoreSwitch.setVisibility(View.VISIBLE);
-            // Launch ArActivity
-            /*Intent intent = new Intent(MapActivity.this, ArActivity.class);
-            startActivity(intent);*/
         }
         else if(distanceBetweenZoneAndUser > zone.getZoneRadius() && userInsideZone){
             Toast.makeText(this, "Exiting the zone", Toast.LENGTH_LONG).show();
@@ -330,7 +325,10 @@ public class MapActivity extends AppCompatActivity
             MarkerOptions markerOptions = new MarkerOptions()
                     .position(Zone.generatePoints(location.latitude, location.longitude, 0, zoneRadius))
                     .flat(true)
-                    .icon(bitmapDescriptor);
+                    .icon(bitmapDescriptor)
+                    // Title field will be used as an identifier for the marker
+                    .title(String.valueOf(i));
+            GameData.addMarker(markerOptions);
             markerData.add(markerOptions);
             // Add the marker to the map
             map.addMarker(markerOptions);

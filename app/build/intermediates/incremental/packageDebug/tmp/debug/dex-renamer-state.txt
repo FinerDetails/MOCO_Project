@@ -1,4 +1,4 @@
-#Thu Jul 06 18:33:42 CEST 2023
+#Thu Jul 06 21:03:22 CEST 2023
 base.0=C\:\\Users\\Erkka\\AndroidStudioProjects\\MOCOPROJECT\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
 base.1=C\:\\Users\\Erkka\\AndroidStudioProjects\\MOCOPROJECT\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
 base.2=C\:\\Users\\Erkka\\AndroidStudioProjects\\MOCOPROJECT\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\3\\classes.dex
