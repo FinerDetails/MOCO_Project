@@ -9,11 +9,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="35a09785-97bd-49da-a4e1-0a2fc4fd5af4" name="Changes" comment="The Circle code refactored to its own class &quot;Zone&quot; and added customized map by including mapId to the activity_map layout file. At the time of the commit the customized map does not appear due to unknown reasons, possibly related to google cloud being slow to update.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/moco_project/MapActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/moco_project/MapActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/moco_project/Zone.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/moco_project/Zone.java" afterDir="false" />
-    </list>
+    <list default="true" id="35a09785-97bd-49da-a4e1-0a2fc4fd5af4" name="Changes" comment="Added a switch that changes between MapActivity and ArActivity. The Switch only appears once location of the user is determined to be inside the Zone.&#10;Location data of markers is now recorded to a List and shared with ArActivity.&#10;Tweaked Zone and Marker settings for testing purposes." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
