@@ -18,7 +18,16 @@ public class Zone {
     private LatLng location;
     private GoogleMap map;
 
+<<<<<<< HEAD
 
+    /**
+     * Adventure Zone for AI mode
+     * @param location
+     * @param map
+     */
+    public Zone(Location location, GoogleMap map) {
+        this.location = location;
+=======
     public double getZoneRadius() {
         return zoneRadius;
     }
@@ -27,6 +36,7 @@ public class Zone {
 
     public Zone(Location userLocation, GoogleMap map, double zoneRadius) {
         this.userLocation = userLocation;
+>>>>>>> main
         this.map = map;
         this.zoneRadius = zoneRadius;
         createZones();
