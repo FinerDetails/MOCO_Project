@@ -20,18 +20,7 @@
             map:uiScrollGestures="false"
             map:uiTiltGestures="false"
             map:cameraTilt="30"
-            tools:layout="@layout/activity_map">
-            <Switch
-                android:id="@+id/arcore_switch"
-                android:layout_width="108dp"
-                android:layout_height="53dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="22dp"
-                android:switchPadding="8dp"
-                android:text="@string/ar" />
-        </fragment>
+            tools:layout="@layout/activity_map" />
         <!--map:uiZoomControls="false"
             map:uiZoomGestures="false"-->
 
