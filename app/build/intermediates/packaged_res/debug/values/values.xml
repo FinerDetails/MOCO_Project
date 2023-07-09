@@ -8,7 +8,7 @@
     <color name="light_blue_A400">#FF00B0FF</color>
     <color name="white">#FFFFFFFF</color>
     <string name="app_name">MOCO-PROJECT</string>
-    <string name="ar">AR</string>
+    <string name="ar">AR on</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="location_permission_denied">This sample requires location permission to enable the \'my location\' layer. Please try again and grant access to use the location.\nIf the permission has been permanently denied, it can be enabled from the System Settings > Apps > \'Google Maps API Demos\'.</string>

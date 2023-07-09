@@ -89,120 +89,119 @@
 51-->D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:22:9-54
 52        android:supportsRtl="true"
 52-->D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:23:9-35
-53        android:testOnly="true"
-54        android:theme="@style/Theme.MOCOPROJECT" >
-54-->D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:24:9-49
-55        <activity
-55-->D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:26:9-28:39
-56            android:name="com.example.moco_project.ArActivity"
-56-->D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:27:13-39
-57            android:exported="true" />
-57-->D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:28:13-36
-58
-59        <meta-data
-60            android:name="com.google.android.geo.API_KEY"
-60-->D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:31:13-58
-61            android:value="AIzaSyC1XfZwbIaJKxcY0NnLC9cifg3Lt0-ZXjc" />
-61-->D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:32:13-44
-62        <meta-data
-62-->D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:33:9-35:69
-63            android:name="com.google.android.gms.version"
-63-->D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:34:13-58
-64            android:value="@integer/google_play_services_version" />
-64-->D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:35:13-66
-65
-66        <activity
-66-->D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:37:9-39:40
-67            android:name="com.example.moco_project.MapActivity"
-67-->D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:38:13-40
-68            android:exported="false" />
-68-->D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:39:13-37
-69        <activity
-69-->D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:40:9-48:20
-70            android:name="com.example.moco_project.MainActivity"
-70-->D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:41:13-41
-71            android:exported="true" >
-71-->D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:42:13-36
-72            <intent-filter>
-72-->D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:43:13-47:29
-73                <action android:name="android.intent.action.MAIN" />
-73-->D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:44:17-69
-73-->D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:44:25-66
-74
-75                <category android:name="android.intent.category.LAUNCHER" />
-75-->D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:46:17-77
-75-->D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:46:27-74
-76            </intent-filter>
-77        </activity>
-78
-79        <!--
-80        "AR Required" app, requires "Google Play Services for AR" (ARCore)
-81        to be installed, as the app does not include any non-AR features.
-82        -->
-83        <meta-data
-83-->D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:52:9-81
-84            android:name="com.google.ar.core"
-84-->D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:52:20-53
-85            android:value="required" />
-85-->D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:52:54-78
-86        <!-- The minimal version code of ARCore APK required for an app using this SDK. -->
-87        <meta-data
-87-->[com.google.ar:core:1.38.0] C:\Users\hanna\.gradle\caches\transforms-3\611b2bd2b88f1484abbb7c16c4f8a2a8\transformed\jetified-core-1.38.0\AndroidManifest.xml:27:9-29:41
-88            android:name="com.google.ar.core.min_apk_version"
-88-->[com.google.ar:core:1.38.0] C:\Users\hanna\.gradle\caches\transforms-3\611b2bd2b88f1484abbb7c16c4f8a2a8\transformed\jetified-core-1.38.0\AndroidManifest.xml:28:13-62
-89            android:value="231000000" /> <!-- This activity is critical for installing ARCore when it is not already present. -->
-89-->[com.google.ar:core:1.38.0] C:\Users\hanna\.gradle\caches\transforms-3\611b2bd2b88f1484abbb7c16c4f8a2a8\transformed\jetified-core-1.38.0\AndroidManifest.xml:29:13-38
-90        <activity
-90-->[com.google.ar:core:1.38.0] C:\Users\hanna\.gradle\caches\transforms-3\611b2bd2b88f1484abbb7c16c4f8a2a8\transformed\jetified-core-1.38.0\AndroidManifest.xml:31:9-37:80
-91            android:name="com.google.ar.core.InstallActivity"
-91-->[com.google.ar:core:1.38.0] C:\Users\hanna\.gradle\caches\transforms-3\611b2bd2b88f1484abbb7c16c4f8a2a8\transformed\jetified-core-1.38.0\AndroidManifest.xml:32:13-62
-92            android:configChanges="keyboardHidden|orientation|screenSize"
-92-->[com.google.ar:core:1.38.0] C:\Users\hanna\.gradle\caches\transforms-3\611b2bd2b88f1484abbb7c16c4f8a2a8\transformed\jetified-core-1.38.0\AndroidManifest.xml:33:13-74
-93            android:excludeFromRecents="true"
-93-->[com.google.ar:core:1.38.0] C:\Users\hanna\.gradle\caches\transforms-3\611b2bd2b88f1484abbb7c16c4f8a2a8\transformed\jetified-core-1.38.0\AndroidManifest.xml:34:13-46
-94            android:exported="false"
-94-->[com.google.ar:core:1.38.0] C:\Users\hanna\.gradle\caches\transforms-3\611b2bd2b88f1484abbb7c16c4f8a2a8\transformed\jetified-core-1.38.0\AndroidManifest.xml:35:13-37
-95            android:launchMode="singleTop"
-95-->[com.google.ar:core:1.38.0] C:\Users\hanna\.gradle\caches\transforms-3\611b2bd2b88f1484abbb7c16c4f8a2a8\transformed\jetified-core-1.38.0\AndroidManifest.xml:36:13-43
-96            android:theme="@android:style/Theme.Material.Light.Dialog.Alert" /> <!-- Needs to be explicitly declared on P+ -->
-96-->[com.google.ar:core:1.38.0] C:\Users\hanna\.gradle\caches\transforms-3\611b2bd2b88f1484abbb7c16c4f8a2a8\transformed\jetified-core-1.38.0\AndroidManifest.xml:37:13-77
-97        <uses-library
-97-->[com.google.android.gms:play-services-maps:18.1.0] C:\Users\hanna\.gradle\caches\transforms-3\2e8863cb2556c92b377b95f70aab9609\transformed\jetified-play-services-maps-18.1.0\AndroidManifest.xml:39:9-41:40
-98            android:name="org.apache.http.legacy"
-98-->[com.google.android.gms:play-services-maps:18.1.0] C:\Users\hanna\.gradle\caches\transforms-3\2e8863cb2556c92b377b95f70aab9609\transformed\jetified-play-services-maps-18.1.0\AndroidManifest.xml:40:13-50
-99            android:required="false" />
-99-->[com.google.android.gms:play-services-maps:18.1.0] C:\Users\hanna\.gradle\caches\transforms-3\2e8863cb2556c92b377b95f70aab9609\transformed\jetified-play-services-maps-18.1.0\AndroidManifest.xml:41:13-37
-100
-101        <activity
-101-->[com.google.android.gms:play-services-base:18.1.0] C:\Users\hanna\.gradle\caches\transforms-3\9036a528b1406275d26d7622c1327b73\transformed\jetified-play-services-base-18.1.0\AndroidManifest.xml:20:9-22:45
-102            android:name="com.google.android.gms.common.api.GoogleApiActivity"
-102-->[com.google.android.gms:play-services-base:18.1.0] C:\Users\hanna\.gradle\caches\transforms-3\9036a528b1406275d26d7622c1327b73\transformed\jetified-play-services-base-18.1.0\AndroidManifest.xml:20:19-85
-103            android:exported="false"
-103-->[com.google.android.gms:play-services-base:18.1.0] C:\Users\hanna\.gradle\caches\transforms-3\9036a528b1406275d26d7622c1327b73\transformed\jetified-play-services-base-18.1.0\AndroidManifest.xml:22:19-43
-104            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-104-->[com.google.android.gms:play-services-base:18.1.0] C:\Users\hanna\.gradle\caches\transforms-3\9036a528b1406275d26d7622c1327b73\transformed\jetified-play-services-base-18.1.0\AndroidManifest.xml:21:19-78
-105
-106        <provider
-106-->[androidx.emoji2:emoji2:1.2.0] C:\Users\hanna\.gradle\caches\transforms-3\3d235ed602f65236d1e967aa3ae41734\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:24:9-32:20
-107            android:name="androidx.startup.InitializationProvider"
-107-->[androidx.emoji2:emoji2:1.2.0] C:\Users\hanna\.gradle\caches\transforms-3\3d235ed602f65236d1e967aa3ae41734\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:25:13-67
-108            android:authorities="com.example.moco_project.androidx-startup"
-108-->[androidx.emoji2:emoji2:1.2.0] C:\Users\hanna\.gradle\caches\transforms-3\3d235ed602f65236d1e967aa3ae41734\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:26:13-68
-109            android:exported="false" >
-109-->[androidx.emoji2:emoji2:1.2.0] C:\Users\hanna\.gradle\caches\transforms-3\3d235ed602f65236d1e967aa3ae41734\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:27:13-37
-110            <meta-data
-110-->[androidx.emoji2:emoji2:1.2.0] C:\Users\hanna\.gradle\caches\transforms-3\3d235ed602f65236d1e967aa3ae41734\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:29:13-31:52
-111                android:name="androidx.emoji2.text.EmojiCompatInitializer"
-111-->[androidx.emoji2:emoji2:1.2.0] C:\Users\hanna\.gradle\caches\transforms-3\3d235ed602f65236d1e967aa3ae41734\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:30:17-75
-112                android:value="androidx.startup" />
-112-->[androidx.emoji2:emoji2:1.2.0] C:\Users\hanna\.gradle\caches\transforms-3\3d235ed602f65236d1e967aa3ae41734\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:31:17-49
-113            <meta-data
-113-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\hanna\.gradle\caches\transforms-3\74479ed0ca537f847c79c9f1d11b43a4\transformed\jetified-lifecycle-process-2.4.1\AndroidManifest.xml:31:13-33:52
-114                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
-114-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\hanna\.gradle\caches\transforms-3\74479ed0ca537f847c79c9f1d11b43a4\transformed\jetified-lifecycle-process-2.4.1\AndroidManifest.xml:32:17-78
-115                android:value="androidx.startup" />
-115-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\hanna\.gradle\caches\transforms-3\74479ed0ca537f847c79c9f1d11b43a4\transformed\jetified-lifecycle-process-2.4.1\AndroidManifest.xml:33:17-49
-116        </provider>
-117    </application>
-118
-119</manifest>
+53        android:theme="@style/Theme.MOCOPROJECT" >
+53-->D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:24:9-49
+54        <activity
+54-->D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:26:9-28:39
+55            android:name="com.example.moco_project.ArActivity"
+55-->D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:27:13-39
+56            android:exported="true" />
+56-->D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:28:13-36
+57
+58        <meta-data
+59            android:name="com.google.android.geo.API_KEY"
+59-->D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:31:13-58
+60            android:value="AIzaSyC1XfZwbIaJKxcY0NnLC9cifg3Lt0-ZXjc" />
+60-->D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:32:13-44
+61        <meta-data
+61-->D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:33:9-35:69
+62            android:name="com.google.android.gms.version"
+62-->D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:34:13-58
+63            android:value="@integer/google_play_services_version" />
+63-->D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:35:13-66
+64
+65        <activity
+65-->D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:37:9-39:40
+66            android:name="com.example.moco_project.MapActivity"
+66-->D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:38:13-40
+67            android:exported="false" />
+67-->D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:39:13-37
+68        <activity
+68-->D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:40:9-48:20
+69            android:name="com.example.moco_project.MainActivity"
+69-->D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:41:13-41
+70            android:exported="true" >
+70-->D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:42:13-36
+71            <intent-filter>
+71-->D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:43:13-47:29
+72                <action android:name="android.intent.action.MAIN" />
+72-->D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:44:17-69
+72-->D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:44:25-66
+73
+74                <category android:name="android.intent.category.LAUNCHER" />
+74-->D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:46:17-77
+74-->D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:46:27-74
+75            </intent-filter>
+76        </activity>
+77
+78        <!--
+79        "AR Required" app, requires "Google Play Services for AR" (ARCore)
+80        to be installed, as the app does not include any non-AR features.
+81        -->
+82        <meta-data
+82-->D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:52:9-81
+83            android:name="com.google.ar.core"
+83-->D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:52:20-53
+84            android:value="required" />
+84-->D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:52:54-78
+85        <!-- The minimal version code of ARCore APK required for an app using this SDK. -->
+86        <meta-data
+86-->[com.google.ar:core:1.38.0] C:\Users\hanna\.gradle\caches\transforms-3\611b2bd2b88f1484abbb7c16c4f8a2a8\transformed\jetified-core-1.38.0\AndroidManifest.xml:27:9-29:41
+87            android:name="com.google.ar.core.min_apk_version"
+87-->[com.google.ar:core:1.38.0] C:\Users\hanna\.gradle\caches\transforms-3\611b2bd2b88f1484abbb7c16c4f8a2a8\transformed\jetified-core-1.38.0\AndroidManifest.xml:28:13-62
+88            android:value="231000000" /> <!-- This activity is critical for installing ARCore when it is not already present. -->
+88-->[com.google.ar:core:1.38.0] C:\Users\hanna\.gradle\caches\transforms-3\611b2bd2b88f1484abbb7c16c4f8a2a8\transformed\jetified-core-1.38.0\AndroidManifest.xml:29:13-38
+89        <activity
+89-->[com.google.ar:core:1.38.0] C:\Users\hanna\.gradle\caches\transforms-3\611b2bd2b88f1484abbb7c16c4f8a2a8\transformed\jetified-core-1.38.0\AndroidManifest.xml:31:9-37:80
+90            android:name="com.google.ar.core.InstallActivity"
+90-->[com.google.ar:core:1.38.0] C:\Users\hanna\.gradle\caches\transforms-3\611b2bd2b88f1484abbb7c16c4f8a2a8\transformed\jetified-core-1.38.0\AndroidManifest.xml:32:13-62
+91            android:configChanges="keyboardHidden|orientation|screenSize"
+91-->[com.google.ar:core:1.38.0] C:\Users\hanna\.gradle\caches\transforms-3\611b2bd2b88f1484abbb7c16c4f8a2a8\transformed\jetified-core-1.38.0\AndroidManifest.xml:33:13-74
+92            android:excludeFromRecents="true"
+92-->[com.google.ar:core:1.38.0] C:\Users\hanna\.gradle\caches\transforms-3\611b2bd2b88f1484abbb7c16c4f8a2a8\transformed\jetified-core-1.38.0\AndroidManifest.xml:34:13-46
+93            android:exported="false"
+93-->[com.google.ar:core:1.38.0] C:\Users\hanna\.gradle\caches\transforms-3\611b2bd2b88f1484abbb7c16c4f8a2a8\transformed\jetified-core-1.38.0\AndroidManifest.xml:35:13-37
+94            android:launchMode="singleTop"
+94-->[com.google.ar:core:1.38.0] C:\Users\hanna\.gradle\caches\transforms-3\611b2bd2b88f1484abbb7c16c4f8a2a8\transformed\jetified-core-1.38.0\AndroidManifest.xml:36:13-43
+95            android:theme="@android:style/Theme.Material.Light.Dialog.Alert" /> <!-- Needs to be explicitly declared on P+ -->
+95-->[com.google.ar:core:1.38.0] C:\Users\hanna\.gradle\caches\transforms-3\611b2bd2b88f1484abbb7c16c4f8a2a8\transformed\jetified-core-1.38.0\AndroidManifest.xml:37:13-77
+96        <uses-library
+96-->[com.google.android.gms:play-services-maps:18.1.0] C:\Users\hanna\.gradle\caches\transforms-3\2e8863cb2556c92b377b95f70aab9609\transformed\jetified-play-services-maps-18.1.0\AndroidManifest.xml:39:9-41:40
+97            android:name="org.apache.http.legacy"
+97-->[com.google.android.gms:play-services-maps:18.1.0] C:\Users\hanna\.gradle\caches\transforms-3\2e8863cb2556c92b377b95f70aab9609\transformed\jetified-play-services-maps-18.1.0\AndroidManifest.xml:40:13-50
+98            android:required="false" />
+98-->[com.google.android.gms:play-services-maps:18.1.0] C:\Users\hanna\.gradle\caches\transforms-3\2e8863cb2556c92b377b95f70aab9609\transformed\jetified-play-services-maps-18.1.0\AndroidManifest.xml:41:13-37
+99
+100        <activity
+100-->[com.google.android.gms:play-services-base:18.1.0] C:\Users\hanna\.gradle\caches\transforms-3\9036a528b1406275d26d7622c1327b73\transformed\jetified-play-services-base-18.1.0\AndroidManifest.xml:20:9-22:45
+101            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+101-->[com.google.android.gms:play-services-base:18.1.0] C:\Users\hanna\.gradle\caches\transforms-3\9036a528b1406275d26d7622c1327b73\transformed\jetified-play-services-base-18.1.0\AndroidManifest.xml:20:19-85
+102            android:exported="false"
+102-->[com.google.android.gms:play-services-base:18.1.0] C:\Users\hanna\.gradle\caches\transforms-3\9036a528b1406275d26d7622c1327b73\transformed\jetified-play-services-base-18.1.0\AndroidManifest.xml:22:19-43
+103            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+103-->[com.google.android.gms:play-services-base:18.1.0] C:\Users\hanna\.gradle\caches\transforms-3\9036a528b1406275d26d7622c1327b73\transformed\jetified-play-services-base-18.1.0\AndroidManifest.xml:21:19-78
+104
+105        <provider
+105-->[androidx.emoji2:emoji2:1.2.0] C:\Users\hanna\.gradle\caches\transforms-3\3d235ed602f65236d1e967aa3ae41734\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:24:9-32:20
+106            android:name="androidx.startup.InitializationProvider"
+106-->[androidx.emoji2:emoji2:1.2.0] C:\Users\hanna\.gradle\caches\transforms-3\3d235ed602f65236d1e967aa3ae41734\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:25:13-67
+107            android:authorities="com.example.moco_project.androidx-startup"
+107-->[androidx.emoji2:emoji2:1.2.0] C:\Users\hanna\.gradle\caches\transforms-3\3d235ed602f65236d1e967aa3ae41734\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:26:13-68
+108            android:exported="false" >
+108-->[androidx.emoji2:emoji2:1.2.0] C:\Users\hanna\.gradle\caches\transforms-3\3d235ed602f65236d1e967aa3ae41734\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:27:13-37
+109            <meta-data
+109-->[androidx.emoji2:emoji2:1.2.0] C:\Users\hanna\.gradle\caches\transforms-3\3d235ed602f65236d1e967aa3ae41734\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:29:13-31:52
+110                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+110-->[androidx.emoji2:emoji2:1.2.0] C:\Users\hanna\.gradle\caches\transforms-3\3d235ed602f65236d1e967aa3ae41734\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:30:17-75
+111                android:value="androidx.startup" />
+111-->[androidx.emoji2:emoji2:1.2.0] C:\Users\hanna\.gradle\caches\transforms-3\3d235ed602f65236d1e967aa3ae41734\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:31:17-49
+112            <meta-data
+112-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\hanna\.gradle\caches\transforms-3\74479ed0ca537f847c79c9f1d11b43a4\transformed\jetified-lifecycle-process-2.4.1\AndroidManifest.xml:31:13-33:52
+113                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+113-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\hanna\.gradle\caches\transforms-3\74479ed0ca537f847c79c9f1d11b43a4\transformed\jetified-lifecycle-process-2.4.1\AndroidManifest.xml:32:17-78
+114                android:value="androidx.startup" />
+114-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\hanna\.gradle\caches\transforms-3\74479ed0ca537f847c79c9f1d11b43a4\transformed\jetified-lifecycle-process-2.4.1\AndroidManifest.xml:33:17-49
+115        </provider>
+116    </application>
+117
+118</manifest>

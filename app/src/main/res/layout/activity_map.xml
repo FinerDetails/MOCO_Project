@@ -21,6 +21,7 @@
             map:uiTiltGestures="false"
             map:cameraTilt="30"
             tools:layout="@layout/activity_map" />
+
         <!--map:uiZoomControls="false"
             map:uiZoomGestures="false"-->
 

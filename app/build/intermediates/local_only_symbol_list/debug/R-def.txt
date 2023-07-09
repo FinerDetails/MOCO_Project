@@ -11,6 +11,7 @@ color light_blue_A400
 color white
 drawable ic_launcher_background
 drawable ic_launcher_foreground
+drawable mushroom_icon_edited
 id arcore_switch
 id end
 id glsurfaceview

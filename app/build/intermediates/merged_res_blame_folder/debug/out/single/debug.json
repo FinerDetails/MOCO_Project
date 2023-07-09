@@ -4,8 +4,16 @@
         "source": "C:\\Users\\hanna\\.gradle\\daemon\\8.0\\com.example.moco_project.app-main-34:\\mipmap-anydpi-v26\\ic_launcher.xml"
     },
     {
+        "merged": "com.example.moco_project.app-merged_res-32:/layout_activity_map.xml.flat",
+        "source": "com.example.moco_project.app-main-34:/layout/activity_map.xml"
+    },
+    {
         "merged": "C:\\Users\\hanna\\.gradle\\daemon\\8.0\\com.example.moco_project.app-merged_res-32:\\layout_activity_map.xml.flat",
         "source": "C:\\Users\\hanna\\.gradle\\daemon\\8.0\\com.example.moco_project.app-main-34:\\layout\\activity_map.xml"
+    },
+    {
+        "merged": "C:\\Users\\hanna\\.gradle\\daemon\\8.0\\com.example.moco_project.app-merged_res-32:\\drawable_mushroom_icon_edited.png.flat",
+        "source": "C:\\Users\\hanna\\.gradle\\daemon\\8.0\\com.example.moco_project.app-main-34:\\drawable\\mushroom_icon_edited.png"
     },
     {
         "merged": "C:\\Users\\hanna\\.gradle\\daemon\\8.0\\com.example.moco_project.app-merged_res-32:\\mipmap-xxxhdpi_ic_launcher.webp.flat",
@@ -38,10 +46,6 @@
     {
         "merged": "C:\\Users\\hanna\\.gradle\\daemon\\8.0\\com.example.moco_project.app-merged_res-32:\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
         "source": "C:\\Users\\hanna\\.gradle\\daemon\\8.0\\com.example.moco_project.app-main-34:\\mipmap-anydpi-v26\\ic_launcher_round.xml"
-    },
-    {
-        "merged": "com.example.moco_project.app-merged_res-32:/layout_activity_check_ar_availability.xml.flat",
-        "source": "com.example.moco_project.app-main-34:/layout/activity_check_ar_availability.xml"
     },
     {
         "merged": "C:\\Users\\hanna\\.gradle\\daemon\\8.0\\com.example.moco_project.app-merged_res-32:\\mipmap-xxhdpi_ic_launcher_round.webp.flat",

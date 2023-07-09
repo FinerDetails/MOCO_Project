@@ -3,7 +3,6 @@ package com.example.moco_project;
 import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
 import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -44,6 +43,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.moco_project.helpers.DisplayRotationHelper;
 import com.example.moco_project.helpers.TapHelper;
@@ -51,6 +51,7 @@ import com.example.moco_project.helpers.TrackingStateHelper;
 import com.example.moco_project.rendering.ObjectRenderer;
 import com.example.moco_project.rendering.PlaneRenderer;
 import com.example.moco_project.rendering.PointCloudRenderer;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.ar.core.Anchor;
 import com.google.ar.core.ArCoreApk;
 import com.google.ar.core.Camera;
@@ -180,6 +181,7 @@ ImageReader.OnImageAvailableListener, SurfaceTexture.OnFrameAvailableListener {
     // Total number of CPU images processed.
     private int cpuImagesProcessed;
 
+
     /** ---------------------------------------------------------------------------------
      * METHODE AREA
      */
@@ -213,10 +215,13 @@ ImageReader.OnImageAvailableListener, SurfaceTexture.OnFrameAvailableListener {
         // Switch to allow pausing and resuming of ARCore.
         Switch arcoreSwitch = findViewById(R.id.arcore_switch);
         // Ensure initial switch position is set based on initial value of `arMode` variable.
-        arcoreSwitch.setChecked(arMode);
+        //TODO arcoreSwitch.setChecked(arMode);
+        arcoreSwitch.setChecked(GameData.getIsArActivity());
         arcoreSwitch.setOnCheckedChangeListener(
             (view, checked) -> {
                 Log.i(TAG, "Switching to " + (checked ? "AR" : "non-AR") + " mode.");
+                //Update the switch state
+                GameData.setIsArActivity(false);
                 if (checked) {
                     statusTextView.setText("ARCore is activated");
                     arMode = true;
@@ -225,7 +230,8 @@ ImageReader.OnImageAvailableListener, SurfaceTexture.OnFrameAvailableListener {
                     statusTextView.setText("ARCore was paused");
                     arMode = false;
                     pauseARCore();
-                    resumeCamera2();
+                    startActivity(new Intent(ArActivity.this, MapActivity.class));
+                    //resumeCamera2();
                 }
             });
 
@@ -256,6 +262,16 @@ ImageReader.OnImageAvailableListener, SurfaceTexture.OnFrameAvailableListener {
             openCamera();
         }
         displayRotationHelper.onResume();
+        //How to get latitude of first marker that has been generated:
+        Toast.makeText(this, "first mushroom latitude " +
+                GameData.getMarkerData().get(0).getPosition().latitude, Toast.LENGTH_SHORT).show();
+        /*
+        BTW the markers have IDs in their ".title" keys. IDs are given to markers when they are
+        first generated. They are numbers starting from 0 and their type is String.
+        When markers are clicked on the map, GameData.deleteMarkerByTitle(String title) is called.
+        This function deletes the correct instance from the markerdata list.
+        You can also get the last user location with GameData.getUserLocation()
+         */
     }
 
     @Override

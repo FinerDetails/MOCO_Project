@@ -3056,6 +3056,7 @@ drawable mtrl_switch_thumb_unchecked_pressed
 drawable mtrl_switch_track
 drawable mtrl_switch_track_decoration
 drawable mtrl_tabs_default_indicator
+drawable mushroom_icon_edited
 drawable navigation_empty_icon
 drawable notification_action_background
 drawable notification_bg
