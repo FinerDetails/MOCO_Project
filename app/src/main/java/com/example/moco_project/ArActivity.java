@@ -41,6 +41,7 @@ import android.view.MotionEvent;
 import android.view.Surface;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -79,6 +80,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import javax.microedition.khronos.egl.EGLConfig;
@@ -181,9 +184,13 @@ ImageReader.OnImageAvailableListener, SurfaceTexture.OnFrameAvailableListener {
     // Total number of CPU images processed.
     private int cpuImagesProcessed;
 
+    private ProgressBar hungerBar;
+
+    private Timer timer;
+
 
     /** ---------------------------------------------------------------------------------
-     * METHODE AREA
+     * METHOD AREA
      */
 
 
@@ -235,6 +242,17 @@ ImageReader.OnImageAvailableListener, SurfaceTexture.OnFrameAvailableListener {
                 }
             });
 
+        //Sets up timer for decreasing hunger meter;
+        hungerBar = findViewById(R.id.hungerBar);
+        timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                hungerBar.setProgress(GameData.getHunger());
+                GameData.decrementHunger(); //decrement hunger
+            }
+        }, 0, GameData.getHungerDecreaseInterval());
+
     }
 
     @Override
@@ -248,6 +266,8 @@ ImageReader.OnImageAvailableListener, SurfaceTexture.OnFrameAvailableListener {
             session = null;
         }
         super.onDestroy();
+        // stops hungerBar timer
+        timer.cancel();
     }
 
     @Override

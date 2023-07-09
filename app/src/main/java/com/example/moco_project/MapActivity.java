@@ -40,12 +40,15 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Switch;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class MapActivity extends AppCompatActivity
@@ -79,6 +82,8 @@ public class MapActivity extends AppCompatActivity
     public List<MarkerOptions> markerData = new ArrayList<>();
 
     private Switch arcoreSwitch;
+    private ProgressBar hungerBar;
+    private Timer timer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,18 +132,24 @@ public class MapActivity extends AppCompatActivity
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        //Sets up timer for decreasing hunger meter;
+        hungerBar = findViewById(R.id.hungerBar);
+        timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                hungerBar.setProgress(GameData.getHunger());
+                GameData.decrementHunger(); //decrement hunger
+            }
+        }, 0, GameData.getHungerDecreaseInterval());
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        startLocationUpdates();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
+    protected void onDestroy() {
+        super.onDestroy();
         stopLocationUpdates();
+        timer.cancel();
     }
 
     @Override
@@ -158,8 +169,7 @@ public class MapActivity extends AppCompatActivity
         // We return false to indicate that we have not consumed the event and that we wish
         // for the default behavior to occur (which is for the camera to move such that the
         // marker is centered and for the marker's info window to open, if it has one).
-        GameData.addMushrooms(1);
-        Toast.makeText(this, "mushrooms: " + GameData.getMushrooms(), Toast.LENGTH_SHORT).show();
+        GameData.incrementHunger();
         GameData.deleteMarkerByTitle(marker.getTitle());
         marker.remove();
         return true;
@@ -207,6 +217,7 @@ public class MapActivity extends AppCompatActivity
                         Manifest.permission.ACCESS_COARSE_LOCATION)) {
             // Enable the my location layer if the permission has been granted.
             enableMyLocation();
+            startLocationUpdates();
         } else {
             // Permission was denied. Display an error message
             // Display the missing permission error dialog when the fragments resume.

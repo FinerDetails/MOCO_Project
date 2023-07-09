@@ -4,9 +4,12 @@ package com.example.moco_project.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Switch;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
@@ -23,13 +26,26 @@ public final class ActivityMapBinding implements ViewBinding {
   public final Switch arcoreSwitch;
 
   @NonNull
+  public final ProgressBar hungerBar;
+
+  @NonNull
+  public final ImageView imageView;
+
+  @NonNull
   public final ConstraintLayout mapContainer;
 
+  @NonNull
+  public final Toolbar toolbar;
+
   private ActivityMapBinding(@NonNull ConstraintLayout rootView, @NonNull Switch arcoreSwitch,
-      @NonNull ConstraintLayout mapContainer) {
+      @NonNull ProgressBar hungerBar, @NonNull ImageView imageView,
+      @NonNull ConstraintLayout mapContainer, @NonNull Toolbar toolbar) {
     this.rootView = rootView;
     this.arcoreSwitch = arcoreSwitch;
+    this.hungerBar = hungerBar;
+    this.imageView = imageView;
     this.mapContainer = mapContainer;
+    this.toolbar = toolbar;
   }
 
   @Override
@@ -65,9 +81,28 @@ public final class ActivityMapBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.hungerBar;
+      ProgressBar hungerBar = ViewBindings.findChildViewById(rootView, id);
+      if (hungerBar == null) {
+        break missingId;
+      }
+
+      id = R.id.imageView;
+      ImageView imageView = ViewBindings.findChildViewById(rootView, id);
+      if (imageView == null) {
+        break missingId;
+      }
+
       ConstraintLayout mapContainer = (ConstraintLayout) rootView;
 
-      return new ActivityMapBinding((ConstraintLayout) rootView, arcoreSwitch, mapContainer);
+      id = R.id.toolbar;
+      Toolbar toolbar = ViewBindings.findChildViewById(rootView, id);
+      if (toolbar == null) {
+        break missingId;
+      }
+
+      return new ActivityMapBinding((ConstraintLayout) rootView, arcoreSwitch, hungerBar, imageView,
+          mapContainer, toolbar);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));
