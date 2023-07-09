@@ -9,14 +9,22 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
+<<<<<<< Updated upstream
     <list default="true" id="35a09785-97bd-49da-a4e1-0a2fc4fd5af4" name="Changes" comment="Added a switch that changes between MapActivity and ArActivity. The Switch only appears once location of the user is determined to be inside the Zone.&#10;Location data of markers is now recorded to a List and shared with ArActivity.&#10;Tweaked Zone and Marker settings for testing purposes." />
+=======
+    <list default="true" id="8c5e4fb9-90c4-4009-b838-45a1e95913c7" name="Changes" comment="The Circle code refactored to its own class &quot;Zone&quot; and added customized map by including mapId to the activity_map layout file. At the time of the commit the customized map does not appear due to unknown reasons, possibly related to google cloud being slow to update.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/moco_project/ArActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/moco_project/ArActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/moco_project/MapActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/moco_project/MapActivity.java" afterDir="false" />
+    </list>
+>>>>>>> Stashed changes
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="ChangesViewManager" show_ignored="true" />
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[C:\Users\hanna\.android\avd\Pixel_5_API_34.avd]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[73381b07]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
