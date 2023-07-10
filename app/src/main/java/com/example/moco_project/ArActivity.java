@@ -38,6 +38,7 @@ import android.view.Surface;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -77,6 +78,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -221,6 +224,9 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
     private static final double LOCALIZED_HORIZONTAL_ACCURACY_HYSTERESIS_METERS = 10;
     private static final double LOCALIZED_ORIENTATION_YAW_ACCURACY_HYSTERESIS_DEGREES = 10;
 
+    private ProgressBar hungerBar;
+    private Timer timer;
+
     /** ---------------------------------------------------------------------------------
      * METHODE AREA
      */
@@ -231,6 +237,19 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
         Log.i("ARCore:", "Creating ARActivity");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_check_ar_availability);
+
+        //Sets up timer for decreasing hunger meter;
+        hungerBar = findViewById(R.id.hungerBar);
+        timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                hungerBar.setProgress(GameData.getHunger());
+                GameData.decrementHunger(); //decrement hunger
+            }
+        }, 0, GameData.getHungerDecreaseInterval());
+
+
 
         Bundle extraBundle = getIntent().getExtras();
         if (extraBundle != null && 1 == extraBundle.getShort("automator", (short) 0)) {
@@ -292,6 +311,7 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
             session.close();
             session = null;
         }
+        timer.cancel();
         super.onDestroy();
     }
 

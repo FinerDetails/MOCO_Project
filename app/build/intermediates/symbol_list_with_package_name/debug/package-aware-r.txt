@@ -1446,6 +1446,7 @@ color light_blue_600
 color light_blue_900
 color light_blue_A200
 color light_blue_A400
+color light_purple
 color m3_appbar_overlay_color
 color m3_assist_chip_icon_tint_color
 color m3_assist_chip_stroke_color
@@ -2071,6 +2072,7 @@ color mtrl_textinput_focused_box_stroke_color
 color mtrl_textinput_hovered_box_stroke_color
 color notification_action_color_filter
 color notification_icon_bg_color
+color orange
 color primary_dark_material_dark
 color primary_dark_material_light
 color primary_material_dark
@@ -3057,6 +3059,7 @@ drawable mtrl_switch_track
 drawable mtrl_switch_track_decoration
 drawable mtrl_tabs_default_indicator
 drawable mushroom_icon_edited
+drawable mushroom_icon_edited3
 drawable navigation_empty_icon
 drawable notification_action_background
 drawable notification_bg
@@ -3293,6 +3296,7 @@ id home
 id homeAsUp
 id honorRequest
 id horizontal_only
+id hungerBar
 id hybrid
 id icon
 id icon_group
@@ -3301,6 +3305,7 @@ id ifRoom
 id ignore
 id ignoreRequest
 id image
+id imageView
 id image_text_layout
 id immediateStop
 id included
@@ -3549,6 +3554,7 @@ id title
 id titleDividerNoCustom
 id title_template
 id toggle
+id toolbar
 id top
 id topPanel
 id touch_outside

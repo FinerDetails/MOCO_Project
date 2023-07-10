@@ -16,6 +16,10 @@
         "source": "com.example.moco_project.app-main-35:/mipmap-xxxhdpi/ic_launcher_round.webp"
     },
     {
+        "merged": "com.example.moco_project.app-merged_res-33:/drawable_mushroom_icon_edited3.png.flat",
+        "source": "com.example.moco_project.app-main-35:/drawable/mushroom_icon_edited3.png"
+    },
+    {
         "merged": "com.example.moco_project.app-merged_res-33:/xml_backup_rules.xml.flat",
         "source": "com.example.moco_project.app-main-35:/xml/backup_rules.xml"
     },

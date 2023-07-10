@@ -1445,6 +1445,7 @@ int color light_blue_600 0x7f05006a
 int color light_blue_900 0x7f05006b
 int color light_blue_A200 0x7f05006c
 int color light_blue_A400 0x7f05006d
+int color light_purple 0x7f0502f6
 int color m3_appbar_overlay_color 0x7f05006e
 int color m3_assist_chip_icon_tint_color 0x7f05006f
 int color m3_assist_chip_stroke_color 0x7f050070
@@ -2070,6 +2071,7 @@ int color mtrl_textinput_focused_box_stroke_color 0x7f0502db
 int color mtrl_textinput_hovered_box_stroke_color 0x7f0502dc
 int color notification_action_color_filter 0x7f0502dd
 int color notification_icon_bg_color 0x7f0502de
+int color orange 0x7f0502f7
 int color primary_dark_material_dark 0x7f0502df
 int color primary_dark_material_light 0x7f0502e0
 int color primary_material_dark 0x7f0502e1
@@ -3056,6 +3058,7 @@ int drawable mtrl_switch_track 0x7f0700e1
 int drawable mtrl_switch_track_decoration 0x7f0700e2
 int drawable mtrl_tabs_default_indicator 0x7f0700e3
 int drawable mushroom_icon_edited 0x7f0700e4
+int drawable mushroom_icon_edited3 0x7f0700f5
 int drawable navigation_empty_icon 0x7f0700e5
 int drawable notification_action_background 0x7f0700e6
 int drawable notification_bg 0x7f0700e7
@@ -3292,6 +3295,7 @@ int id home 0x7f0800d8
 int id homeAsUp 0x7f0800d9
 int id honorRequest 0x7f0800da
 int id horizontal_only 0x7f0800db
+int id hungerBar 0x7f0801ff
 int id hybrid 0x7f0800dc
 int id icon 0x7f0800dd
 int id icon_group 0x7f0800de
@@ -3300,6 +3304,7 @@ int id ifRoom 0x7f0800e0
 int id ignore 0x7f0800e1
 int id ignoreRequest 0x7f0800e2
 int id image 0x7f0800e3
+int id imageView 0x7f080200
 int id image_text_layout 0x7f0800e4
 int id immediateStop 0x7f0800e5
 int id included 0x7f0800e6
@@ -3548,6 +3553,7 @@ int id title 0x7f0801d8
 int id titleDividerNoCustom 0x7f0801d9
 int id title_template 0x7f0801da
 int id toggle 0x7f0801db
+int id toolbar 0x7f080201
 int id top 0x7f0801dc
 int id topPanel 0x7f0801dd
 int id touch_outside 0x7f0801de

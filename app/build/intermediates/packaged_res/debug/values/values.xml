@@ -6,6 +6,8 @@
     <color name="light_blue_900">#FF01579B</color>
     <color name="light_blue_A200">#FF40C4FF</color>
     <color name="light_blue_A400">#FF00B0FF</color>
+    <color name="light_purple">#d0bdff</color>
+    <color name="orange">#FF8A65</color>
     <color name="white">#FFFFFFFF</color>
     <string name="app_name">MOCO-PROJECT</string>
     <string name="ar">AR on</string>
