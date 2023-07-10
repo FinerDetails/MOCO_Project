@@ -32,11 +32,9 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.provider.Settings;
 import android.util.Log;
-import android.util.Size;
 import android.view.MotionEvent;
 import android.view.Surface;
 import android.view.View;
-import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Switch;
@@ -48,20 +46,17 @@ import com.example.moco_project.helpers.TrackingStateHelper;
 import com.example.moco_project.rendering.ObjectRenderer;
 import com.example.moco_project.rendering.PlaneRenderer;
 import com.example.moco_project.rendering.PointCloudRenderer;
-import com.google.android.gms.maps.model.LatLng;
 import com.google.ar.core.Anchor;
 import com.google.ar.core.ArCoreApk;
 import com.google.ar.core.Camera;
 import com.google.ar.core.Config;
 import com.google.ar.core.Earth;
 import com.google.ar.core.Frame;
-import com.google.ar.core.FutureState;
 import com.google.ar.core.GeospatialPose;
 import com.google.ar.core.HitResult;
 import com.google.ar.core.Plane;
 import com.google.ar.core.Point;
 import com.google.ar.core.PointCloud;
-import com.google.ar.core.ResolveAnchorOnTerrainFuture;
 import com.google.ar.core.Session;
 import com.google.ar.core.SharedCamera;
 import com.google.ar.core.Trackable;
@@ -80,7 +75,6 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import javax.microedition.khronos.egl.EGLConfig;
@@ -291,7 +285,6 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
                     pauseARCore();
                     GameData.setIsArActivity(false);
                     startActivity(new Intent(ArActivity.this, MapActivity.class));
-                    //resumeCamera2();
                 }
             });
 
@@ -442,9 +435,6 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
     /**
      * Handles the updating for @link State.LOCALIZING. In this state, wait for the horizontal and
      * orientation threshold to improve until it reaches your threshold.
-     *
-     * <p>If it takes too long for the threshold to be reached, this could mean that GPS data isn't
-     * accurate enough, or that the user is in an area that can't be localized with StreetView.
      */
     private void updateLocalizingState(Earth earth) {
         GeospatialPose geospatialPose = earth.getCameraGeospatialPose();
@@ -453,12 +443,6 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
                 <= LOCALIZING_ORIENTATION_YAW_ACCURACY_THRESHOLD_DEGREES) {
             state = State.LOCALIZED;
         }
-
-       /* if (TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis() - localizingStartTimestamp)
-                > LOCALIZING_TIMEOUT_SECONDS) {
-            state = State.LOCALIZING_FAILED;
-            return;
-        }*/
     }
 
     @Override
@@ -552,8 +536,7 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
     public boolean checkIfCameraPermissionHasBeenGranted() {
         Log.i(TAG, "PERMISSION has been granted before.");
         return (ContextCompat.checkSelfPermission(
-                this, Manifest.permission.CAMERA) ==
-                PackageManager.PERMISSION_GRANTED);
+                this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED);
     }
 
     /**
@@ -624,7 +607,7 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
         }
 
         // Checks our camera permissions
-        if (!checkIfCameraPermissionHasBeenGranted()) {
+        if (checkIfCameraPermissionHasBeenGranted()) {
             requestCameraPermission();
             return;
         }
@@ -822,11 +805,6 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
         }
     };
 
-    private void resumeCamera2() {
-        setRepeatingCaptureRequest();
-        sharedCamera.getSurfaceTexture().setOnFrameAvailableListener(this);
-    }
-
     private void resumeARCore() {
         // Ensure that session is valid before triggering ARCore resume. Handles the case where the user
         // manually uninstalls ARCore while the app is paused and then resumes.
@@ -920,8 +898,6 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
         try {
             if (GameData.getIsArActivity()) {
                 onDrawFrameARCore();
-            } else {
-                onDrawFrameCamera2();
             }
         } catch (Throwable t) {
             // Avoid crashing the application due to unhandled exceptions.
@@ -929,38 +905,6 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
         }
     }
 
-    // Draw frame when in non-AR mode. Called on the GL thread.
-    public void onDrawFrameCamera2() {
-        SurfaceTexture texture = sharedCamera.getSurfaceTexture();
-
-        // ARCore may attach the SurfaceTexture to a different texture from the camera texture, so we
-        // need to manually reattach it to our desired texture.
-        if (isFirstFrameWithoutArcore.getAndSet(false)) {
-            try {
-                texture.detachFromGLContext();
-            } catch (RuntimeException e) {
-                // Ignore if fails, it may not be attached yet.
-            }
-            texture.attachToGLContext(backgroundRenderer.getTextureId());
-        }
-
-        // Update the surface.
-        texture.updateTexImage();
-
-        // Account for any difference between camera sensor orientation and display orientation.
-        int rotationDegrees = displayRotationHelper.getCameraSensorToDisplayRotation(cameraId);
-
-        // Determine size of the camera preview image.
-        Size size = session.getCameraConfig().getTextureSize();
-
-        // Determine aspect ratio of the output GL surface, accounting for the current display rotation
-        // relative to the camera sensor orientation of the device.
-        float displayAspectRatio =
-                displayRotationHelper.getCameraSensorRelativeViewportAspectRatio(cameraId);
-
-        // Render camera preview image to the GL surface.
-        backgroundRenderer.draw(size.getWidth(), size.getHeight(), displayAspectRatio, rotationDegrees);
-    }
 
     // Surface texture on frame available callback, used only in non-AR mode.
     @Override
@@ -982,8 +926,6 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
             this.color = color4f;
         }
     }
-
-
 
     // Draw frame when in AR mode. Called on the GL thread.
     public void onDrawFrameARCore() throws CameraNotAvailableException {
@@ -1109,7 +1051,6 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
         }
     }
 
-
     /**
      * Repeating camera capture session state callback
      *
@@ -1125,9 +1066,6 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
             if (GameData.getIsArActivity()) {
                 setRepeatingCaptureRequest();
             // Note, resumeARCore() must be called in onActive(), not here.
-            } else {
-                // Calls `setRepeatingCaptureRequest()`.
-                resumeCamera2();
             }
         }
 
@@ -1225,7 +1163,7 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, int[] results) {
         super.onRequestPermissionsResult(requestCode, permissions, results);
-        if(!checkIfCameraPermissionHasBeenGranted()) {
+        if(checkIfCameraPermissionHasBeenGranted()) {
             Log.i(TAG, "Camera permission is needed to run this application.");
             if(!shouldShowRequestPermissionRationale(this)) {
                 launchPermissionSettings(this);
