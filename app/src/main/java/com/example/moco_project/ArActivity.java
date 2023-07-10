@@ -274,7 +274,6 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
         // Switch to allow pausing and resuming of ARCore.
         Switch arcoreSwitch = findViewById(R.id.arcore_switch);
         // Ensure initial switch position is set based on initial value of `arMode` variable.
-        //arcoreSwitch.setChecked(arMode);
         Log.i("GameData:", String.valueOf(GameData.getIsArActivity()));
         arcoreSwitch.setChecked(GameData.getIsArActivity());
 
@@ -285,13 +284,10 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
                 if (compoundButton.isChecked()) {
                     statusTextView.setText("ARCore is activated");
                     Log.i("ARCore:", "ARCore is activated");
-                    //arMode = true;
-                    GameData.setIsArActivity(true);
                     resumeARCore();
                 } else {
                     statusTextView.setText("ARCore was paused");
                     Log.i("ARCore:", "ARCore was paused");
-                    //arMode = false;
                     pauseARCore();
                     GameData.setIsArActivity(false);
                     startActivity(new Intent(ArActivity.this, MapActivity.class));

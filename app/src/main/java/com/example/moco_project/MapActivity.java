@@ -40,6 +40,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.ProgressBar;
 import android.widget.Switch;
 import android.widget.Toast;
@@ -96,18 +97,17 @@ public class MapActivity extends AppCompatActivity
         //Switch to allow pausing and resuming of ArActivity
         arcoreSwitch = findViewById(R.id.arcore_switch);
         arcoreSwitch.setVisibility(View.GONE);
+
         arcoreSwitch.setChecked(GameData.getIsArActivity());
         arcoreSwitch.setOnCheckedChangeListener(
                 (view, checked) -> {
                     //Update the switch state
-                   GameData.setIsArActivity(true);
                     if (checked) {
-                      startActivity(new Intent(MapActivity.this, ArActivity.class));
+                        GameData.setIsArActivity(true);
+                        startActivity(new Intent(MapActivity.this, ArActivity.class));
                     }
                 }
         );
-
-
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         locationCallback = new LocationCallback() {
             @Override
@@ -146,10 +146,16 @@ public class MapActivity extends AppCompatActivity
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        arcoreSwitch.setChecked(GameData.getIsArActivity());
+    }
+
+    @Override
     protected void onDestroy() {
-        super.onDestroy();
         stopLocationUpdates();
         timer.cancel();
+        super.onDestroy();
     }
 
     @Override
