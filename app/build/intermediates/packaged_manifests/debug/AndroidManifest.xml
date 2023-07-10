@@ -54,7 +54,8 @@
         android:theme="@style/Theme.MOCOPROJECT" >
         <activity
             android:name="com.example.moco_project.ArActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:launchMode="singleTask" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -68,7 +69,8 @@
 
         <activity
             android:name="com.example.moco_project.MapActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:launchMode="singleTask" />
         <activity
             android:name="com.example.moco_project.MainActivity"
             android:exported="true" >
