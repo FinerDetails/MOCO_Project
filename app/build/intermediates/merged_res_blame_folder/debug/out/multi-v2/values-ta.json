@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.moco_project.app-mergeDebugResources-30:/values-ta/values-ta.xml",
+            "outputFile": "com.example.moco_project.app-mergeDebugResources-31:/values-ta/values-ta.xml",
             "map": [
                 {
                     "source": "C:\\Users\\hanna\\.gradle\\caches\\transforms-3\\9036a528b1406275d26d7622c1327b73\\transformed\\jetified-play-services-base-18.1.0\\res\\values-ta\\values.xml",
@@ -57,23 +57,6 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\hanna\\.gradle\\caches\\transforms-3\\69d5ce78cc97fe1a04a23073b9bb6ddc\\transformed\\jetified-play-services-basement-18.1.0\\res\\values-ta\\values.xml",
-                    "from": {
-                        "startLines": "4",
-                        "startColumns": "0",
-                        "startOffsets": "195",
-                        "endColumns": "156",
-                        "endOffsets": "351"
-                    },
-                    "to": {
-                        "startLines": "54",
-                        "startColumns": "4",
-                        "startOffsets": "5295",
-                        "endColumns": "160",
-                        "endOffsets": "5451"
-                    }
-                },
-                {
                     "source": "C:\\Users\\hanna\\.gradle\\caches\\transforms-3\\8c25e88eb4ea76e8f3d0900731d8ae12\\transformed\\core-1.9.0\\res\\values-ta\\values-ta.xml",
                     "from": {
                         "startLines": "2",
@@ -105,6 +88,23 @@
                         "startOffsets": "322,376,429,553,684",
                         "endColumns": "53,52,123,130,94",
                         "endOffsets": "371,424,548,679,774"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\hanna\\.gradle\\caches\\transforms-3\\de2e14f819a1e58f5ce8ec0d104f55e0\\transformed\\jetified-play-services-basement-18.2.0\\res\\values-ta\\values.xml",
+                    "from": {
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "195",
+                        "endColumns": "156",
+                        "endOffsets": "351"
+                    },
+                    "to": {
+                        "startLines": "54",
+                        "startColumns": "4",
+                        "startOffsets": "5295",
+                        "endColumns": "160",
+                        "endOffsets": "5451"
                     }
                 }
             ]

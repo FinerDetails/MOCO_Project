@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.moco_project.app-mergeDebugResources-30:/values-bs/values-bs.xml",
+            "outputFile": "com.example.moco_project.app-mergeDebugResources-31:/values-bs/values-bs.xml",
             "map": [
                 {
                     "source": "C:\\Users\\hanna\\.gradle\\caches\\transforms-3\\611b2bd2b88f1484abbb7c16c4f8a2a8\\transformed\\jetified-core-1.38.0\\res\\values-bs\\values.xml",
@@ -74,7 +74,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\hanna\\.gradle\\caches\\transforms-3\\69d5ce78cc97fe1a04a23073b9bb6ddc\\transformed\\jetified-play-services-basement-18.1.0\\res\\values-bs\\values.xml",
+                    "source": "C:\\Users\\hanna\\.gradle\\caches\\transforms-3\\de2e14f819a1e58f5ce8ec0d104f55e0\\transformed\\jetified-play-services-basement-18.2.0\\res\\values-bs\\values.xml",
                     "from": {
                         "startLines": "4",
                         "startColumns": "0",

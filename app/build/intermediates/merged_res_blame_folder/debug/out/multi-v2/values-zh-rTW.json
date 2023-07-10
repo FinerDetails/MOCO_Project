@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.moco_project.app-mergeDebugResources-30:/values-zh-rTW/values-zh-rTW.xml",
+            "outputFile": "com.example.moco_project.app-mergeDebugResources-31:/values-zh-rTW/values-zh-rTW.xml",
             "map": [
                 {
                     "source": "C:\\Users\\hanna\\.gradle\\caches\\transforms-3\\611b2bd2b88f1484abbb7c16c4f8a2a8\\transformed\\jetified-core-1.38.0\\res\\values-zh-rTW\\values.xml",
@@ -35,6 +35,23 @@
                         "startOffsets": "9415",
                         "endColumns": "100",
                         "endOffsets": "9511"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\hanna\\.gradle\\caches\\transforms-3\\de2e14f819a1e58f5ce8ec0d104f55e0\\transformed\\jetified-play-services-basement-18.2.0\\res\\values-zh-rTW\\values.xml",
+                    "from": {
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "199",
+                        "endColumns": "98",
+                        "endOffsets": "297"
+                    },
+                    "to": {
+                        "startLines": "54",
+                        "startColumns": "4",
+                        "startOffsets": "4706",
+                        "endColumns": "102",
+                        "endOffsets": "4804"
                     }
                 },
                 {
@@ -88,23 +105,6 @@
                         "startOffsets": "3842,3943,4071,4186,4288,4395,4511,4611,4809,4919,5020,5149,5264,5366,5474,5530,5587",
                         "endColumns": "100,127,114,101,106,115,99,94,109,100,128,114,101,107,55,56,73",
                         "endOffsets": "3938,4066,4181,4283,4390,4506,4606,4701,4914,5015,5144,5259,5361,5469,5525,5582,5656"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\hanna\\.gradle\\caches\\transforms-3\\69d5ce78cc97fe1a04a23073b9bb6ddc\\transformed\\jetified-play-services-basement-18.1.0\\res\\values-zh-rTW\\values.xml",
-                    "from": {
-                        "startLines": "4",
-                        "startColumns": "0",
-                        "startOffsets": "199",
-                        "endColumns": "98",
-                        "endOffsets": "297"
-                    },
-                    "to": {
-                        "startLines": "54",
-                        "startColumns": "4",
-                        "startOffsets": "4706",
-                        "endColumns": "102",
-                        "endOffsets": "4804"
                     }
                 }
             ]

@@ -1,8 +1,25 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.moco_project.app-mergeDebugResources-30:/values-pa/values-pa.xml",
+            "outputFile": "com.example.moco_project.app-mergeDebugResources-31:/values-pa/values-pa.xml",
             "map": [
+                {
+                    "source": "C:\\Users\\hanna\\.gradle\\caches\\transforms-3\\de2e14f819a1e58f5ce8ec0d104f55e0\\transformed\\jetified-play-services-basement-18.2.0\\res\\values-pa\\values.xml",
+                    "from": {
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "195",
+                        "endColumns": "146",
+                        "endOffsets": "341"
+                    },
+                    "to": {
+                        "startLines": "54",
+                        "startColumns": "4",
+                        "startOffsets": "5162",
+                        "endColumns": "150",
+                        "endOffsets": "5308"
+                    }
+                },
                 {
                     "source": "C:\\Users\\hanna\\.gradle\\caches\\transforms-3\\8c25e88eb4ea76e8f3d0900731d8ae12\\transformed\\core-1.9.0\\res\\values-pa\\values-pa.xml",
                     "from": {
@@ -88,23 +105,6 @@
                         "startOffsets": "761,864,961,1066,1152,1252,1365,1443,1520,1611,1704,1798,1892,1992,2085,2180,2274,2365,2456,2535,2645,2748,2844,2955,3057,3167,3326,10499",
                         "endColumns": "102,96,104,85,99,112,77,76,90,92,93,93,99,92,94,93,90,90,78,109,102,95,110,101,109,158,96,79",
                         "endOffsets": "859,956,1061,1147,1247,1360,1438,1515,1606,1699,1793,1887,1987,2080,2175,2269,2360,2451,2530,2640,2743,2839,2950,3052,3162,3321,3418,10574"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\hanna\\.gradle\\caches\\transforms-3\\69d5ce78cc97fe1a04a23073b9bb6ddc\\transformed\\jetified-play-services-basement-18.1.0\\res\\values-pa\\values.xml",
-                    "from": {
-                        "startLines": "4",
-                        "startColumns": "0",
-                        "startOffsets": "195",
-                        "endColumns": "146",
-                        "endOffsets": "341"
-                    },
-                    "to": {
-                        "startLines": "54",
-                        "startColumns": "4",
-                        "startOffsets": "5162",
-                        "endColumns": "150",
-                        "endOffsets": "5308"
                     }
                 }
             ]

@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.moco_project.app-mergeDebugResources-30:/values-am/values-am.xml",
+            "outputFile": "com.example.moco_project.app-mergeDebugResources-31:/values-am/values-am.xml",
             "map": [
                 {
                     "source": "C:\\Users\\hanna\\.gradle\\caches\\transforms-3\\731866f4f07c37e8f6d282fe1dd76996\\transformed\\material-1.9.0\\res\\values-am\\values-am.xml",
@@ -57,6 +57,23 @@
                     }
                 },
                 {
+                    "source": "C:\\Users\\hanna\\.gradle\\caches\\transforms-3\\de2e14f819a1e58f5ce8ec0d104f55e0\\transformed\\jetified-play-services-basement-18.2.0\\res\\values-am\\values.xml",
+                    "from": {
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "195",
+                        "endColumns": "127",
+                        "endOffsets": "322"
+                    },
+                    "to": {
+                        "startLines": "54",
+                        "startColumns": "4",
+                        "startOffsets": "4893",
+                        "endColumns": "131",
+                        "endOffsets": "5020"
+                    }
+                },
+                {
                     "source": "C:\\Users\\hanna\\.gradle\\caches\\transforms-3\\8c25e88eb4ea76e8f3d0900731d8ae12\\transformed\\core-1.9.0\\res\\values-am\\values-am.xml",
                     "from": {
                         "startLines": "2",
@@ -88,23 +105,6 @@
                         "startOffsets": "311,359,409,515,622",
                         "endColumns": "47,49,105,106,82",
                         "endOffsets": "354,404,510,617,700"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\hanna\\.gradle\\caches\\transforms-3\\69d5ce78cc97fe1a04a23073b9bb6ddc\\transformed\\jetified-play-services-basement-18.1.0\\res\\values-am\\values.xml",
-                    "from": {
-                        "startLines": "4",
-                        "startColumns": "0",
-                        "startOffsets": "195",
-                        "endColumns": "127",
-                        "endOffsets": "322"
-                    },
-                    "to": {
-                        "startLines": "54",
-                        "startColumns": "4",
-                        "startOffsets": "4893",
-                        "endColumns": "131",
-                        "endOffsets": "5020"
                     }
                 }
             ]

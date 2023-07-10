@@ -1,41 +1,52 @@
 -- Merging decision tree log ---
 meta-data#com.google.android.geo.API_KEY
-INJECTED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:30:9-32:47
+INJECTED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:31:9-33:47
 	android:value
 		INJECTED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml
-		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:32:13-44
+		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:33:13-44
 	android:name
-		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:31:13-58
+		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:32:13-58
+meta-data#com.google.android.ar.API_KEY
+INJECTED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:37:9-39:47
+	android:value
+		INJECTED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml
+		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:39:13-44
+	android:name
+		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:38:13-57
 manifest
-ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:2:1-55:12
-INJECTED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:2:1-55:12
-INJECTED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:2:1-55:12
-INJECTED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:2:1-55:12
+ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:2:1-58:12
+INJECTED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:2:1-58:12
+INJECTED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:2:1-58:12
+INJECTED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:2:1-58:12
 MERGED from [androidx.databinding:viewbinding:8.0.0] C:\Users\hanna\.gradle\caches\transforms-3\4619ba3c2365dd9c367ff7552257dcf6\transformed\jetified-viewbinding-8.0.0\AndroidManifest.xml:2:1-7:12
 MERGED from [com.google.ar:core:1.38.0] C:\Users\hanna\.gradle\caches\transforms-3\611b2bd2b88f1484abbb7c16c4f8a2a8\transformed\jetified-core-1.38.0\AndroidManifest.xml:8:1-40:12
 MERGED from [com.google.android.gms:play-services-maps:18.1.0] C:\Users\hanna\.gradle\caches\transforms-3\2e8863cb2556c92b377b95f70aab9609\transformed\jetified-play-services-maps-18.1.0\AndroidManifest.xml:17:1-44:12
 MERGED from [com.google.android.gms:play-services-location:21.0.1] C:\Users\hanna\.gradle\caches\transforms-3\4d3bfc16c1fb684fc9dc41cf70daf28c\transformed\jetified-play-services-location-21.0.1\AndroidManifest.xml:2:1-9:12
+MERGED from [com.google.android.gms:play-services-auth:20.6.0] C:\Users\hanna\.gradle\caches\transforms-3\ae86035013dbe518295e0134f070c89f\transformed\jetified-play-services-auth-20.6.0\AndroidManifest.xml:17:1-40:12
 MERGED from [com.google.android.material:material:1.9.0] C:\Users\hanna\.gradle\caches\transforms-3\731866f4f07c37e8f6d282fe1dd76996\transformed\material-1.9.0\AndroidManifest.xml:17:1-26:12
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] C:\Users\hanna\.gradle\caches\transforms-3\1b1fc35cfff048765e7b5057facd7433\transformed\constraintlayout-2.1.4\AndroidManifest.xml:2:1-11:12
 MERGED from [androidx.appcompat:appcompat-resources:1.6.1] C:\Users\hanna\.gradle\caches\transforms-3\f21d0c30ed2918ef3e98cec07dd99bf6\transformed\jetified-appcompat-resources-1.6.1\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.appcompat:appcompat:1.6.1] C:\Users\hanna\.gradle\caches\transforms-3\7ba610368285ef737a15a687544ee720\transformed\appcompat-1.6.1\AndroidManifest.xml:17:1-22:12
+MERGED from [com.google.android.gms:play-services-auth-api-phone:18.0.1] C:\Users\hanna\.gradle\caches\transforms-3\50fd734aeada83edc7343f7b5243e158\transformed\jetified-play-services-auth-api-phone-18.0.1\AndroidManifest.xml:2:1-7:12
+MERGED from [com.google.android.gms:play-services-auth-base:18.0.4] C:\Users\hanna\.gradle\caches\transforms-3\af5248883c286bcb422d73308cc5348e\transformed\jetified-play-services-auth-base-18.0.4\AndroidManifest.xml:2:1-7:12
+MERGED from [com.google.android.gms:play-services-fido:20.0.1] C:\Users\hanna\.gradle\caches\transforms-3\883288d4a456605b8263bfe63cfd48ff\transformed\jetified-play-services-fido-20.0.1\AndroidManifest.xml:2:1-10:12
 MERGED from [com.google.android.gms:play-services-base:18.1.0] C:\Users\hanna\.gradle\caches\transforms-3\9036a528b1406275d26d7622c1327b73\transformed\jetified-play-services-base-18.1.0\AndroidManifest.xml:16:1-24:12
 MERGED from [com.google.android.gms:play-services-tasks:18.0.2] C:\Users\hanna\.gradle\caches\transforms-3\7dfbd97623a128a697f1691ef20a01a9\transformed\jetified-play-services-tasks-18.0.2\AndroidManifest.xml:2:1-6:12
-MERGED from [com.google.android.gms:play-services-basement:18.1.0] C:\Users\hanna\.gradle\caches\transforms-3\69d5ce78cc97fe1a04a23073b9bb6ddc\transformed\jetified-play-services-basement-18.1.0\AndroidManifest.xml:16:1-26:12
+MERGED from [com.google.android.gms:play-services-basement:18.2.0] C:\Users\hanna\.gradle\caches\transforms-3\de2e14f819a1e58f5ce8ec0d104f55e0\transformed\jetified-play-services-basement-18.2.0\AndroidManifest.xml:16:1-26:12
 MERGED from [androidx.viewpager2:viewpager2:1.0.0] C:\Users\hanna\.gradle\caches\transforms-3\a44244b32f4b5581acb881385646f7be\transformed\jetified-viewpager2-1.0.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.fragment:fragment:1.3.6] C:\Users\hanna\.gradle\caches\transforms-3\c7fdf132750f580e9799a5455b4a5c84\transformed\fragment-1.3.6\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] C:\Users\hanna\.gradle\caches\transforms-3\1e7ff98370262fd019b8413a0f6844b9\transformed\dynamicanimation-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] C:\Users\hanna\.gradle\caches\transforms-3\5532b3cbec1601c01b6235de990717a7\transformed\legacy-support-core-utils-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.loader:loader:1.0.0] C:\Users\hanna\.gradle\caches\transforms-3\546d4bc68ec85a8120517b15b62dc38b\transformed\loader-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.activity:activity:1.6.0] C:\Users\hanna\.gradle\caches\transforms-3\f51999b096a3a19fce6b86792fa31edf\transformed\jetified-activity-1.6.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.emoji2:emoji2-views-helper:1.2.0] C:\Users\hanna\.gradle\caches\transforms-3\3f217ec338d6d83ed8ff70dfe0e7d6e1\transformed\jetified-emoji2-views-helper-1.2.0\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.emoji2:emoji2:1.2.0] C:\Users\hanna\.gradle\caches\transforms-3\3d235ed602f65236d1e967aa3ae41734\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:17:1-35:12
 MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] C:\Users\hanna\.gradle\caches\transforms-3\169fbc0cc288bcafd707ff1de5b5d1ef\transformed\drawerlayout-1.1.1\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] C:\Users\hanna\.gradle\caches\transforms-3\602e0f40a2e4890a6c140b4e0e9297aa\transformed\coordinatorlayout-1.1.0\AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] C:\Users\hanna\.gradle\caches\transforms-3\1e7ff98370262fd019b8413a0f6844b9\transformed\dynamicanimation-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.transition:transition:1.2.0] C:\Users\hanna\.gradle\caches\transforms-3\f550c9bc53f117cb9e3852beae837a10\transformed\transition-1.2.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\hanna\.gradle\caches\transforms-3\1104968edb0b42381aa947d109a888c3\transformed\vectordrawable-animated-1.1.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\hanna\.gradle\caches\transforms-3\aa88bda1a69cb79a57f5c91edf6bd497\transformed\vectordrawable-1.1.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\hanna\.gradle\caches\transforms-3\c2eb6369fb666d8c17cdcf42896777fe\transformed\viewpager-1.0.0\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] C:\Users\hanna\.gradle\caches\transforms-3\5532b3cbec1601c01b6235de990717a7\transformed\legacy-support-core-utils-1.0.0\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.loader:loader:1.0.0] C:\Users\hanna\.gradle\caches\transforms-3\546d4bc68ec85a8120517b15b62dc38b\transformed\loader-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.5.1] C:\Users\hanna\.gradle\caches\transforms-3\53cbd816d1f0ce2619bbae9b8dcd2d8b\transformed\lifecycle-viewmodel-2.5.1\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.5.1] C:\Users\hanna\.gradle\caches\transforms-3\7713754c0b6a5337acbb563590ba0db1\transformed\jetified-lifecycle-viewmodel-savedstate-2.5.1\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.core:core-ktx:1.9.0] C:\Users\hanna\.gradle\caches\transforms-3\b1a932d7f6d54d7db5205ce92f1df456\transformed\jetified-core-ktx-1.9.0\AndroidManifest.xml:2:1-7:12
@@ -58,22 +69,22 @@ MERGED from [androidx.documentfile:documentfile:1.0.0] C:\Users\hanna\.gradle\ca
 MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\hanna\.gradle\caches\transforms-3\e955da626a3fb0b49faa6dcf12a4f6a2\transformed\localbroadcastmanager-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.print:print:1.0.0] C:\Users\hanna\.gradle\caches\transforms-3\e15e0c47fb3dde4d9ec9696347094b31\transformed\print-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.annotation:annotation-experimental:1.3.0] C:\Users\hanna\.gradle\caches\transforms-3\a0988ddd25878a8ff7bd12a362afe1bd\transformed\jetified-annotation-experimental-1.3.0\AndroidManifest.xml:17:1-22:12
-INJECTED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:2:1-55:12
-INJECTED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:2:1-55:12
-INJECTED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:2:1-55:12
+INJECTED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:2:1-58:12
+INJECTED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:2:1-58:12
+INJECTED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:2:1-58:12
 	package
 		INJECTED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml
-		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:2:1-55:12
+		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:2:1-58:12
 		INJECTED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml
 	android:versionName
 		INJECTED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml
-		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:2:1-55:12
+		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:2:1-58:12
 		INJECTED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml
 	xmlns:tools
 		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:3:5-51
 	android:versionCode
 		INJECTED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml
-		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:2:1-55:12
+		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:2:1-58:12
 		INJECTED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:2:11-69
@@ -91,32 +102,42 @@ uses-permission#android.permission.ACCESS_FINE_LOCATION
 ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:10:5-79
 	android:name
 		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:10:22-76
+uses-permission#android.permission.INTERNET
+ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:11:5-67
+MERGED from [com.google.android.gms:play-services-maps:18.1.0] C:\Users\hanna\.gradle\caches\transforms-3\2e8863cb2556c92b377b95f70aab9609\transformed\jetified-play-services-maps-18.1.0\AndroidManifest.xml:24:5-67
+MERGED from [com.google.android.gms:play-services-maps:18.1.0] C:\Users\hanna\.gradle\caches\transforms-3\2e8863cb2556c92b377b95f70aab9609\transformed\jetified-play-services-maps-18.1.0\AndroidManifest.xml:24:5-67
+	android:name
+		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:11:22-64
 uses-permission#android.permission.CAMERA
-ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:11:5-65
+ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:12:5-65
 	android:name
-		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:11:22-62
+		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:12:22-62
 uses-feature#android.hardware.camera.ar
-ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:14:5-63
+ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:15:5-63
 	android:name
-		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:14:19-60
+		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:15:19-60
 application
-ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:16:5-53:19
+ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:17:5-56:19
 MERGED from [com.google.ar:core:1.38.0] C:\Users\hanna\.gradle\caches\transforms-3\611b2bd2b88f1484abbb7c16c4f8a2a8\transformed\jetified-core-1.38.0\AndroidManifest.xml:24:5-38:19
 MERGED from [com.google.ar:core:1.38.0] C:\Users\hanna\.gradle\caches\transforms-3\611b2bd2b88f1484abbb7c16c4f8a2a8\transformed\jetified-core-1.38.0\AndroidManifest.xml:24:5-38:19
 MERGED from [com.google.android.gms:play-services-maps:18.1.0] C:\Users\hanna\.gradle\caches\transforms-3\2e8863cb2556c92b377b95f70aab9609\transformed\jetified-play-services-maps-18.1.0\AndroidManifest.xml:36:5-42:19
 MERGED from [com.google.android.gms:play-services-maps:18.1.0] C:\Users\hanna\.gradle\caches\transforms-3\2e8863cb2556c92b377b95f70aab9609\transformed\jetified-play-services-maps-18.1.0\AndroidManifest.xml:36:5-42:19
 MERGED from [com.google.android.gms:play-services-location:21.0.1] C:\Users\hanna\.gradle\caches\transforms-3\4d3bfc16c1fb684fc9dc41cf70daf28c\transformed\jetified-play-services-location-21.0.1\AndroidManifest.xml:7:5-20
 MERGED from [com.google.android.gms:play-services-location:21.0.1] C:\Users\hanna\.gradle\caches\transforms-3\4d3bfc16c1fb684fc9dc41cf70daf28c\transformed\jetified-play-services-location-21.0.1\AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-auth:20.6.0] C:\Users\hanna\.gradle\caches\transforms-3\ae86035013dbe518295e0134f070c89f\transformed\jetified-play-services-auth-20.6.0\AndroidManifest.xml:22:5-38:19
+MERGED from [com.google.android.gms:play-services-auth:20.6.0] C:\Users\hanna\.gradle\caches\transforms-3\ae86035013dbe518295e0134f070c89f\transformed\jetified-play-services-auth-20.6.0\AndroidManifest.xml:22:5-38:19
 MERGED from [com.google.android.material:material:1.9.0] C:\Users\hanna\.gradle\caches\transforms-3\731866f4f07c37e8f6d282fe1dd76996\transformed\material-1.9.0\AndroidManifest.xml:24:5-20
 MERGED from [com.google.android.material:material:1.9.0] C:\Users\hanna\.gradle\caches\transforms-3\731866f4f07c37e8f6d282fe1dd76996\transformed\material-1.9.0\AndroidManifest.xml:24:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] C:\Users\hanna\.gradle\caches\transforms-3\1b1fc35cfff048765e7b5057facd7433\transformed\constraintlayout-2.1.4\AndroidManifest.xml:9:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] C:\Users\hanna\.gradle\caches\transforms-3\1b1fc35cfff048765e7b5057facd7433\transformed\constraintlayout-2.1.4\AndroidManifest.xml:9:5-20
+MERGED from [com.google.android.gms:play-services-fido:20.0.1] C:\Users\hanna\.gradle\caches\transforms-3\883288d4a456605b8263bfe63cfd48ff\transformed\jetified-play-services-fido-20.0.1\AndroidManifest.xml:7:5-8:19
+MERGED from [com.google.android.gms:play-services-fido:20.0.1] C:\Users\hanna\.gradle\caches\transforms-3\883288d4a456605b8263bfe63cfd48ff\transformed\jetified-play-services-fido-20.0.1\AndroidManifest.xml:7:5-8:19
 MERGED from [com.google.android.gms:play-services-base:18.1.0] C:\Users\hanna\.gradle\caches\transforms-3\9036a528b1406275d26d7622c1327b73\transformed\jetified-play-services-base-18.1.0\AndroidManifest.xml:19:5-23:19
 MERGED from [com.google.android.gms:play-services-base:18.1.0] C:\Users\hanna\.gradle\caches\transforms-3\9036a528b1406275d26d7622c1327b73\transformed\jetified-play-services-base-18.1.0\AndroidManifest.xml:19:5-23:19
 MERGED from [com.google.android.gms:play-services-tasks:18.0.2] C:\Users\hanna\.gradle\caches\transforms-3\7dfbd97623a128a697f1691ef20a01a9\transformed\jetified-play-services-tasks-18.0.2\AndroidManifest.xml:5:5-20
 MERGED from [com.google.android.gms:play-services-tasks:18.0.2] C:\Users\hanna\.gradle\caches\transforms-3\7dfbd97623a128a697f1691ef20a01a9\transformed\jetified-play-services-tasks-18.0.2\AndroidManifest.xml:5:5-20
-MERGED from [com.google.android.gms:play-services-basement:18.1.0] C:\Users\hanna\.gradle\caches\transforms-3\69d5ce78cc97fe1a04a23073b9bb6ddc\transformed\jetified-play-services-basement-18.1.0\AndroidManifest.xml:20:5-24:19
-MERGED from [com.google.android.gms:play-services-basement:18.1.0] C:\Users\hanna\.gradle\caches\transforms-3\69d5ce78cc97fe1a04a23073b9bb6ddc\transformed\jetified-play-services-basement-18.1.0\AndroidManifest.xml:20:5-24:19
+MERGED from [com.google.android.gms:play-services-basement:18.2.0] C:\Users\hanna\.gradle\caches\transforms-3\de2e14f819a1e58f5ce8ec0d104f55e0\transformed\jetified-play-services-basement-18.2.0\AndroidManifest.xml:20:5-24:19
+MERGED from [com.google.android.gms:play-services-basement:18.2.0] C:\Users\hanna\.gradle\caches\transforms-3\de2e14f819a1e58f5ce8ec0d104f55e0\transformed\jetified-play-services-basement-18.2.0\AndroidManifest.xml:20:5-24:19
 MERGED from [androidx.emoji2:emoji2:1.2.0] C:\Users\hanna\.gradle\caches\transforms-3\3d235ed602f65236d1e967aa3ae41734\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:23:5-33:19
 MERGED from [androidx.emoji2:emoji2:1.2.0] C:\Users\hanna\.gradle\caches\transforms-3\3d235ed602f65236d1e967aa3ae41734\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:23:5-33:19
 MERGED from [androidx.core:core:1.9.0] C:\Users\hanna\.gradle\caches\transforms-3\8c25e88eb4ea76e8f3d0900731d8ae12\transformed\core-1.9.0\AndroidManifest.xml:28:5-89
@@ -130,65 +151,65 @@ MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\hanna\.gradle\cach
 	android:appComponentFactory
 		ADDED from [androidx.core:core:1.9.0] C:\Users\hanna\.gradle\caches\transforms-3\8c25e88eb4ea76e8f3d0900731d8ae12\transformed\core-1.9.0\AndroidManifest.xml:28:18-86
 	android:supportsRtl
-		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:23:9-35
+		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:24:9-35
 	android:label
-		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:21:9-41
+		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:22:9-41
 	android:fullBackupContent
-		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:19:9-54
+		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:20:9-54
 	android:roundIcon
-		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:22:9-54
+		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:23:9-54
 	tools:targetApi
-		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:25:9-29
+		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:26:9-29
 	android:icon
-		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:20:9-43
+		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:21:9-43
 	android:allowBackup
-		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:17:9-35
+		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:18:9-35
 	android:theme
-		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:24:9-49
+		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:25:9-49
 	android:dataExtractionRules
-		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:18:9-65
+		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:19:9-65
 activity#com.example.moco_project.ArActivity
-ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:26:9-28:39
+ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:27:9-29:39
 	android:exported
-		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:28:13-36
+		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:29:13-36
 	android:name
-		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:27:13-39
+		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:28:13-39
 meta-data#com.google.android.gms.version
-ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:33:9-35:69
-MERGED from [com.google.android.gms:play-services-basement:18.1.0] C:\Users\hanna\.gradle\caches\transforms-3\69d5ce78cc97fe1a04a23073b9bb6ddc\transformed\jetified-play-services-basement-18.1.0\AndroidManifest.xml:21:9-23:69
-MERGED from [com.google.android.gms:play-services-basement:18.1.0] C:\Users\hanna\.gradle\caches\transforms-3\69d5ce78cc97fe1a04a23073b9bb6ddc\transformed\jetified-play-services-basement-18.1.0\AndroidManifest.xml:21:9-23:69
+ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:34:9-36:69
+MERGED from [com.google.android.gms:play-services-basement:18.2.0] C:\Users\hanna\.gradle\caches\transforms-3\de2e14f819a1e58f5ce8ec0d104f55e0\transformed\jetified-play-services-basement-18.2.0\AndroidManifest.xml:21:9-23:69
+MERGED from [com.google.android.gms:play-services-basement:18.2.0] C:\Users\hanna\.gradle\caches\transforms-3\de2e14f819a1e58f5ce8ec0d104f55e0\transformed\jetified-play-services-basement-18.2.0\AndroidManifest.xml:21:9-23:69
 	android:value
-		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:35:13-66
+		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:36:13-66
 	android:name
-		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:34:13-58
+		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:35:13-58
 activity#com.example.moco_project.MapActivity
-ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:37:9-39:40
+ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:40:9-42:40
 	android:exported
-		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:39:13-37
+		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:42:13-37
 	android:name
-		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:38:13-40
+		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:41:13-40
 activity#com.example.moco_project.MainActivity
-ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:40:9-48:20
+ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:43:9-51:20
 	android:exported
-		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:42:13-36
+		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:45:13-36
 	android:name
-		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:41:13-41
+		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:44:13-41
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:43:13-47:29
+ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:46:13-50:29
 action#android.intent.action.MAIN
-ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:44:17-69
+ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:47:17-69
 	android:name
-		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:44:25-66
+		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:47:25-66
 category#android.intent.category.LAUNCHER
-ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:46:17-77
+ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:49:17-77
 	android:name
-		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:46:27-74
+		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:49:27-74
 meta-data#com.google.ar.core
-ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:52:9-81
+ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:55:9-81
 	android:value
-		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:52:54-78
+		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:55:54-78
 	android:name
-		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:52:20-53
+		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:55:20-53
 uses-sdk
 INJECTED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml
@@ -201,6 +222,8 @@ MERGED from [com.google.android.gms:play-services-maps:18.1.0] C:\Users\hanna\.g
 MERGED from [com.google.android.gms:play-services-maps:18.1.0] C:\Users\hanna\.gradle\caches\transforms-3\2e8863cb2556c92b377b95f70aab9609\transformed\jetified-play-services-maps-18.1.0\AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.gms:play-services-location:21.0.1] C:\Users\hanna\.gradle\caches\transforms-3\4d3bfc16c1fb684fc9dc41cf70daf28c\transformed\jetified-play-services-location-21.0.1\AndroidManifest.xml:5:5-44
 MERGED from [com.google.android.gms:play-services-location:21.0.1] C:\Users\hanna\.gradle\caches\transforms-3\4d3bfc16c1fb684fc9dc41cf70daf28c\transformed\jetified-play-services-location-21.0.1\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-auth:20.6.0] C:\Users\hanna\.gradle\caches\transforms-3\ae86035013dbe518295e0134f070c89f\transformed\jetified-play-services-auth-20.6.0\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-auth:20.6.0] C:\Users\hanna\.gradle\caches\transforms-3\ae86035013dbe518295e0134f070c89f\transformed\jetified-play-services-auth-20.6.0\AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.material:material:1.9.0] C:\Users\hanna\.gradle\caches\transforms-3\731866f4f07c37e8f6d282fe1dd76996\transformed\material-1.9.0\AndroidManifest.xml:20:5-22:41
 MERGED from [com.google.android.material:material:1.9.0] C:\Users\hanna\.gradle\caches\transforms-3\731866f4f07c37e8f6d282fe1dd76996\transformed\material-1.9.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] C:\Users\hanna\.gradle\caches\transforms-3\1b1fc35cfff048765e7b5057facd7433\transformed\constraintlayout-2.1.4\AndroidManifest.xml:5:5-7:41
@@ -209,16 +232,28 @@ MERGED from [androidx.appcompat:appcompat-resources:1.6.1] C:\Users\hanna\.gradl
 MERGED from [androidx.appcompat:appcompat-resources:1.6.1] C:\Users\hanna\.gradle\caches\transforms-3\f21d0c30ed2918ef3e98cec07dd99bf6\transformed\jetified-appcompat-resources-1.6.1\AndroidManifest.xml:20:5-44
 MERGED from [androidx.appcompat:appcompat:1.6.1] C:\Users\hanna\.gradle\caches\transforms-3\7ba610368285ef737a15a687544ee720\transformed\appcompat-1.6.1\AndroidManifest.xml:20:5-44
 MERGED from [androidx.appcompat:appcompat:1.6.1] C:\Users\hanna\.gradle\caches\transforms-3\7ba610368285ef737a15a687544ee720\transformed\appcompat-1.6.1\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-auth-api-phone:18.0.1] C:\Users\hanna\.gradle\caches\transforms-3\50fd734aeada83edc7343f7b5243e158\transformed\jetified-play-services-auth-api-phone-18.0.1\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-auth-api-phone:18.0.1] C:\Users\hanna\.gradle\caches\transforms-3\50fd734aeada83edc7343f7b5243e158\transformed\jetified-play-services-auth-api-phone-18.0.1\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-auth-base:18.0.4] C:\Users\hanna\.gradle\caches\transforms-3\af5248883c286bcb422d73308cc5348e\transformed\jetified-play-services-auth-base-18.0.4\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-auth-base:18.0.4] C:\Users\hanna\.gradle\caches\transforms-3\af5248883c286bcb422d73308cc5348e\transformed\jetified-play-services-auth-base-18.0.4\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-fido:20.0.1] C:\Users\hanna\.gradle\caches\transforms-3\883288d4a456605b8263bfe63cfd48ff\transformed\jetified-play-services-fido-20.0.1\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-fido:20.0.1] C:\Users\hanna\.gradle\caches\transforms-3\883288d4a456605b8263bfe63cfd48ff\transformed\jetified-play-services-fido-20.0.1\AndroidManifest.xml:5:5-44
 MERGED from [com.google.android.gms:play-services-base:18.1.0] C:\Users\hanna\.gradle\caches\transforms-3\9036a528b1406275d26d7622c1327b73\transformed\jetified-play-services-base-18.1.0\AndroidManifest.xml:18:5-43
 MERGED from [com.google.android.gms:play-services-base:18.1.0] C:\Users\hanna\.gradle\caches\transforms-3\9036a528b1406275d26d7622c1327b73\transformed\jetified-play-services-base-18.1.0\AndroidManifest.xml:18:5-43
 MERGED from [com.google.android.gms:play-services-tasks:18.0.2] C:\Users\hanna\.gradle\caches\transforms-3\7dfbd97623a128a697f1691ef20a01a9\transformed\jetified-play-services-tasks-18.0.2\AndroidManifest.xml:4:5-43
 MERGED from [com.google.android.gms:play-services-tasks:18.0.2] C:\Users\hanna\.gradle\caches\transforms-3\7dfbd97623a128a697f1691ef20a01a9\transformed\jetified-play-services-tasks-18.0.2\AndroidManifest.xml:4:5-43
-MERGED from [com.google.android.gms:play-services-basement:18.1.0] C:\Users\hanna\.gradle\caches\transforms-3\69d5ce78cc97fe1a04a23073b9bb6ddc\transformed\jetified-play-services-basement-18.1.0\AndroidManifest.xml:18:5-43
-MERGED from [com.google.android.gms:play-services-basement:18.1.0] C:\Users\hanna\.gradle\caches\transforms-3\69d5ce78cc97fe1a04a23073b9bb6ddc\transformed\jetified-play-services-basement-18.1.0\AndroidManifest.xml:18:5-43
+MERGED from [com.google.android.gms:play-services-basement:18.2.0] C:\Users\hanna\.gradle\caches\transforms-3\de2e14f819a1e58f5ce8ec0d104f55e0\transformed\jetified-play-services-basement-18.2.0\AndroidManifest.xml:18:5-43
+MERGED from [com.google.android.gms:play-services-basement:18.2.0] C:\Users\hanna\.gradle\caches\transforms-3\de2e14f819a1e58f5ce8ec0d104f55e0\transformed\jetified-play-services-basement-18.2.0\AndroidManifest.xml:18:5-43
 MERGED from [androidx.viewpager2:viewpager2:1.0.0] C:\Users\hanna\.gradle\caches\transforms-3\a44244b32f4b5581acb881385646f7be\transformed\jetified-viewpager2-1.0.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.viewpager2:viewpager2:1.0.0] C:\Users\hanna\.gradle\caches\transforms-3\a44244b32f4b5581acb881385646f7be\transformed\jetified-viewpager2-1.0.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.fragment:fragment:1.3.6] C:\Users\hanna\.gradle\caches\transforms-3\c7fdf132750f580e9799a5455b4a5c84\transformed\fragment-1.3.6\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.fragment:fragment:1.3.6] C:\Users\hanna\.gradle\caches\transforms-3\c7fdf132750f580e9799a5455b4a5c84\transformed\fragment-1.3.6\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] C:\Users\hanna\.gradle\caches\transforms-3\1e7ff98370262fd019b8413a0f6844b9\transformed\dynamicanimation-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] C:\Users\hanna\.gradle\caches\transforms-3\1e7ff98370262fd019b8413a0f6844b9\transformed\dynamicanimation-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] C:\Users\hanna\.gradle\caches\transforms-3\5532b3cbec1601c01b6235de990717a7\transformed\legacy-support-core-utils-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] C:\Users\hanna\.gradle\caches\transforms-3\5532b3cbec1601c01b6235de990717a7\transformed\legacy-support-core-utils-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] C:\Users\hanna\.gradle\caches\transforms-3\546d4bc68ec85a8120517b15b62dc38b\transformed\loader-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] C:\Users\hanna\.gradle\caches\transforms-3\546d4bc68ec85a8120517b15b62dc38b\transformed\loader-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.activity:activity:1.6.0] C:\Users\hanna\.gradle\caches\transforms-3\f51999b096a3a19fce6b86792fa31edf\transformed\jetified-activity-1.6.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.activity:activity:1.6.0] C:\Users\hanna\.gradle\caches\transforms-3\f51999b096a3a19fce6b86792fa31edf\transformed\jetified-activity-1.6.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.emoji2:emoji2-views-helper:1.2.0] C:\Users\hanna\.gradle\caches\transforms-3\3f217ec338d6d83ed8ff70dfe0e7d6e1\transformed\jetified-emoji2-views-helper-1.2.0\AndroidManifest.xml:5:5-44
@@ -229,8 +264,6 @@ MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] C:\Users\hanna\.gradle\ca
 MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] C:\Users\hanna\.gradle\caches\transforms-3\169fbc0cc288bcafd707ff1de5b5d1ef\transformed\drawerlayout-1.1.1\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] C:\Users\hanna\.gradle\caches\transforms-3\602e0f40a2e4890a6c140b4e0e9297aa\transformed\coordinatorlayout-1.1.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] C:\Users\hanna\.gradle\caches\transforms-3\602e0f40a2e4890a6c140b4e0e9297aa\transformed\coordinatorlayout-1.1.0\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] C:\Users\hanna\.gradle\caches\transforms-3\1e7ff98370262fd019b8413a0f6844b9\transformed\dynamicanimation-1.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] C:\Users\hanna\.gradle\caches\transforms-3\1e7ff98370262fd019b8413a0f6844b9\transformed\dynamicanimation-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.transition:transition:1.2.0] C:\Users\hanna\.gradle\caches\transforms-3\f550c9bc53f117cb9e3852beae837a10\transformed\transition-1.2.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.transition:transition:1.2.0] C:\Users\hanna\.gradle\caches\transforms-3\f550c9bc53f117cb9e3852beae837a10\transformed\transition-1.2.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\hanna\.gradle\caches\transforms-3\1104968edb0b42381aa947d109a888c3\transformed\vectordrawable-animated-1.1.0\AndroidManifest.xml:20:5-22:41
@@ -239,10 +272,6 @@ MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\hanna\.gradl
 MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\hanna\.gradle\caches\transforms-3\aa88bda1a69cb79a57f5c91edf6bd497\transformed\vectordrawable-1.1.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\hanna\.gradle\caches\transforms-3\c2eb6369fb666d8c17cdcf42896777fe\transformed\viewpager-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\hanna\.gradle\caches\transforms-3\c2eb6369fb666d8c17cdcf42896777fe\transformed\viewpager-1.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] C:\Users\hanna\.gradle\caches\transforms-3\5532b3cbec1601c01b6235de990717a7\transformed\legacy-support-core-utils-1.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] C:\Users\hanna\.gradle\caches\transforms-3\5532b3cbec1601c01b6235de990717a7\transformed\legacy-support-core-utils-1.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.loader:loader:1.0.0] C:\Users\hanna\.gradle\caches\transforms-3\546d4bc68ec85a8120517b15b62dc38b\transformed\loader-1.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.loader:loader:1.0.0] C:\Users\hanna\.gradle\caches\transforms-3\546d4bc68ec85a8120517b15b62dc38b\transformed\loader-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.5.1] C:\Users\hanna\.gradle\caches\transforms-3\53cbd816d1f0ce2619bbae9b8dcd2d8b\transformed\lifecycle-viewmodel-2.5.1\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.5.1] C:\Users\hanna\.gradle\caches\transforms-3\53cbd816d1f0ce2619bbae9b8dcd2d8b\transformed\lifecycle-viewmodel-2.5.1\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.5.1] C:\Users\hanna\.gradle\caches\transforms-3\7713754c0b6a5337acbb563590ba0db1\transformed\jetified-lifecycle-viewmodel-savedstate-2.5.1\AndroidManifest.xml:20:5-22:41
@@ -329,10 +358,6 @@ uses-permission#android.permission.ACCESS_NETWORK_STATE
 ADDED from [com.google.android.gms:play-services-maps:18.1.0] C:\Users\hanna\.gradle\caches\transforms-3\2e8863cb2556c92b377b95f70aab9609\transformed\jetified-play-services-maps-18.1.0\AndroidManifest.xml:23:5-79
 	android:name
 		ADDED from [com.google.android.gms:play-services-maps:18.1.0] C:\Users\hanna\.gradle\caches\transforms-3\2e8863cb2556c92b377b95f70aab9609\transformed\jetified-play-services-maps-18.1.0\AndroidManifest.xml:23:22-76
-uses-permission#android.permission.INTERNET
-ADDED from [com.google.android.gms:play-services-maps:18.1.0] C:\Users\hanna\.gradle\caches\transforms-3\2e8863cb2556c92b377b95f70aab9609\transformed\jetified-play-services-maps-18.1.0\AndroidManifest.xml:24:5-67
-	android:name
-		ADDED from [com.google.android.gms:play-services-maps:18.1.0] C:\Users\hanna\.gradle\caches\transforms-3\2e8863cb2556c92b377b95f70aab9609\transformed\jetified-play-services-maps-18.1.0\AndroidManifest.xml:24:22-64
 uses-feature#0x00020000
 ADDED from [com.google.android.gms:play-services-maps:18.1.0] C:\Users\hanna\.gradle\caches\transforms-3\2e8863cb2556c92b377b95f70aab9609\transformed\jetified-play-services-maps-18.1.0\AndroidManifest.xml:26:5-28:35
 	android:glEsVersion
@@ -349,6 +374,26 @@ ADDED from [com.google.android.gms:play-services-maps:18.1.0] C:\Users\hanna\.gr
 		ADDED from [com.google.android.gms:play-services-maps:18.1.0] C:\Users\hanna\.gradle\caches\transforms-3\2e8863cb2556c92b377b95f70aab9609\transformed\jetified-play-services-maps-18.1.0\AndroidManifest.xml:41:13-37
 	android:name
 		ADDED from [com.google.android.gms:play-services-maps:18.1.0] C:\Users\hanna\.gradle\caches\transforms-3\2e8863cb2556c92b377b95f70aab9609\transformed\jetified-play-services-maps-18.1.0\AndroidManifest.xml:40:13-50
+activity#com.google.android.gms.auth.api.signin.internal.SignInHubActivity
+ADDED from [com.google.android.gms:play-services-auth:20.6.0] C:\Users\hanna\.gradle\caches\transforms-3\ae86035013dbe518295e0134f070c89f\transformed\jetified-play-services-auth-20.6.0\AndroidManifest.xml:23:9-27:75
+	android:excludeFromRecents
+		ADDED from [com.google.android.gms:play-services-auth:20.6.0] C:\Users\hanna\.gradle\caches\transforms-3\ae86035013dbe518295e0134f070c89f\transformed\jetified-play-services-auth-20.6.0\AndroidManifest.xml:25:13-46
+	android:exported
+		ADDED from [com.google.android.gms:play-services-auth:20.6.0] C:\Users\hanna\.gradle\caches\transforms-3\ae86035013dbe518295e0134f070c89f\transformed\jetified-play-services-auth-20.6.0\AndroidManifest.xml:26:13-37
+	android:theme
+		ADDED from [com.google.android.gms:play-services-auth:20.6.0] C:\Users\hanna\.gradle\caches\transforms-3\ae86035013dbe518295e0134f070c89f\transformed\jetified-play-services-auth-20.6.0\AndroidManifest.xml:27:13-72
+	android:name
+		ADDED from [com.google.android.gms:play-services-auth:20.6.0] C:\Users\hanna\.gradle\caches\transforms-3\ae86035013dbe518295e0134f070c89f\transformed\jetified-play-services-auth-20.6.0\AndroidManifest.xml:24:13-93
+service#com.google.android.gms.auth.api.signin.RevocationBoundService
+ADDED from [com.google.android.gms:play-services-auth:20.6.0] C:\Users\hanna\.gradle\caches\transforms-3\ae86035013dbe518295e0134f070c89f\transformed\jetified-play-services-auth-20.6.0\AndroidManifest.xml:33:9-37:51
+	android:exported
+		ADDED from [com.google.android.gms:play-services-auth:20.6.0] C:\Users\hanna\.gradle\caches\transforms-3\ae86035013dbe518295e0134f070c89f\transformed\jetified-play-services-auth-20.6.0\AndroidManifest.xml:35:13-36
+	android:visibleToInstantApps
+		ADDED from [com.google.android.gms:play-services-auth:20.6.0] C:\Users\hanna\.gradle\caches\transforms-3\ae86035013dbe518295e0134f070c89f\transformed\jetified-play-services-auth-20.6.0\AndroidManifest.xml:37:13-48
+	android:permission
+		ADDED from [com.google.android.gms:play-services-auth:20.6.0] C:\Users\hanna\.gradle\caches\transforms-3\ae86035013dbe518295e0134f070c89f\transformed\jetified-play-services-auth-20.6.0\AndroidManifest.xml:36:13-107
+	android:name
+		ADDED from [com.google.android.gms:play-services-auth:20.6.0] C:\Users\hanna\.gradle\caches\transforms-3\ae86035013dbe518295e0134f070c89f\transformed\jetified-play-services-auth-20.6.0\AndroidManifest.xml:34:13-89
 activity#com.google.android.gms.common.api.GoogleApiActivity
 ADDED from [com.google.android.gms:play-services-base:18.1.0] C:\Users\hanna\.gradle\caches\transforms-3\9036a528b1406275d26d7622c1327b73\transformed\jetified-play-services-base-18.1.0\AndroidManifest.xml:20:9-22:45
 	android:exported

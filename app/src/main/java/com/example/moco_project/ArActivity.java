@@ -9,12 +9,10 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.ImageFormat;
 import android.graphics.SurfaceTexture;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCaptureSession;
@@ -24,8 +22,6 @@ import android.hardware.camera2.CameraManager;
 import android.hardware.camera2.CaptureFailure;
 import android.hardware.camera2.CaptureRequest;
 import android.hardware.camera2.TotalCaptureResult;
-import android.media.Image;
-import android.media.ImageReader;
 import android.net.Uri;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
@@ -40,10 +36,10 @@ import android.util.Size;
 import android.view.MotionEvent;
 import android.view.Surface;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.moco_project.helpers.DisplayRotationHelper;
 import com.example.moco_project.helpers.TapHelper;
@@ -51,22 +47,25 @@ import com.example.moco_project.helpers.TrackingStateHelper;
 import com.example.moco_project.rendering.ObjectRenderer;
 import com.example.moco_project.rendering.PlaneRenderer;
 import com.example.moco_project.rendering.PointCloudRenderer;
-import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.ar.core.Anchor;
 import com.google.ar.core.ArCoreApk;
 import com.google.ar.core.Camera;
-import com.google.ar.core.CameraConfig;
-import com.google.ar.core.CameraConfigFilter;
 import com.google.ar.core.Config;
+import com.google.ar.core.Earth;
 import com.google.ar.core.Frame;
+import com.google.ar.core.FutureState;
+import com.google.ar.core.GeospatialPose;
 import com.google.ar.core.HitResult;
 import com.google.ar.core.Plane;
 import com.google.ar.core.Point;
 import com.google.ar.core.PointCloud;
+import com.google.ar.core.ResolveAnchorOnTerrainFuture;
 import com.google.ar.core.Session;
 import com.google.ar.core.SharedCamera;
 import com.google.ar.core.Trackable;
 import com.google.ar.core.TrackingState;
+import com.google.ar.core.VpsAvailabilityFuture;
 import com.google.ar.core.exceptions.CameraNotAvailableException;
 import com.google.ar.core.exceptions.UnavailableApkTooOldException;
 import com.google.ar.core.exceptions.UnavailableArcoreNotInstalledException;
@@ -76,16 +75,16 @@ import com.google.ar.core.exceptions.UnavailableSdkTooOldException;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
 public class ArActivity extends AppCompatActivity implements GLSurfaceView.Renderer,
-ImageReader.OnImageAvailableListener, SurfaceTexture.OnFrameAvailableListener {
+ SurfaceTexture.OnFrameAvailableListener {
 
     /**
      * VARIABLES
@@ -116,14 +115,11 @@ ImageReader.OnImageAvailableListener, SurfaceTexture.OnFrameAvailableListener {
     // A list of CaptureRequest keys that can cause delays when switching between AR and non-AR modes.
     private List<CaptureRequest.Key<?>> keysThatCanCauseCaptureDelaysWhenModified;
 
-    // Image reader that continuously processes CPU images.
-    private ImageReader cpuImageReader;
-
     // Camera capture session. Used by both non-AR and AR modes.
     private CameraCaptureSession captureSession;
 
     // Whether the app is currently in AR mode. Initial value determines initial state.
-    private boolean arMode = false;
+    private boolean arMode = true;
 
     // Whether ARCore is currently active.
     private boolean arcoreActive;
@@ -181,6 +177,49 @@ ImageReader.OnImageAvailableListener, SurfaceTexture.OnFrameAvailableListener {
     // Total number of CPU images processed.
     private int cpuImagesProcessed;
 
+    private GeospatialPose ourCurrentLocation;
+
+    private Earth earth;
+
+    private VpsAvailabilityFuture future;
+
+    private boolean geospatialModeSupported;
+
+    enum State {
+        /** The Geospatial API has not yet been initialized. */
+        UNINITIALIZED,
+        /** The Geospatial API is not supported. */
+        UNSUPPORTED,
+        /** The Geospatial API has encountered an unrecoverable error. */
+        EARTH_STATE_ERROR,
+        /** The Session has started, but {@link Earth} isn't  yet. */
+        PRETRACKING,
+        /**
+         * {@link Earth} is {, but the desired positioning confidence
+         * hasn't been reached yet.
+         */
+        LOCALIZING,
+        /** The desired positioning confidence wasn't reached in time. */
+        LOCALIZING_FAILED,
+        /**
+         * {@link Earth} is  and the desired positioning confidence has
+         * been reached.
+         */
+        LOCALIZED
+    }
+
+    private State state = State.UNINITIALIZED;
+
+    // The thresholds that are required for horizontal and orientation accuracies before entering into
+    // the LOCALIZED state. Once the accuracies are equal or less than these values, the app will
+    // allow the user to place anchors.
+    private static final double LOCALIZING_HORIZONTAL_ACCURACY_THRESHOLD_METERS = 10;
+    private static final double LOCALIZING_ORIENTATION_YAW_ACCURACY_THRESHOLD_DEGREES = 15;
+
+    // Once in the LOCALIZED state, if either accuracies degrade beyond these amounts, the app will
+    // revert back to the LOCALIZING state.
+    private static final double LOCALIZED_HORIZONTAL_ACCURACY_HYSTERESIS_METERS = 10;
+    private static final double LOCALIZED_ORIENTATION_YAW_ACCURACY_HYSTERESIS_DEGREES = 10;
 
     /** ---------------------------------------------------------------------------------
      * METHODE AREA
@@ -189,6 +228,7 @@ ImageReader.OnImageAvailableListener, SurfaceTexture.OnFrameAvailableListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.i("ARCore:", "Creating ARActivity");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_check_ar_availability);
 
@@ -215,21 +255,26 @@ ImageReader.OnImageAvailableListener, SurfaceTexture.OnFrameAvailableListener {
         // Switch to allow pausing and resuming of ARCore.
         Switch arcoreSwitch = findViewById(R.id.arcore_switch);
         // Ensure initial switch position is set based on initial value of `arMode` variable.
-        //TODO arcoreSwitch.setChecked(arMode);
+        //arcoreSwitch.setChecked(arMode);
+        Log.i("GameData:", String.valueOf(GameData.getIsArActivity()));
         arcoreSwitch.setChecked(GameData.getIsArActivity());
-        arcoreSwitch.setOnCheckedChangeListener(
-            (view, checked) -> {
-                Log.i(TAG, "Switching to " + (checked ? "AR" : "non-AR") + " mode.");
+
+        arcoreSwitch.setOnCheckedChangeListener((compoundButton, checked) -> {
+
+                Log.i("ARCore:", "Switching to " + (checked ? "AR" : "non-AR") + " mode.");
                 //Update the switch state
-                GameData.setIsArActivity(false);
-                if (checked) {
+                if (compoundButton.isChecked()) {
                     statusTextView.setText("ARCore is activated");
-                    arMode = true;
+                    Log.i("ARCore:", "ARCore is activated");
+                    //arMode = true;
+                    GameData.setIsArActivity(true);
                     resumeARCore();
                 } else {
                     statusTextView.setText("ARCore was paused");
-                    arMode = false;
+                    Log.i("ARCore:", "ARCore was paused");
+                    //arMode = false;
                     pauseARCore();
+                    GameData.setIsArActivity(false);
                     startActivity(new Intent(ArActivity.this, MapActivity.class));
                     //resumeCamera2();
                 }
@@ -263,8 +308,11 @@ ImageReader.OnImageAvailableListener, SurfaceTexture.OnFrameAvailableListener {
         }
         displayRotationHelper.onResume();
         //How to get latitude of first marker that has been generated:
-        Toast.makeText(this, "first mushroom latitude " +
-                GameData.getMarkerData().get(0).getPosition().latitude, Toast.LENGTH_SHORT).show();
+       /* Toast.makeText(this, "first mushroom latitude " +
+                GameData.getMarkerData().get(0).getPosition().latitude, Toast.LENGTH_SHORT).show();*/
+        statusTextView.setText("Mushroom:\nLatitude: " +
+                        GameData.getMarkerData().get(0).getPosition().latitude +
+                "\nLongitude: " + GameData.getMarkerData().get(0).getPosition().longitude);
         /*
         BTW the markers have IDs in their ".title" keys. IDs are given to markers when they are
         first generated. They are numbers starting from 0 and their type is String.
@@ -274,13 +322,136 @@ ImageReader.OnImageAvailableListener, SurfaceTexture.OnFrameAvailableListener {
          */
     }
 
+    private void placeMushrooms() {
+        if(earth != null) {
+            updateGeospatialState(earth);
+            Log.i("Shroomy:", String.valueOf(earth.getTrackingState()));
+            /*if(earth.getTrackingState() != TrackingState.TRACKING) {
+                Log.i("Shroomy:", String.valueOf(earth.getTrackingState()));
+                Log.i("Shroomy:", String.valueOf(earth.getEarthState()));
+                Log.i("Shroomy:", String.valueOf(session.getAllTrackables(Trackable.class)));
+                return;
+            }else if(earth.getTrackingState() == TrackingState.TRACKING) {
+
+                // cameraGeospatialPose contains geodetic location, rotation, and confidences values.
+                ourCurrentLocation = earth.getCameraGeospatialPose();
+
+                future = session.checkVpsAvailabilityAsync(ourCurrentLocation.getLatitude(),
+                        ourCurrentLocation.getLongitude(), null);
+                if (future.getState() == FutureState.DONE) {
+                    switch (future.getResult()) {
+                        case AVAILABLE:
+                            Log.i("Shroomy:", "VPS is available at this location");
+                            LatLng mushroomPosition = GameData.getMarkerData().get(0).getPosition();
+
+                            final ResolveAnchorOnTerrainFuture terrainFuture =
+                                    earth.resolveAnchorOnTerrainAsync(mushroomPosition.latitude,
+                                            mushroomPosition.longitude, 0.0f, 0, 0, 0, 0, (anchor, state) -> {
+                                                if (state == Anchor.TerrainAnchorState.SUCCESS) {
+                                                    Log.i("Shroomy:", "TerrainAnchor was created");
+                                                } else {
+                                                    Log.i("Shroomy:", "The anchor failed to resolve");
+                                                }
+                                            });
+                            break;
+                        case UNAVAILABLE:
+                            Log.i("Shroomy", "VPS is unavailable at this location");
+                            break;
+                        case ERROR_NETWORK_CONNECTION:
+                            Log.i("Shroomy:", "The external service could not be reached due to a network connection error.");
+                            break;
+                    }
+                } else {
+                    Log.i("Shroomy:", "FutureState not DONE");
+                }
+            }*/
+        } else {
+            Log.i("Shroomy:", "GeospatialMode not supported");
+        }
+    }
+
+    private void updateGeospatialState(Earth earth) {
+        if (earth.getEarthState() != Earth.EarthState.ENABLED) {
+            state = State.EARTH_STATE_ERROR;
+            return;
+        }
+        if (earth.getTrackingState() != TrackingState.TRACKING) {
+            state = State.PRETRACKING;
+            return;
+        }
+        if (state == State.PRETRACKING) {
+            updatePretrackingState(earth);
+        } else if (state == State.LOCALIZING) {
+            updateLocalizingState(earth);
+        } else if (state == State.LOCALIZED) {
+            updateLocalizedState(earth);
+        }
+    }
+
+    /**
+     * Handles the updating for @link State.PRETRACKING. In this state, wait for {@link Earth} to
+     * have @link TrackingState.TRACKING. If it hasn't been enabled by now, then we've encountered
+     * an unrecoverable @link State.EARTH_STATE_ERROR.
+     */
+    private void updatePretrackingState(Earth earth) {
+        if (earth.getTrackingState() == TrackingState.TRACKING) {
+            state = State.LOCALIZING;
+            return;
+        }
+        Log.i("Earth State:", "Earth is not tracked.");
+    }
+
+    /**
+     * Handles the updating for @link State.LOCALIZED. In this state, check the accuracy for
+     * degradation and return to @link State.LOCALIZING if the position accuracies have dropped too
+     * low.
+     */
+    private void updateLocalizedState(Earth earth) {
+        GeospatialPose geospatialPose = earth.getCameraGeospatialPose();
+        // Check if either accuracy has degraded to the point we should enter back into the LOCALIZING
+        // state.
+        if (geospatialPose.getHorizontalAccuracy()
+                > LOCALIZING_HORIZONTAL_ACCURACY_THRESHOLD_METERS
+                + LOCALIZED_HORIZONTAL_ACCURACY_HYSTERESIS_METERS
+                || geospatialPose.getOrientationYawAccuracy()
+                > LOCALIZING_ORIENTATION_YAW_ACCURACY_THRESHOLD_DEGREES
+                + LOCALIZED_ORIENTATION_YAW_ACCURACY_HYSTERESIS_DEGREES) {
+            // Accuracies have degenerated, return to the localizing state.
+            state = State.LOCALIZING;
+
+            return;
+        }
+    }
+
+    /**
+     * Handles the updating for @link State.LOCALIZING. In this state, wait for the horizontal and
+     * orientation threshold to improve until it reaches your threshold.
+     *
+     * <p>If it takes too long for the threshold to be reached, this could mean that GPS data isn't
+     * accurate enough, or that the user is in an area that can't be localized with StreetView.
+     */
+    private void updateLocalizingState(Earth earth) {
+        GeospatialPose geospatialPose = earth.getCameraGeospatialPose();
+        if (geospatialPose.getHorizontalAccuracy() <= LOCALIZING_HORIZONTAL_ACCURACY_THRESHOLD_METERS
+                && geospatialPose.getOrientationYawAccuracy()
+                <= LOCALIZING_ORIENTATION_YAW_ACCURACY_THRESHOLD_DEGREES) {
+            state = State.LOCALIZED;
+        }
+
+       /* if (TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis() - localizingStartTimestamp)
+                > LOCALIZING_TIMEOUT_SECONDS) {
+            state = State.LOCALIZING_FAILED;
+            return;
+        }*/
+    }
+
     @Override
     public void onPause() {
         shouldUpdateSurfaceTexture.set(false);
         surfaceView.onPause();
         waitUntilCameraCaptureSessionIsActive();
         displayRotationHelper.onPause();
-        if (arMode) {
+        if (GameData.getIsArActivity()) {
             pauseARCore();
         }
         closeCamera();
@@ -408,42 +579,29 @@ ImageReader.OnImageAvailableListener, SurfaceTexture.OnFrameAvailableListener {
 
         errorCreatingSession = false;
 
-        //configureCamera();
+        // Earth mode may not be supported on this device due to insufficient sensor quality.
+        if (!session.isGeospatialModeSupported(Config.GeospatialMode.ENABLED)) {
+            state = State.UNSUPPORTED;
+            return;
+        }else {
+            Log.i("Shroomy:", "Device supports GeospatialMode.");
+        }
 
         // Enable auto focus mode while ARCore is running.
         Config sessionConfig = session.getConfig();
-        sessionConfig.setFocusMode(Config.FocusMode.AUTO);
+        sessionConfig = sessionConfig.setFocusMode(Config.FocusMode.AUTO).setGeospatialMode(Config.GeospatialMode.ENABLED);
+
+        /*
+        Enables Geospatial capabilities. Needed for placing mushrooms.
+        ENABLED -> App can gain geo information from the Visual Positioning System (VPS)
+         */
+
+        Log.i("ShroomyInSession:", String.valueOf(geospatialModeSupported));
         session.configure(sessionConfig);
-
-
-        //TODO
-        // Do feature-specific operations here, such as enabling depth or turning on
-        // support for Augmented Faces.
-
+        state = State.PRETRACKING;
     }
 
-    /**
-     * Chooses the best camera configuration to use while running the ARCore Session
-     */
-    public void configureCamera() {
-        CameraConfigFilter cameraConfigFilter = new CameraConfigFilter(session);
-        // Return only camera configs that target 30 FPS camera capture frame rate.
-        cameraConfigFilter.setTargetFps(EnumSet.of(CameraConfig.TargetFps.TARGET_FPS_30));
-        // Return only camera configs that will not use the depth sensor.
-        cameraConfigFilter.setDepthSensorUsage(EnumSet.of(CameraConfig.DepthSensorUsage.DO_NOT_USE));
-        // Get list of configs that match filter settings.
-        // In this case, this list is guaranteed to contain at least one element,
-        // because both TargetFps.TARGET_FPS_30 and DepthSensorUsage.DO_NOT_USE
-        // are supported on all ARCore supported devices.
-        List<CameraConfig> configListe = session.getSupportedCameraConfigs(cameraConfigFilter);
-        // Use element 0 from the list of returned camera configs. This is because
-        // it contains the camera config that best matches the specified filter
-        // settings.
-        session.setCameraConfig(configListe.get(0));
-    }
-
-
-    public void openCamera() {
+        public void openCamera() {
         // Our camera is already opened and doesn't have to be opened again
         if (cameraDevice != null) {
             return;
@@ -462,6 +620,8 @@ ImageReader.OnImageAvailableListener, SurfaceTexture.OnFrameAvailableListener {
 
         if(session == null) {
             createSession();
+            Log.i("ARSession:", "A new ARSession was created.");
+           // placeMushrooms();
         }
 
         // Store the ARCore shared camera reference.
@@ -469,19 +629,6 @@ ImageReader.OnImageAvailableListener, SurfaceTexture.OnFrameAvailableListener {
 
         // Store the ID of the camera that ARCore uses.
         cameraId = session.getCameraConfig().getCameraId();
-
-        // Use the currently configured CPU image size.
-        Size desiredCpuImageSize = session.getCameraConfig().getImageSize();
-        cpuImageReader =
-                ImageReader.newInstance(
-                        desiredCpuImageSize.getWidth(),
-                        desiredCpuImageSize.getHeight(),
-                        ImageFormat.YUV_420_888,
-                        2);
-        cpuImageReader.setOnImageAvailableListener(this, backgroundHandler);
-
-        // When ARCore is running, make sure it also updates our CPU image surface.
-        sharedCamera.setAppSurfaces(this.cameraId, Arrays.asList(cpuImageReader.getSurface()));
 
         try {
 
@@ -528,10 +675,6 @@ ImageReader.OnImageAvailableListener, SurfaceTexture.OnFrameAvailableListener {
             cameraDevice.close();
             safeToExitApp.block();
         }
-        if (cpuImageReader != null) {
-            cpuImageReader.close();
-            cpuImageReader = null;
-        }
     }
 
     /**
@@ -550,14 +693,11 @@ ImageReader.OnImageAvailableListener, SurfaceTexture.OnFrameAvailableListener {
             // Build a list of surfaces, starting with ARCore provided surfaces.
             List<Surface> surfaceList = sharedCamera.getArCoreSurfaces();
 
-            // (Optional) Add a CPU image reader surface.
-            surfaceList.add(cpuImageReader.getSurface());
             // Add ARCore surfaces and CPU image surface targets.
 
-            // Surface list should now contain three surfaces:
+            // Surface list should now contain two surfaces:
             // 0. sharedCamera.getSurfaceTexture()
             // 1. …
-            // 2. cpuImageReader.getSurface()
 
             for (Surface surface : surfaceList) {
                 Log.i("My Surface: ",surface.toString());
@@ -762,7 +902,7 @@ ImageReader.OnImageAvailableListener, SurfaceTexture.OnFrameAvailableListener {
         displayRotationHelper.updateSessionIfNeeded(session);
 
         try {
-            if (arMode) {
+            if (GameData.getIsArActivity()) {
                 onDrawFrameARCore();
             } else {
                 onDrawFrameCamera2();
@@ -812,32 +952,11 @@ ImageReader.OnImageAvailableListener, SurfaceTexture.OnFrameAvailableListener {
         // Log.d(TAG, "onFrameAvailable()");
     }
 
-    // CPU image reader callback.
-    @SuppressLint("SetTextI18n")
-    @Override
-    public void onImageAvailable(ImageReader imageReader) {
-        Image image = imageReader.acquireLatestImage();
-        if (image == null) {
-            Log.w(TAG, "onImageAvailable: Skipping null image.");
-            return;
-        }
-        image.close();
-        cpuImagesProcessed++;
-
-        // Reduce the screen update to once every two seconds with 30fps if running as automated test.
-        if (!automatorRun.get() || (automatorRun.get() && cpuImagesProcessed % 60 == 0)) {
-            runOnUiThread(
-                    () ->
-                            statusTextView.setText("CPU images processed: "
-                                            + cpuImagesProcessed
-                                            + "\n\nMode: "
-                                            + (arMode ? "AR" : "non-AR")
-                                            + " \nARCore active: "
-                                            + arcoreActive
-                                            + " \nShould update surface texture: "
-                                            + shouldUpdateSurfaceTexture.get()));
-        }
-    }
+    /**
+     * An Anchor describes a fixed location and orientation in the real world.
+     * With getPose() you can get the current position of an anchor. In case
+     * Session.update() is called somewhere the location of the anchor might change
+     */
     private static class ColoredAnchor {
         public final Anchor anchor;
         public final float[] color;
@@ -847,6 +966,7 @@ ImageReader.OnImageAvailableListener, SurfaceTexture.OnFrameAvailableListener {
             this.color = color4f;
         }
     }
+
 
 
     // Draw frame when in AR mode. Called on the GL thread.
@@ -877,6 +997,13 @@ ImageReader.OnImageAvailableListener, SurfaceTexture.OnFrameAvailableListener {
         // If not tracking, don't draw 3D objects.
         if (camera.getTrackingState() == TrackingState.PAUSED) {
             return;
+        }
+
+        earth = session.getEarth();
+        Log.i("Shroomy:", String.valueOf(earth));
+        if(earth != null) {
+            updateGeospatialState(earth);
+            Log.i("Shroomy:", String.valueOf(earth.getTrackingState()));
         }
 
         // Get projection matrix.
@@ -979,7 +1106,7 @@ ImageReader.OnImageAvailableListener, SurfaceTexture.OnFrameAvailableListener {
         public void onConfigured(@NonNull CameraCaptureSession session) {
             Log.d(TAG, "Camera capture session configured.");
             captureSession = session;
-            if (arMode) {
+            if (GameData.getIsArActivity()) {
                 setRepeatingCaptureRequest();
             // Note, resumeARCore() must be called in onActive(), not here.
             } else {
@@ -1002,7 +1129,7 @@ ImageReader.OnImageAvailableListener, SurfaceTexture.OnFrameAvailableListener {
         @Override
         public void onActive(@NonNull CameraCaptureSession session) {
             Log.d(TAG, "Camera capture session active.");
-            if (arMode && !arcoreActive) {
+            if (GameData.getIsArActivity() && !arcoreActive) {
                 resumeARCore();
             }
             synchronized (ArActivity.this) {

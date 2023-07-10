@@ -1,8 +1,25 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.moco_project.app-mergeDebugResources-30:/values-kn/values-kn.xml",
+            "outputFile": "com.example.moco_project.app-mergeDebugResources-31:/values-kn/values-kn.xml",
             "map": [
+                {
+                    "source": "C:\\Users\\hanna\\.gradle\\caches\\transforms-3\\de2e14f819a1e58f5ce8ec0d104f55e0\\transformed\\jetified-play-services-basement-18.2.0\\res\\values-kn\\values.xml",
+                    "from": {
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "195",
+                        "endColumns": "141",
+                        "endOffsets": "336"
+                    },
+                    "to": {
+                        "startLines": "54",
+                        "startColumns": "4",
+                        "startOffsets": "5298",
+                        "endColumns": "145",
+                        "endOffsets": "5439"
+                    }
+                },
                 {
                     "source": "C:\\Users\\hanna\\.gradle\\caches\\transforms-3\\7ba610368285ef737a15a687544ee720\\transformed\\appcompat-1.6.1\\res\\values-kn\\values-kn.xml",
                     "from": {
@@ -18,23 +35,6 @@
                         "startOffsets": "772,886,998,1111,1199,1306,1432,1510,1586,1677,1770,1865,1959,2059,2152,2247,2341,2432,2523,2605,2721,2831,2930,3043,3148,3262,3426,10783",
                         "endColumns": "113,111,112,87,106,125,77,75,90,92,94,93,99,92,94,93,90,90,81,115,109,98,112,104,113,163,99,82",
                         "endOffsets": "881,993,1106,1194,1301,1427,1505,1581,1672,1765,1860,1954,2054,2147,2242,2336,2427,2518,2600,2716,2826,2925,3038,3143,3257,3421,3521,10861"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\hanna\\.gradle\\caches\\transforms-3\\69d5ce78cc97fe1a04a23073b9bb6ddc\\transformed\\jetified-play-services-basement-18.1.0\\res\\values-kn\\values.xml",
-                    "from": {
-                        "startLines": "4",
-                        "startColumns": "0",
-                        "startOffsets": "195",
-                        "endColumns": "141",
-                        "endOffsets": "336"
-                    },
-                    "to": {
-                        "startLines": "54",
-                        "startColumns": "4",
-                        "startOffsets": "5298",
-                        "endColumns": "145",
-                        "endOffsets": "5439"
                     }
                 },
                 {

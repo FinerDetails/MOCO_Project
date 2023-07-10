@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.moco_project.app-mergeDebugResources-30:/values-zh-rCN/values-zh-rCN.xml",
+            "outputFile": "com.example.moco_project.app-mergeDebugResources-31:/values-zh-rCN/values-zh-rCN.xml",
             "map": [
                 {
                     "source": "C:\\Users\\hanna\\.gradle\\caches\\transforms-3\\611b2bd2b88f1484abbb7c16c4f8a2a8\\transformed\\jetified-core-1.38.0\\res\\values-zh-rCN\\values.xml",
@@ -55,6 +55,23 @@
                     }
                 },
                 {
+                    "source": "C:\\Users\\hanna\\.gradle\\caches\\transforms-3\\de2e14f819a1e58f5ce8ec0d104f55e0\\transformed\\jetified-play-services-basement-18.2.0\\res\\values-zh-rCN\\values.xml",
+                    "from": {
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "199",
+                        "endColumns": "94",
+                        "endOffsets": "293"
+                    },
+                    "to": {
+                        "startLines": "54",
+                        "startColumns": "4",
+                        "startOffsets": "4689",
+                        "endColumns": "98",
+                        "endOffsets": "4783"
+                    }
+                },
+                {
                     "source": "C:\\Users\\hanna\\.gradle\\caches\\transforms-3\\9036a528b1406275d26d7622c1327b73\\transformed\\jetified-play-services-base-18.1.0\\res\\values-zh-rCN\\values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
@@ -69,23 +86,6 @@
                         "startOffsets": "3827,3928,4057,4172,4274,4379,4495,4597,4788,4896,4997,5127,5242,5346,5454,5510,5567",
                         "endColumns": "100,128,114,101,104,115,101,91,107,100,129,114,103,107,55,56,73",
                         "endOffsets": "3923,4052,4167,4269,4374,4490,4592,4684,4891,4992,5122,5237,5341,5449,5505,5562,5636"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\hanna\\.gradle\\caches\\transforms-3\\69d5ce78cc97fe1a04a23073b9bb6ddc\\transformed\\jetified-play-services-basement-18.1.0\\res\\values-zh-rCN\\values.xml",
-                    "from": {
-                        "startLines": "4",
-                        "startColumns": "0",
-                        "startOffsets": "199",
-                        "endColumns": "94",
-                        "endOffsets": "293"
-                    },
-                    "to": {
-                        "startLines": "54",
-                        "startColumns": "4",
-                        "startOffsets": "4689",
-                        "endColumns": "98",
-                        "endOffsets": "4783"
                     }
                 },
                 {

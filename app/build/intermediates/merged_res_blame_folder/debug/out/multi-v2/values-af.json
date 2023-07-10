@@ -1,25 +1,8 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.moco_project.app-mergeDebugResources-30:/values-af/values-af.xml",
+            "outputFile": "com.example.moco_project.app-mergeDebugResources-31:/values-af/values-af.xml",
             "map": [
-                {
-                    "source": "C:\\Users\\hanna\\.gradle\\caches\\transforms-3\\69d5ce78cc97fe1a04a23073b9bb6ddc\\transformed\\jetified-play-services-basement-18.1.0\\res\\values-af\\values.xml",
-                    "from": {
-                        "startLines": "4",
-                        "startColumns": "0",
-                        "startOffsets": "195",
-                        "endColumns": "138",
-                        "endOffsets": "333"
-                    },
-                    "to": {
-                        "startLines": "54",
-                        "startColumns": "4",
-                        "startOffsets": "5166",
-                        "endColumns": "142",
-                        "endOffsets": "5304"
-                    }
-                },
                 {
                     "source": "C:\\Users\\hanna\\.gradle\\caches\\transforms-3\\9036a528b1406275d26d7622c1327b73\\transformed\\jetified-play-services-base-18.1.0\\res\\values-af\\values.xml",
                     "from": {
@@ -71,6 +54,23 @@
                         "startOffsets": "783,891,987,1093,1178,1281,1399,1476,1552,1643,1736,1831,1925,2024,2117,2212,2311,2406,2500,2581,2688,2793,2890,2998,3101,3203,3357,10501",
                         "endColumns": "107,95,105,84,102,117,76,75,90,92,94,93,98,92,94,98,94,93,80,106,104,96,107,102,101,153,97,80",
                         "endOffsets": "886,982,1088,1173,1276,1394,1471,1547,1638,1731,1826,1920,2019,2112,2207,2306,2401,2495,2576,2683,2788,2885,2993,3096,3198,3352,3450,10577"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\hanna\\.gradle\\caches\\transforms-3\\de2e14f819a1e58f5ce8ec0d104f55e0\\transformed\\jetified-play-services-basement-18.2.0\\res\\values-af\\values.xml",
+                    "from": {
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "195",
+                        "endColumns": "138",
+                        "endOffsets": "333"
+                    },
+                    "to": {
+                        "startLines": "54",
+                        "startColumns": "4",
+                        "startOffsets": "5166",
+                        "endColumns": "142",
+                        "endOffsets": "5304"
                     }
                 },
                 {

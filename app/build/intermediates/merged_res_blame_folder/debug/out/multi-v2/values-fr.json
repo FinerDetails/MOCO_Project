@@ -1,25 +1,8 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.moco_project.app-mergeDebugResources-30:/values-fr/values-fr.xml",
+            "outputFile": "com.example.moco_project.app-mergeDebugResources-31:/values-fr/values-fr.xml",
             "map": [
-                {
-                    "source": "C:\\Users\\hanna\\.gradle\\caches\\transforms-3\\69d5ce78cc97fe1a04a23073b9bb6ddc\\transformed\\jetified-play-services-basement-18.1.0\\res\\values-fr\\values.xml",
-                    "from": {
-                        "startLines": "4",
-                        "startColumns": "0",
-                        "startOffsets": "195",
-                        "endColumns": "160",
-                        "endOffsets": "355"
-                    },
-                    "to": {
-                        "startLines": "54",
-                        "startColumns": "4",
-                        "startOffsets": "5429",
-                        "endColumns": "164",
-                        "endOffsets": "5589"
-                    }
-                },
                 {
                     "source": "C:\\Users\\hanna\\.gradle\\caches\\transforms-3\\9036a528b1406275d26d7622c1327b73\\transformed\\jetified-play-services-base-18.1.0\\res\\values-fr\\values.xml",
                     "from": {
@@ -88,6 +71,23 @@
                         "startOffsets": "863,974,1089,1199,1281,1387,1517,1595,1671,1762,1855,1953,2048,2148,2241,2334,2429,2520,2611,2697,2807,2918,3021,3132,3240,3347,3506,11072",
                         "endColumns": "110,114,109,81,105,129,77,75,90,92,97,94,99,92,92,94,90,90,85,109,110,102,110,107,106,158,98,86",
                         "endOffsets": "969,1084,1194,1276,1382,1512,1590,1666,1757,1850,1948,2043,2143,2236,2329,2424,2515,2606,2692,2802,2913,3016,3127,3235,3342,3501,3600,11154"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\hanna\\.gradle\\caches\\transforms-3\\de2e14f819a1e58f5ce8ec0d104f55e0\\transformed\\jetified-play-services-basement-18.2.0\\res\\values-fr\\values.xml",
+                    "from": {
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "195",
+                        "endColumns": "160",
+                        "endOffsets": "355"
+                    },
+                    "to": {
+                        "startLines": "54",
+                        "startColumns": "4",
+                        "startOffsets": "5429",
+                        "endColumns": "164",
+                        "endOffsets": "5589"
                     }
                 },
                 {

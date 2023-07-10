@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.moco_project.app-mergeDebugResources-30:/values-ko/values-ko.xml",
+            "outputFile": "com.example.moco_project.app-mergeDebugResources-31:/values-ko/values-ko.xml",
             "map": [
                 {
                     "source": "C:\\Users\\hanna\\.gradle\\caches\\transforms-3\\731866f4f07c37e8f6d282fe1dd76996\\transformed\\material-1.9.0\\res\\values-ko\\values-ko.xml",
@@ -23,6 +23,23 @@
                     }
                 },
                 {
+                    "source": "C:\\Users\\hanna\\.gradle\\caches\\transforms-3\\de2e14f819a1e58f5ce8ec0d104f55e0\\transformed\\jetified-play-services-basement-18.2.0\\res\\values-ko\\values.xml",
+                    "from": {
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "195",
+                        "endColumns": "116",
+                        "endOffsets": "311"
+                    },
+                    "to": {
+                        "startLines": "54",
+                        "startColumns": "4",
+                        "startOffsets": "4756",
+                        "endColumns": "120",
+                        "endOffsets": "4872"
+                    }
+                },
+                {
                     "source": "C:\\Users\\hanna\\.gradle\\caches\\transforms-3\\611b2bd2b88f1484abbb7c16c4f8a2a8\\transformed\\jetified-core-1.38.0\\res\\values-ko\\values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8",
@@ -37,23 +54,6 @@
                         "startOffsets": "299,346,395,494,593",
                         "endColumns": "46,48,98,98,72",
                         "endOffsets": "341,390,489,588,661"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\hanna\\.gradle\\caches\\transforms-3\\69d5ce78cc97fe1a04a23073b9bb6ddc\\transformed\\jetified-play-services-basement-18.1.0\\res\\values-ko\\values.xml",
-                    "from": {
-                        "startLines": "4",
-                        "startColumns": "0",
-                        "startOffsets": "195",
-                        "endColumns": "116",
-                        "endOffsets": "311"
-                    },
-                    "to": {
-                        "startLines": "54",
-                        "startColumns": "4",
-                        "startOffsets": "4756",
-                        "endColumns": "120",
-                        "endOffsets": "4872"
                     }
                 },
                 {

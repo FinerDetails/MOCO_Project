@@ -30,10 +30,12 @@
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="22dp"
                 android:switchPadding="8dp"
-                android:text="@string/ar" />
+                android:text="@string/ar"
+                tools:ignore="UseSwitchCompatOrMaterialXml" />
         </fragment>
         <!--map:uiZoomControls="false"
             map:uiZoomGestures="false"-->
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
