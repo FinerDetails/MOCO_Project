@@ -65,7 +65,7 @@
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.ar.API_KEY"
-            android:value="AIzaSyC1XfZwbIaJKxcY0NnLC9cifg3Lt0-ZXjc" />
+            android:value="AIzaSyBi29CDh2k_37hx3A-R3FdMtuM196SFx7A" />
 
         <activity
             android:name="com.example.moco_project.MapActivity"

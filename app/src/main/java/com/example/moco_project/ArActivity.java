@@ -3,6 +3,7 @@ package com.example.moco_project;
 import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
 import androidx.activity.result.ActivityResultLauncher;
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -13,6 +14,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.graphics.SurfaceTexture;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCaptureSession;
@@ -46,17 +48,21 @@ import com.example.moco_project.helpers.TrackingStateHelper;
 import com.example.moco_project.rendering.ObjectRenderer;
 import com.example.moco_project.rendering.PlaneRenderer;
 import com.example.moco_project.rendering.PointCloudRenderer;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.ar.core.Anchor;
 import com.google.ar.core.ArCoreApk;
 import com.google.ar.core.Camera;
 import com.google.ar.core.Config;
 import com.google.ar.core.Earth;
 import com.google.ar.core.Frame;
+import com.google.ar.core.FutureState;
 import com.google.ar.core.GeospatialPose;
 import com.google.ar.core.HitResult;
 import com.google.ar.core.Plane;
 import com.google.ar.core.Point;
 import com.google.ar.core.PointCloud;
+import com.google.ar.core.ResolveAnchorOnTerrainFuture;
 import com.google.ar.core.Session;
 import com.google.ar.core.SharedCamera;
 import com.google.ar.core.Trackable;
@@ -72,7 +78,9 @@ import com.google.ar.core.exceptions.UnavailableSdkTooOldException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.EnumSet;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -152,7 +160,7 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
 
     private final AtomicBoolean automatorRun = new AtomicBoolean(false);
 
-    private final ArrayList<ColoredAnchor> anchors = new ArrayList<>();
+    private final ArrayList<Anchor> anchors = new ArrayList<>();
 
     // Temporary matrix allocated here to reduce number of allocations for each frame.
     private final float[] anchorMatrix = new float[16];
@@ -171,8 +179,6 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
     // Text view for displaying on screen status message.
     private TextView statusTextView;
 
-    // Total number of CPU images processed.
-    private int cpuImagesProcessed;
 
     private GeospatialPose ourCurrentLocation;
 
@@ -196,8 +202,6 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
          * hasn't been reached yet.
          */
         LOCALIZING,
-        /** The desired positioning confidence wasn't reached in time. */
-        LOCALIZING_FAILED,
         /**
          * {@link Earth} is  and the desired positioning confidence has
          * been reached.
@@ -220,6 +224,14 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
 
     private ProgressBar hungerBar;
     private Timer timer;
+
+    private final Object anchorsLock = new Object();
+
+    private final Set<Anchor> terrainAnchors = new HashSet<>();
+
+    private boolean mushroomsAnchorPlaced = false;
+
+    private boolean mushroomsPlaced = false;
 
     /** ---------------------------------------------------------------------------------
      * METHODE AREA
@@ -317,8 +329,6 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
         }
         displayRotationHelper.onResume();
         //How to get latitude of first marker that has been generated:
-       /* Toast.makeText(this, "first mushroom latitude " +
-                GameData.getMarkerData().get(0).getPosition().latitude, Toast.LENGTH_SHORT).show();*/
         statusTextView.setText("Mushroom:\nLatitude: " +
                         GameData.getMarkerData().get(0).getPosition().latitude +
                 "\nLongitude: " + GameData.getMarkerData().get(0).getPosition().longitude);
@@ -331,38 +341,32 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
          */
     }
 
-    private void placeMushrooms() {
+    private void placeMushroomAnchors() {
         if(earth != null) {
             updateGeospatialState(earth);
-            Log.i("Shroomy:", String.valueOf(earth.getTrackingState()));
-            /*if(earth.getTrackingState() != TrackingState.TRACKING) {
-                Log.i("Shroomy:", String.valueOf(earth.getTrackingState()));
-                Log.i("Shroomy:", String.valueOf(earth.getEarthState()));
-                Log.i("Shroomy:", String.valueOf(session.getAllTrackables(Trackable.class)));
-                return;
-            }else if(earth.getTrackingState() == TrackingState.TRACKING) {
-
+            if(earth.getTrackingState() == TrackingState.TRACKING) {
                 // cameraGeospatialPose contains geodetic location, rotation, and confidences values.
                 ourCurrentLocation = earth.getCameraGeospatialPose();
-
-                future = session.checkVpsAvailabilityAsync(ourCurrentLocation.getLatitude(),
+                /*future = session.checkVpsAvailabilityAsync(ourCurrentLocation.getLatitude(),
                         ourCurrentLocation.getLongitude(), null);
-                if (future.getState() == FutureState.DONE) {
+                Log.i("Shroomy:", future.toString());*/
+                //checkVpsState(future);
+               /* if (future.getState() == FutureState.DONE) {
                     switch (future.getResult()) {
                         case AVAILABLE:
-                            Log.i("Shroomy:", "VPS is available at this location");
-                            LatLng mushroomPosition = GameData.getMarkerData().get(0).getPosition();
-
-                            final ResolveAnchorOnTerrainFuture terrainFuture =
-                                    earth.resolveAnchorOnTerrainAsync(mushroomPosition.latitude,
-                                            mushroomPosition.longitude, 0.0f, 0, 0, 0, 0, (anchor, state) -> {
-                                                if (state == Anchor.TerrainAnchorState.SUCCESS) {
-                                                    Log.i("Shroomy:", "TerrainAnchor was created");
-                                                } else {
-                                                    Log.i("Shroomy:", "The anchor failed to resolve");
-                                                }
-                                            });
-                            break;
+                            Log.i("Shroomy:", "VPS is available at this location");*/
+                            if(anchors.size() < 100) {
+                                for(MarkerOptions marker : GameData.getMarkerData()) {
+                                    Log.i("Anchor:", "Anchor size is: " + anchors.size());
+                                   /* if (anchors.size() >= 100) {
+                                        anchors.get(0).detach();
+                                        anchors.remove(0);
+                                        Log.i("Anchor:", "Anchor size after removable is " + anchors.size());
+                                    }*/
+                                    createTerrainAnchor(marker.getPosition());
+                                }
+                            }
+                            /*break;
                         case UNAVAILABLE:
                             Log.i("Shroomy", "VPS is unavailable at this location");
                             break;
@@ -371,14 +375,41 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
                             break;
                     }
                 } else {
-                    Log.i("Shroomy:", "FutureState not DONE");
-                }
-            }*/
+                    Log.i("Shroomy:", String.valueOf(future.getState()));
+                }*/
+            }
         } else {
             Log.i("Shroomy:", "GeospatialMode not supported");
         }
     }
 
+    /**
+     * Creates a new TerrainAnchor. For a preciser Anchor VPS is needed...
+     * @param mushroomPosition
+     */
+    public void createTerrainAnchor(LatLng mushroomPosition) {
+        final ResolveAnchorOnTerrainFuture terrainFuture =
+            earth.resolveAnchorOnTerrainAsync(mushroomPosition.latitude,
+            mushroomPosition.longitude, earth.getCameraGeospatialPose().getAltitude() - 1, 0, 0, 0, 1, (anchor, state) -> {
+                Log.i("TerrainAnchor:", String.valueOf(state));
+                if (state == Anchor.TerrainAnchorState.SUCCESS) {
+
+                    synchronized (anchorsLock) {
+                        anchors.add(anchor);
+                        terrainAnchors.add(anchor);
+                        Log.i("Shroomy:", "TerrainAnchor was created");
+                    }
+                } else {
+                    Log.i("Shroomy:", "The anchor failed to resolve");
+                }
+        });
+    }
+
+    /**
+     * Copied from ARCores example geospatial_java ->
+     * <a href="https://github.com/google-ar/arcore-android-sdk/blob/master/samples/geospatial_java/app/src/main/java/com/google/ar/core/examples/java/geospatial/GeospatialActivity.java">GitHub</a>
+     * @param earth An image of the real world
+     */
     private void updateGeospatialState(Earth earth) {
         if (earth.getEarthState() != Earth.EarthState.ENABLED) {
             state = State.EARTH_STATE_ERROR;
@@ -398,6 +429,29 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
     }
 
     /**
+     * Checks the state of our Visual Positioning System (VPS).
+     * @param future
+     */
+    private void checkVpsState(VpsAvailabilityFuture future)  {
+        if(future.getState() != FutureState.DONE) {
+            Log.i("VpsAvailability:", "FutureState is not DONE yet.");
+            if(future.getState() == FutureState.PENDING) {
+                Log.i("VpsAvailability:", "FutureState is PENDING. Trying to resolve.");
+                //wait(10000);
+            } else if(future.getState() == FutureState.CANCELLED) {
+                Log.i("VpsAvailability:", "FutureState is CANCELLED.");
+            }
+        }
+    }
+
+    private void resolveVpsAvailabilityFutureState(VpsAvailabilityFuture future) {
+
+    }
+
+    /**
+     * Copied and modified from ARCores example geospatial_java ->
+     * <a href="https://github.com/google-ar/arcore-android-sdk/blob/master/samples/geospatial_java/app/src/main/java/com/google/ar/core/examples/java/geospatial/GeospatialActivity.java">GitHub</a>
+     *
      * Handles the updating for @link State.PRETRACKING. In this state, wait for {@link Earth} to
      * have @link TrackingState.TRACKING. If it hasn't been enabled by now, then we've encountered
      * an unrecoverable @link State.EARTH_STATE_ERROR.
@@ -411,6 +465,9 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
     }
 
     /**
+     * Copied and modified from ARCores example geospatial_java ->
+     * <a href="https://github.com/google-ar/arcore-android-sdk/blob/master/samples/geospatial_java/app/src/main/java/com/google/ar/core/examples/java/geospatial/GeospatialActivity.java">GitHub</a>
+     *
      * Handles the updating for @link State.LOCALIZED. In this state, check the accuracy for
      * degradation and return to @link State.LOCALIZING if the position accuracies have dropped too
      * low.
@@ -427,12 +484,13 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
                 + LOCALIZED_ORIENTATION_YAW_ACCURACY_HYSTERESIS_DEGREES) {
             // Accuracies have degenerated, return to the localizing state.
             state = State.LOCALIZING;
-
-            return;
         }
     }
 
     /**
+     * Copied and modified from ARCores example geospatial_java ->
+     * <a href="https://github.com/google-ar/arcore-android-sdk/blob/master/samples/geospatial_java/app/src/main/java/com/google/ar/core/examples/java/geospatial/GeospatialActivity.java">GitHub</a>
+     *
      * Handles the updating for @link State.LOCALIZING. In this state, wait for the horizontal and
      * orientation threshold to improve until it reaches your threshold.
      */
@@ -530,7 +588,6 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
 
     /**
      * Checks, if the camera permission has been granted before or not
-     *
      * @return true --> was granted; false --> wasn't  granted
      */
     public boolean checkIfCameraPermissionHasBeenGranted() {
@@ -907,24 +964,10 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
 
 
     // Surface texture on frame available callback, used only in non-AR mode.
+    // We need to keep this method because of the class implementation
     @Override
     public void onFrameAvailable(SurfaceTexture surfaceTexture) {
         // Log.d(TAG, "onFrameAvailable()");
-    }
-
-    /**
-     * An Anchor describes a fixed location and orientation in the real world.
-     * With getPose() you can get the current position of an anchor. In case
-     * Session.update() is called somewhere the location of the anchor might change
-     */
-    private static class ColoredAnchor {
-        public final Anchor anchor;
-        public final float[] color;
-
-        public ColoredAnchor(Anchor a, float[] color4f) {
-            this.anchor = a;
-            this.color = color4f;
-        }
     }
 
     // Draw frame when in AR mode. Called on the GL thread.
@@ -943,9 +986,6 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
         Frame frame = session.update();
         Camera camera = frame.getCamera();
 
-        // Handle screen tap.
-        handleTap(frame, camera);
-
         // If frame is ready, render camera preview image to the GL surface.
         backgroundRenderer.draw(frame);
 
@@ -958,13 +998,19 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
         }
 
         earth = session.getEarth();
-        Log.i("Shroomy:", String.valueOf(earth));
         if(earth != null) {
             updateGeospatialState(earth);
-            Log.i("Shroomy:", String.valueOf(earth.getTrackingState()));
         }
 
-        // Get projection matrix.
+        if(!mushroomsAnchorPlaced) {
+            for(MarkerOptions marker : GameData.getMarkerData()) {
+                createTerrainAnchor(marker.getPosition());
+            }
+            mushroomsAnchorPlaced = true;
+        }
+
+
+       /* // Get projection matrix.
         float[] projmtx = new float[16];
         camera.getProjectionMatrix(projmtx, 0, 0.1f, 100.0f);
 
@@ -991,64 +1037,27 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
 
         // Visualize anchors created by touch.
         float scaleFactor = 1.0f;
-        for (ColoredAnchor coloredAnchor : anchors) {
-            if (coloredAnchor.anchor.getTrackingState() != TrackingState.TRACKING) {
-                continue;
-            }
-            // Get the current pose of an Anchor in world space. The Anchor pose is updated
-            // during calls to sharedSession.update() as ARCore refines its estimate of the world.
-            coloredAnchor.anchor.getPose().toMatrix(anchorMatrix, 0);
 
-            // Update and draw the model and its shadow.
-            virtualObject.updateModelMatrix(anchorMatrix, scaleFactor);
-            virtualObjectShadow.updateModelMatrix(anchorMatrix, scaleFactor);
-            virtualObject.draw(viewmtx, projmtx, colorCorrectionRgba, coloredAnchor.color);
-            virtualObjectShadow.draw(viewmtx, projmtx, colorCorrectionRgba, coloredAnchor.color);
-        }
-    }
-
-    // Handle only one tap per frame, as taps are usually low frequency compared to frame rate.
-    private void handleTap(Frame frame, Camera camera) {
-        MotionEvent tap = tapHelper.poll();
-        if (tap != null && camera.getTrackingState() == TrackingState.TRACKING) {
-            for (HitResult hit : frame.hitTest(tap)) {
-                // Check if any plane was hit, and if it was hit inside the plane polygon
-                Trackable trackable = hit.getTrackable();
-                // Creates an anchor if a plane or an oriented point was hit.
-                if ((trackable instanceof Plane
-                        && ((Plane) trackable).isPoseInPolygon(hit.getHitPose())
-                        && (PlaneRenderer.calculateDistanceToPlane(hit.getHitPose(), camera.getPose()) > 0))
-                        || (trackable instanceof Point
-                        && ((Point) trackable).getOrientationMode()
-                        == Point.OrientationMode.ESTIMATED_SURFACE_NORMAL)) {
-                    // Hits are sorted by depth. Consider only closest hit on a plane or oriented point.
-                    // Cap the number of objects created. This avoids overloading both the
-                    // rendering system and ARCore.
-                    if (anchors.size() >= 20) {
-                        anchors.get(0).anchor.detach();
-                        anchors.remove(0);
-                    }
-
-                    // Assign a color to the object for rendering based on the trackable type
-                    // this anchor attached to. For AR_TRACKABLE_POINT, it's blue color, and
-                    // for AR_TRACKABLE_PLANE, it's green color.
-                    float[] objColor;
-                    if (trackable instanceof Point) {
-                        objColor = new float[]{66.0f, 133.0f, 244.0f, 255.0f};
-                    } else if (trackable instanceof Plane) {
-                        objColor = new float[]{139.0f, 195.0f, 74.0f, 255.0f};
-                    } else {
-                        objColor = new float[]{0f, 0f, 0f, 0f};
-                    }
-
-                    // Adding an Anchor tells ARCore that it should track this position in
-                    // space. This anchor is created on the Plane to place the 3D model
-                    // in the correct position relative both to the world and to the plane.
-                    anchors.add(new ColoredAnchor(hit.createAnchor(), objColor));
-                    break;
+        //All Mushroom anchors
+        if(!mushroomsPlaced) {
+            for (Anchor myAnchor : anchors) {
+                if (myAnchor.getTrackingState() != TrackingState.TRACKING) {
+                    continue;
                 }
+                // Get the current pose of an Anchor in world space. The Anchor pose is updated
+                // during calls to sharedSession.update() as ARCore refines its estimate of the world.
+                myAnchor.getPose().toMatrix(anchorMatrix, 0);
+
+                // Update and draw the model and its shadow.
+                virtualObject.updateModelMatrix(anchorMatrix, scaleFactor);
+                virtualObjectShadow.updateModelMatrix(anchorMatrix, scaleFactor);
+                float[] objColor = new float[]{66.0f, 240.0f, 0.0f, 232.0f};
+                virtualObject.draw(viewmtx, projmtx, colorCorrectionRgba, objColor);
+                virtualObjectShadow.draw(viewmtx, projmtx, colorCorrectionRgba, objColor);
+                Log.i("Shroomy:", "Shroomy " + myAnchor + " was drawn!");
+                mushroomsPlaced = true;
             }
-        }
+        }*/
     }
 
     /**

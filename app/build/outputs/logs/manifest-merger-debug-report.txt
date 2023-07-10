@@ -6,13 +6,6 @@ INJECTED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\An
 		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:34:13-44
 	android:name
 		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:33:13-58
-meta-data#com.google.android.ar.API_KEY
-INJECTED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:38:9-40:47
-	android:value
-		INJECTED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml
-		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:40:13-44
-	android:name
-		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:39:13-57
 manifest
 ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:2:1-60:12
 INJECTED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:2:1-60:12
@@ -184,6 +177,12 @@ MERGED from [com.google.android.gms:play-services-basement:18.2.0] C:\Users\hann
 		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:37:13-66
 	android:name
 		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:36:13-58
+meta-data#com.google.android.ar.API_KEY
+ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:38:9-40:71
+	android:value
+		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:40:13-68
+	android:name
+		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:39:13-57
 activity#com.example.moco_project.MapActivity
 ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:41:9-44:40
 	android:launchMode

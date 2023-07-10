@@ -113,10 +113,11 @@
 65            android:value="@integer/google_play_services_version" />
 65-->D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:37:13-66
 66        <meta-data
+66-->D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:38:9-40:71
 67            android:name="com.google.android.ar.API_KEY"
 67-->D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:39:13-57
-68            android:value="AIzaSyC1XfZwbIaJKxcY0NnLC9cifg3Lt0-ZXjc" />
-68-->D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:40:13-44
+68            android:value="AIzaSyBi29CDh2k_37hx3A-R3FdMtuM196SFx7A" />
+68-->D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:40:13-68
 69
 70        <activity
 70-->D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:41:9-44:40

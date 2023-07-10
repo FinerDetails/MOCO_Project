@@ -3,6 +3,7 @@ package com.example.moco_project;
 import android.location.Location;
 
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.ar.core.Anchor;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -76,4 +77,5 @@ public class GameData {
     public Location getUserLocation() {
         return userLocation;
     }
+
 }

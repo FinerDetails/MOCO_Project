@@ -1,4 +1,4 @@
-#Mon Jul 10 16:28:41 CEST 2023
+#Tue Jul 11 01:33:35 CEST 2023
 base.0=D\:\\Dokumente\\Studium HSB\\SoSe 23\\MOCO\\MOCO_Project\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
 base.1=D\:\\Dokumente\\Studium HSB\\SoSe 23\\MOCO\\MOCO_Project\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
 base.2=D\:\\Dokumente\\Studium HSB\\SoSe 23\\MOCO\\MOCO_Project\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\15\\classes.dex
