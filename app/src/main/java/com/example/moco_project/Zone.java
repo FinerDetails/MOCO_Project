@@ -3,6 +3,7 @@ import android.graphics.Color;
 import android.location.Location;
 
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 
@@ -14,35 +15,52 @@ public class Zone {
     }
 
     private final Location userLocation;
-    private LatLng location;
-    private final GoogleMap map;
+    private static LatLng location;
+    private static GoogleMap map;
 
 
     public double getZoneRadius() {
         return zoneRadius;
     }
 
-    private final double zoneRadius;
+    private static double zoneRadius;
 
     public Zone(Location userLocation, GoogleMap map, double zoneRadius) {
         this.userLocation = userLocation;
         this.map = map;
         this.zoneRadius = zoneRadius;
-        createZones();
+        LatLng userLatLng = new LatLng(userLocation.getLatitude(),userLocation.getLongitude());
+        createZones(true, userLatLng);
     }
 
-    private void createZones() {
-        double currentLat = userLocation.getLatitude();
-        double currentLng = userLocation.getLongitude();
-        // location = generatePoints(currentLat, currentLng, zoneRadius + 100, zoneRadius + 200);
-        location = generatePoints(currentLat, currentLng, zoneRadius -150, zoneRadius -150);
-        map.addCircle(new CircleOptions()
-                .center(location)
-                .radius(zoneRadius) // Set radius of circle
-                .strokeWidth(8)
-                .strokeColor(Color.rgb(64, 39, 89))
-                .fillColor(Color.argb(215, 64, 39, 89))
-                .clickable(false));
+    public static Circle createZones(Boolean isPurpleZone, LatLng zoneLocation) {
+        double currentLat;
+        double currentLng;
+        currentLat = zoneLocation.latitude;
+        currentLng = zoneLocation.longitude;
+        Circle circle;
+        if (isPurpleZone) {
+            // location = generatePoints(currentLat, currentLng, zoneRadius + 100, zoneRadius + 200);
+            location = generatePoints(currentLat, currentLng, zoneRadius - 150, zoneRadius - 150);
+            circle = map.addCircle(new CircleOptions()
+                    .center(location)
+                    .radius(zoneRadius) // Set radius of circle
+                    .strokeWidth(8)
+                    .strokeColor(Color.rgb(64, 39, 89))
+                    .fillColor(Color.argb(215, 64, 39, 89))
+                    .clickable(false));
+        }
+        else{
+            location = new LatLng(currentLat,currentLng);
+            circle = map.addCircle(new CircleOptions()
+                    .center(location)
+                    .radius(GameData.getMushroomClickDistance()) // Set radius of circle
+                    .strokeWidth(8)
+                    .strokeColor(Color.TRANSPARENT)
+                    .fillColor(Color.TRANSPARENT)
+                    .clickable(false));
+        }
+        return circle;
     }
 
     public static LatLng generatePoints(double currentLat, double currentLng, double minDistance, double maxDistance) {

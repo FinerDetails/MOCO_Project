@@ -330,8 +330,8 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
         displayRotationHelper.onResume();
         //How to get latitude of first marker that has been generated:
         statusTextView.setText("Mushroom:\nLatitude: " +
-                        GameData.getMarkerData().get(0).getPosition().latitude +
-                "\nLongitude: " + GameData.getMarkerData().get(0).getPosition().longitude);
+                        GameData.getMarkerData().get(0).getMarker().getPosition().latitude +
+                "\nLongitude: " + GameData.getMarkerData().get(0).getMarker().getPosition().longitude);
         /*
         BTW the markers have IDs in their ".title" keys. IDs are given to markers when they are
         first generated. They are numbers starting from 0 and their type is String.
@@ -356,14 +356,14 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
                         case AVAILABLE:
                             Log.i("Shroomy:", "VPS is available at this location");*/
                             if(anchors.size() < 100) {
-                                for(MarkerOptions marker : GameData.getMarkerData()) {
+                                for(MarkerData markerData : GameData.getMarkerData()) {
                                     Log.i("Anchor:", "Anchor size is: " + anchors.size());
                                    /* if (anchors.size() >= 100) {
                                         anchors.get(0).detach();
                                         anchors.remove(0);
                                         Log.i("Anchor:", "Anchor size after removable is " + anchors.size());
                                     }*/
-                                    createTerrainAnchor(marker.getPosition());
+                                    createTerrainAnchor(markerData.getMarker().getPosition());
                                 }
                             }
                             /*break;
@@ -1003,8 +1003,8 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
         }
 
         if(!mushroomsAnchorPlaced) {
-            for(MarkerOptions marker : GameData.getMarkerData()) {
-                createTerrainAnchor(marker.getPosition());
+            for(MarkerData markerData : GameData.getMarkerData()) {
+                createTerrainAnchor(markerData.getMarker().getPosition());
             }
             mushroomsAnchorPlaced = true;
         }

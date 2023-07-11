@@ -18,6 +18,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -28,6 +29,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
 
@@ -123,8 +125,10 @@ public class MapActivity extends AppCompatActivity
                     GameData.setUserLocation(location);
                     //Check whether or not user is inside the zone
                     if (zone != null){
-                        whenUserInsideZone(location);
+                        whenUserInsidePurpleZone(location);
+                        GameData.checkMarkerLocation(location);
                     }
+
                 }
             }
         };
@@ -176,8 +180,7 @@ public class MapActivity extends AppCompatActivity
         // for the default behavior to occur (which is for the camera to move such that the
         // marker is centered and for the marker's info window to open, if it has one).
         GameData.incrementHunger();
-        GameData.deleteMarkerByTitle(marker.getTitle());
-        marker.remove();
+        GameData.deleteMarkerById(marker.getTitle());
         return true;
     }
 
@@ -309,7 +312,7 @@ public class MapActivity extends AppCompatActivity
                 break;
         }
     }
-    public void whenUserInsideZone(Location location) {
+    public void whenUserInsidePurpleZone(Location location) {
         Location centerLocation = new Location("");
         centerLocation.setLatitude(zone.getLocation().latitude);
         centerLocation.setLongitude(zone.getLocation().longitude);
@@ -328,11 +331,14 @@ public class MapActivity extends AppCompatActivity
             arcoreSwitch.setVisibility(View.GONE);
         }
     }
+    public void whenUserInsideOrangeZone(Location location) {
+
+    }
     private void generateMarkers(){
         int width = 50; //In pixels
         int height = 50;
-        int minMarkers = 100;
-        int maxMarkers = 100;
+        int minMarkers = GameData.getMinMushroomAmount();
+        int maxMarkers = GameData.getMaxMushroomAmount();
         Random random = new Random();
         int randomMarkerAmount = random.nextInt(maxMarkers - minMarkers + 1) + minMarkers;
         Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.mushroom_icon_edited);
@@ -341,17 +347,20 @@ public class MapActivity extends AppCompatActivity
         LatLng location = zone.getLocation();
         double zoneRadius = zone.getZoneRadius();
         for (int i = 0; i < randomMarkerAmount; i++ ) {
+            LatLng generationLocation = Zone.generatePoints(location.latitude, location.longitude, 0, zoneRadius-GameData.getMushroomClickDistance());
+            Circle circle = Zone.createZones(false,generationLocation);
             MarkerOptions markerOptions = new MarkerOptions()
-                    .position(Zone.generatePoints(location.latitude, location.longitude, 0, zoneRadius))
+                    .position(generationLocation)
                     .flat(true)
                     .icon(bitmapDescriptor).title(String.valueOf(i));
-            GameData.addMarker(markerOptions);
-            markerData.add(markerOptions);
+
             // Add the marker to the map
-            map.addMarker(markerOptions);
+
+            Marker marker = map.addMarker(markerOptions);
             map.setOnMarkerClickListener(this);
+            MarkerData markerData = new MarkerData(marker,circle);
+            GameData.addMarker(markerData);
+
         }
     }
 }
-
-
