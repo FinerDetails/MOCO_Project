@@ -104,7 +104,7 @@ public class MapActivity extends AppCompatActivity
                     //Update the switch state
                     if (checked) {
                         GameData.setIsArActivity(true);
-                        startActivity(new Intent(MapActivity.this, ArActivity.class));
+                        startActivity(new Intent(MapActivity.this, GeospatialActivity.class));
                     }
                 }
         );

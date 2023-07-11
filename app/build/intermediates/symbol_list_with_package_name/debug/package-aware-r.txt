@@ -2960,6 +2960,7 @@ drawable btn_radio_off_mtrl
 drawable btn_radio_off_to_on_mtrl_animation
 drawable btn_radio_on_mtrl
 drawable btn_radio_on_to_off_mtrl_animation
+drawable button_bg
 drawable common_full_open_on_phone
 drawable common_google_signin_btn_icon_dark
 drawable common_google_signin_btn_icon_dark_focused
@@ -2984,11 +2985,14 @@ drawable design_ic_visibility
 drawable design_ic_visibility_off
 drawable design_password_eye
 drawable design_snackbar_background
+drawable dialog_bg
 drawable googleg_disabled_color_18
 drawable googleg_standard_color_18
 drawable ic_arrow_back_black_24
 drawable ic_clear_black_24
 drawable ic_clock_black_24dp
+drawable ic_geospatial_background
+drawable ic_geospatial_foreground
 drawable ic_keyboard_black_24dp
 drawable ic_launcher_background
 drawable ic_launcher_foreground
@@ -3000,6 +3004,7 @@ drawable ic_mtrl_chip_checked_black
 drawable ic_mtrl_chip_checked_circle
 drawable ic_mtrl_chip_close_circle
 drawable ic_search_black_24
+drawable ic_settings_white
 drawable m3_appbar_background
 drawable m3_avd_hide_password
 drawable m3_avd_show_password
@@ -3157,6 +3162,7 @@ id aligned
 id all
 id allStates
 id always
+id anchor_reset
 id animateToEnd
 id animateToStart
 id antiClockwise
@@ -3197,6 +3203,7 @@ id checkbox
 id checked
 id chronometer
 id circle_center
+id clear_anchors_button
 id clear_text
 id clip_horizontal
 id clip_vertical
@@ -3281,6 +3288,8 @@ id forever
 id fragment_container_view_tag
 id frost
 id fullscreen_header
+id geospatial
+id geospatial_pose_view
 id ghost_view
 id ghost_view_holder
 id gone
@@ -3438,6 +3447,7 @@ id right
 id rightToLeft
 id right_icon
 id right_side
+id rooftop
 id rounded
 id row_index_key
 id satellite
@@ -3478,6 +3488,7 @@ id search_voice_btn
 id select_dialog_listview
 id selected
 id selection_type
+id set_anchor_button
 id sharedValueSet
 id sharedValueUnset
 id shortcut
@@ -3511,7 +3522,9 @@ id startToEnd
 id startVertical
 id staticLayout
 id staticPostLayout
+id status_text_view
 id stop
+id streetscape_geometry_switch
 id stretch
 id submenuarrow
 id submit_area
@@ -3531,6 +3544,7 @@ id tag_transition_group
 id tag_unhandled_key_event_manager
 id tag_unhandled_key_listeners
 id tag_window_insets_animation_callback
+id tap_screen_text_view
 id terrain
 id text
 id text2
@@ -3706,6 +3720,7 @@ layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
 layout activity_check_ar_availability
+layout activity_geospatial
 layout activity_main
 layout activity_map
 layout custom_dialog
@@ -3785,9 +3800,12 @@ layout select_dialog_item_material
 layout select_dialog_multichoice_material
 layout select_dialog_singlechoice_material
 layout support_simple_spinner_dropdown_item
+menu setting_menu
 mipmap ic_launcher
 mipmap ic_launcher_round
 plurals mtrl_badge_content_description
+plurals status_anchors_cleared
+plurals status_anchors_set
 raw keep_arcore
 string __arcore_cancel
 string __arcore_continue
@@ -3821,6 +3839,7 @@ string abc_searchview_description_voice
 string abc_shareactionprovider_share_with
 string abc_shareactionprovider_share_with_application
 string abc_toolbar_collapse_description
+string agree_to_share
 string androidx_startup
 string app_name
 string appbar_scrolling_view_behavior
@@ -3831,6 +3850,8 @@ string bottomsheet_action_expand
 string bottomsheet_action_expand_halfway
 string bottomsheet_drag_handle_clicked
 string bottomsheet_drag_handle_content_description
+string button_text_clear_anchors
+string button_text_set_anchor
 string character_counter_content_description
 string character_counter_overflowed_content_description
 string character_counter_pattern
@@ -3853,6 +3874,7 @@ string common_google_play_services_wear_update_text
 string common_open_on_phone
 string common_signin_button_text
 string common_signin_button_text_long
+string continue_button
 string dummy_button
 string dummy_content
 string error_a11y_label
@@ -3860,9 +3882,13 @@ string error_icon_content_description
 string exposed_dropdown_menu_content_description
 string fab_transformation_scrim_behavior
 string fab_transformation_sheet_behavior
+string geospatial_pose
+string geospatial_pose_not_tracking
 string hide_bottom_view_on_scroll_behavior
 string icon_content_description
 string item_view_role_description
+string learn_more
+string learn_more_url
 string location_permission_denied
 string m3_ref_typeface_brand_medium
 string m3_ref_typeface_brand_regular
@@ -3975,11 +4001,27 @@ string search_menu_title
 string searchbar_scrolling_view_behavior
 string searchview_clear_text_content_description
 string searchview_navigation_content_description
+string share_experience_message
+string share_experience_title
 string side_sheet_accessibility_pane_title
 string side_sheet_behavior
 string status_bar_notification_info_overflow
+string status_earth_state_error
+string status_localize_complete
+string status_localize_hint
+string status_localize_timeout
 string status_messages_appear_here_at_runtime
+string status_pretracking
+string status_rooftop_anchor
+string status_terrain_anchor
+string status_unsupported
+string switch_render_streetscaope_geometry
+string tap_screen_text
+string terrain_anchor_no_result_yet
+string terrain_anchor_resource_exhausted
 string title_activity_map
+string vps_unavailable_message
+string vps_unavailable_title
 style AlertDialog_AppCompat
 style AlertDialog_AppCompat_Light
 style Animation_AppCompat_Dialog

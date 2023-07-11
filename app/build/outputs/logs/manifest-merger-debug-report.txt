@@ -1,16 +1,16 @@
 -- Merging decision tree log ---
 meta-data#com.google.android.geo.API_KEY
-INJECTED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:32:9-34:47
+INJECTED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:36:9-38:47
 	android:value
 		INJECTED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml
-		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:34:13-44
+		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:38:13-44
 	android:name
-		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:33:13-58
+		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:37:13-58
 manifest
-ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:2:1-60:12
-INJECTED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:2:1-60:12
-INJECTED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:2:1-60:12
-INJECTED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:2:1-60:12
+ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:2:1-64:12
+INJECTED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:2:1-64:12
+INJECTED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:2:1-64:12
+INJECTED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:2:1-64:12
 MERGED from [androidx.databinding:viewbinding:8.0.0] C:\Users\hanna\.gradle\caches\transforms-3\4619ba3c2365dd9c367ff7552257dcf6\transformed\jetified-viewbinding-8.0.0\AndroidManifest.xml:2:1-7:12
 MERGED from [com.google.ar:core:1.38.0] C:\Users\hanna\.gradle\caches\transforms-3\611b2bd2b88f1484abbb7c16c4f8a2a8\transformed\jetified-core-1.38.0\AndroidManifest.xml:8:1-40:12
 MERGED from [com.google.android.gms:play-services-maps:18.1.0] C:\Users\hanna\.gradle\caches\transforms-3\2e8863cb2556c92b377b95f70aab9609\transformed\jetified-play-services-maps-18.1.0\AndroidManifest.xml:17:1-44:12
@@ -62,22 +62,22 @@ MERGED from [androidx.documentfile:documentfile:1.0.0] C:\Users\hanna\.gradle\ca
 MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\hanna\.gradle\caches\transforms-3\e955da626a3fb0b49faa6dcf12a4f6a2\transformed\localbroadcastmanager-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.print:print:1.0.0] C:\Users\hanna\.gradle\caches\transforms-3\e15e0c47fb3dde4d9ec9696347094b31\transformed\print-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.annotation:annotation-experimental:1.3.0] C:\Users\hanna\.gradle\caches\transforms-3\a0988ddd25878a8ff7bd12a362afe1bd\transformed\jetified-annotation-experimental-1.3.0\AndroidManifest.xml:17:1-22:12
-INJECTED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:2:1-60:12
-INJECTED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:2:1-60:12
-INJECTED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:2:1-60:12
+INJECTED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:2:1-64:12
+INJECTED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:2:1-64:12
+INJECTED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:2:1-64:12
 	package
 		INJECTED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml
-		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:2:1-60:12
+		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:2:1-64:12
 		INJECTED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml
 	android:versionName
 		INJECTED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml
-		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:2:1-60:12
+		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:2:1-64:12
 		INJECTED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml
 	xmlns:tools
 		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:3:5-51
 	android:versionCode
 		INJECTED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml
-		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:2:1-60:12
+		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:2:1-64:12
 		INJECTED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:2:11-69
@@ -110,7 +110,7 @@ ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\Andro
 	android:name
 		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:15:19-60
 application
-ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:17:5-58:19
+ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:17:5-62:19
 MERGED from [com.google.ar:core:1.38.0] C:\Users\hanna\.gradle\caches\transforms-3\611b2bd2b88f1484abbb7c16c4f8a2a8\transformed\jetified-core-1.38.0\AndroidManifest.xml:24:5-38:19
 MERGED from [com.google.ar:core:1.38.0] C:\Users\hanna\.gradle\caches\transforms-3\611b2bd2b88f1484abbb7c16c4f8a2a8\transformed\jetified-core-1.38.0\AndroidManifest.xml:24:5-38:19
 MERGED from [com.google.android.gms:play-services-maps:18.1.0] C:\Users\hanna\.gradle\caches\transforms-3\2e8863cb2556c92b377b95f70aab9609\transformed\jetified-play-services-maps-18.1.0\AndroidManifest.xml:36:5-42:19
@@ -169,50 +169,58 @@ ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\Andro
 		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:30:13-36
 	android:name
 		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:28:13-39
-meta-data#com.google.android.gms.version
-ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:35:9-37:69
-MERGED from [com.google.android.gms:play-services-basement:18.2.0] C:\Users\hanna\.gradle\caches\transforms-3\de2e14f819a1e58f5ce8ec0d104f55e0\transformed\jetified-play-services-basement-18.2.0\AndroidManifest.xml:21:9-23:69
-MERGED from [com.google.android.gms:play-services-basement:18.2.0] C:\Users\hanna\.gradle\caches\transforms-3\de2e14f819a1e58f5ce8ec0d104f55e0\transformed\jetified-play-services-basement-18.2.0\AndroidManifest.xml:21:9-23:69
-	android:value
-		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:37:13-66
-	android:name
-		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:36:13-58
-meta-data#com.google.android.ar.API_KEY
-ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:38:9-40:71
-	android:value
-		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:40:13-68
-	android:name
-		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:39:13-57
-activity#com.example.moco_project.MapActivity
-ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:41:9-44:40
+activity#com.example.moco_project.GeospatialActivity
+ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:31:9-34:39
 	android:launchMode
-		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:43:13-44
+		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:33:13-44
 	android:exported
-		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:44:13-37
+		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:34:13-36
 	android:name
-		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:42:13-40
-activity#com.example.moco_project.MainActivity
-ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:45:9-53:20
-	android:exported
-		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:47:13-36
-	android:name
-		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:46:13-41
-intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:48:13-52:29
-action#android.intent.action.MAIN
-ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:49:17-69
-	android:name
-		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:49:25-66
-category#android.intent.category.LAUNCHER
-ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:51:17-77
-	android:name
-		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:51:27-74
-meta-data#com.google.ar.core
-ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:57:9-81
+		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:32:13-47
+meta-data#com.google.android.gms.version
+ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:39:9-41:69
+MERGED from [com.google.android.gms:play-services-basement:18.2.0] C:\Users\hanna\.gradle\caches\transforms-3\de2e14f819a1e58f5ce8ec0d104f55e0\transformed\jetified-play-services-basement-18.2.0\AndroidManifest.xml:21:9-23:69
+MERGED from [com.google.android.gms:play-services-basement:18.2.0] C:\Users\hanna\.gradle\caches\transforms-3\de2e14f819a1e58f5ce8ec0d104f55e0\transformed\jetified-play-services-basement-18.2.0\AndroidManifest.xml:21:9-23:69
 	android:value
-		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:57:54-78
+		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:41:13-66
 	android:name
-		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:57:20-53
+		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:40:13-58
+meta-data#com.google.android.ar.API_KEY
+ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:42:9-44:71
+	android:value
+		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:44:13-68
+	android:name
+		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:43:13-57
+activity#com.example.moco_project.MapActivity
+ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:45:9-48:40
+	android:launchMode
+		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:47:13-44
+	android:exported
+		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:48:13-37
+	android:name
+		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:46:13-40
+activity#com.example.moco_project.MainActivity
+ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:49:9-57:20
+	android:exported
+		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:51:13-36
+	android:name
+		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:50:13-41
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:52:13-56:29
+action#android.intent.action.MAIN
+ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:53:17-69
+	android:name
+		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:53:25-66
+category#android.intent.category.LAUNCHER
+ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:55:17-77
+	android:name
+		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:55:27-74
+meta-data#com.google.ar.core
+ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:61:9-81
+	android:value
+		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:61:54-78
+	android:name
+		ADDED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml:61:20-53
 uses-sdk
 INJECTED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from D:\Dokumente\Studium HSB\SoSe 23\MOCO\MOCO_Project\app\src\main\AndroidManifest.xml

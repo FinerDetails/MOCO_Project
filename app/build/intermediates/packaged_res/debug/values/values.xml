@@ -9,16 +9,48 @@
     <color name="light_purple">#d0bdff</color>
     <color name="orange">#FF8A65</color>
     <color name="white">#FFFFFFFF</color>
+    <plurals name="status_anchors_cleared">
+        <item quantity="one">%d Anchor cleared</item>
+        <item quantity="other">%d Anchors cleared</item>
+    </plurals>
+    <plurals name="status_anchors_set">
+        <item quantity="one">%d / %d Anchor set</item>
+        <item quantity="other">%d / %d Anchors set</item>
+    </plurals>
+    <string name="agree_to_share">Get started</string>
     <string name="app_name">MOCO-PROJECT</string>
     <string name="ar">AR on</string>
+    <string name="button_text_clear_anchors" translatable="false">CLEAR ALL ANCHORS</string>
+    <string name="button_text_set_anchor" translatable="false">ANCHOR SETTING</string>
+    <string name="continue_button">Continue</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="geospatial_pose" translatable="false">LAT/LNG: %.6f˚, %.6f˚\n\t\t\tACCURACY: %.2fm\nALTITUDE: %.2fm\n\t\t\tACCURACY: %.2fm\nORIENTATION: [%.1f, %.1f, %.1f, %.1f]\n\t\t\tYAW ACCURACY: %.1f˚</string>
+    <string name="geospatial_pose_not_tracking" translatable="false">GEOSPATIAL POSE: Not tracking</string>
+    <string name="learn_more">Learn more</string>
+    <string name="learn_more_url" translatable="false">https://developers.google.com/ar/data-privacy</string>
     <string name="location_permission_denied">This sample requires location permission to enable the \'my location\' layer. Please try again and grant access to use the location.\nIf the permission has been permanently denied, it can be enabled from the System Settings > Apps > \'Google Maps API Demos\'.</string>
     <string name="map_id">16a18dd4978bf105</string>
     <string name="permission_rationale_location">Access to the location service is required to demonstrate the \'my location\' feature, which shows your current location on the map.</string>
     <string name="permission_required_toast">Location permission is required for this demo.</string>
+    <string name="share_experience_message">To power this session, Google will process visual data from your camera.</string>
+    <string name="share_experience_title">AR in the real world</string>
+    <string name="status_earth_state_error" translatable="false">There was an error state error, check that you have a valid authentication for the ARCore API.</string>
+    <string name="status_localize_complete" translatable="false">Localization complete.</string>
+    <string name="status_localize_hint" translatable="false">Point your camera at buildings, stores, and signs near you.</string>
+    <string name="status_localize_timeout" translatable="false">Localization not possible.\nClose and open the app to restart session.</string>
     <string name="status_messages_appear_here_at_runtime">Status messages appear here at runtime.</string>
+    <string name="status_pretracking" translatable="false">Localizing your device to set anchor.</string>
+    <string name="status_rooftop_anchor" translatable="false">Rooftop anchor state: %1$s</string>
+    <string name="status_terrain_anchor" translatable="false">Terrain anchor state: %1$s</string>
+    <string name="status_unsupported" translatable="false">This device is not supported.</string>
+    <string name="switch_render_streetscaope_geometry" translatable="false">SHOW GEOMETRY</string>
+    <string name="tap_screen_text" translatable="false">TAP ON SCREEN TO CREATE ANCHOR</string>
+    <string name="terrain_anchor_no_result_yet" translatable="false">Still resolving the terrain anchor. Please make sure you\'re in an area that has VPS coverage.</string>
+    <string name="terrain_anchor_resource_exhausted" translatable="false">Too many terrain anchors have already been held. Clear all anchors to create new ones.</string>
     <string name="title_activity_map">MapActivity</string>
+    <string name="vps_unavailable_message">Your current location does not have VPS coverage. Your session will be using your GPS signal only if VPS is not available.</string>
+    <string name="vps_unavailable_title">VPS not available</string>
     <style name="Base.Theme.MOCOPROJECT" parent="Theme.Material3.DayNight.NoActionBar">
         
         

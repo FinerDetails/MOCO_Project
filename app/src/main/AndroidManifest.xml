@@ -28,6 +28,10 @@
             android:name=".ArActivity"
             android:launchMode="singleTask"
             android:exported="true" />
+        <activity
+            android:name=".GeospatialActivity"
+            android:launchMode="singleTask"
+            android:exported="true" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

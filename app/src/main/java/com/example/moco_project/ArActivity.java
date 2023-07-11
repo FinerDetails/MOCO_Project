@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.DialogFragment;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -1024,6 +1025,16 @@ public class ArActivity extends AppCompatActivity  implements SampleRender.Rende
         }
         // Compose the virtual scene with the background.
         backgroundRenderer.drawVirtualScene(render, virtualSceneFramebuffer, Z_NEAR, Z_FAR);
+    }
+
+    @Override
+    public void onDialogPositiveClick(DialogFragment dialog) {
+
+    }
+
+    @Override
+    public void onDialogContinueClick(DialogFragment dialog) {
+
     }
 
     /**
