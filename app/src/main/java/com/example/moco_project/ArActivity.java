@@ -3,30 +3,27 @@ package com.example.moco_project;
 import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
 import androidx.activity.result.ActivityResultLauncher;
-import androidx.annotation.ColorInt;
+import androidx.annotation.GuardedBy;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
-import android.graphics.SurfaceTexture;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCaptureSession;
-import android.hardware.camera2.CameraCharacteristics;
-import android.hardware.camera2.CameraDevice;
-import android.hardware.camera2.CameraManager;
 import android.hardware.camera2.CaptureFailure;
 import android.hardware.camera2.CaptureRequest;
 import android.hardware.camera2.TotalCaptureResult;
 import android.net.Uri;
-import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
+import android.opengl.Matrix;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.ConditionVariable;
@@ -34,21 +31,34 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.provider.Settings;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.Surface;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.moco_project.helpers.DisplayRotationHelper;
+import com.example.moco_project.helpers.LocationPermissionHelper;
 import com.example.moco_project.helpers.TapHelper;
 import com.example.moco_project.helpers.TrackingStateHelper;
+import com.example.moco_project.rendering.BackgroundRenderer;
+import com.example.moco_project.rendering.Framebuffer;
+import com.example.moco_project.rendering.IndexBuffer;
+import com.example.moco_project.rendering.Mesh;
 import com.example.moco_project.rendering.ObjectRenderer;
 import com.example.moco_project.rendering.PlaneRenderer;
 import com.example.moco_project.rendering.PointCloudRenderer;
-import com.google.android.gms.maps.model.LatLng;
+import com.example.moco_project.rendering.SampleRender;
+import com.example.moco_project.rendering.Shader;
+import com.example.moco_project.rendering.Texture;
+import com.example.moco_project.rendering.VertexBuffer;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.ar.core.Anchor;
 import com.google.ar.core.ArCoreApk;
@@ -62,11 +72,14 @@ import com.google.ar.core.HitResult;
 import com.google.ar.core.Plane;
 import com.google.ar.core.Point;
 import com.google.ar.core.PointCloud;
+import com.google.ar.core.Pose;
 import com.google.ar.core.ResolveAnchorOnTerrainFuture;
 import com.google.ar.core.Session;
 import com.google.ar.core.SharedCamera;
+import com.google.ar.core.StreetscapeGeometry;
 import com.google.ar.core.Trackable;
 import com.google.ar.core.TrackingState;
+import com.google.ar.core.VpsAvailability;
 import com.google.ar.core.VpsAvailabilityFuture;
 import com.google.ar.core.exceptions.CameraNotAvailableException;
 import com.google.ar.core.exceptions.UnavailableApkTooOldException;
@@ -76,6 +89,7 @@ import com.google.ar.core.exceptions.UnavailableException;
 import com.google.ar.core.exceptions.UnavailableSdkTooOldException;
 
 import java.io.IOException;
+import java.nio.FloatBuffer;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.HashSet;
@@ -85,11 +99,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import javax.microedition.khronos.egl.EGLConfig;
-import javax.microedition.khronos.opengles.GL10;
-
-public class ArActivity extends AppCompatActivity implements GLSurfaceView.Renderer,
- SurfaceTexture.OnFrameAvailableListener {
+public class ArActivity extends AppCompatActivity  implements SampleRender.Renderer{
 
     /**
      * VARIABLES
@@ -111,8 +121,6 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
     private HandlerThread backgroundThread;
     private Handler backgroundHandler;
     // Reference to the camera system service.
-    private CameraManager cameraManager;
-    private CameraDevice cameraDevice;
     private CaptureRequest.Builder previewCaptureRequestBuilder;
 
     private ActivityResultLauncher<String> requestPermissionLauncher;
@@ -129,7 +137,7 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
     // Whether ARCore is currently active.
     private boolean arcoreActive;
 
-    private final BackgroundRenderer backgroundRenderer = new BackgroundRenderer();
+    private BackgroundRenderer backgroundRenderer;
 
     // Prevent any changes to camera capture session after CameraManager.openCamera() is called, but
     // before camera device becomes active.
@@ -150,43 +158,23 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
     // A check mechanism to ensure that the camera closed properly so that the app can safely exit.
     private final ConditionVariable safeToExitApp = new ConditionVariable();
 
-    private final PlaneRenderer planeRenderer = new PlaneRenderer();
+    private PlaneRenderer planeRenderer;
 
     private final PointCloudRenderer pointCloudRenderer = new PointCloudRenderer();
 
     private DisplayRotationHelper displayRotationHelper;
 
-    private TapHelper tapHelper;
-
-    private final AtomicBoolean automatorRun = new AtomicBoolean(false);
-
     private final ArrayList<Anchor> anchors = new ArrayList<>();
-
-    // Temporary matrix allocated here to reduce number of allocations for each frame.
-    private final float[] anchorMatrix = new float[16];
-
-    private final ObjectRenderer virtualObject = new ObjectRenderer();
-    private final ObjectRenderer virtualObjectShadow = new ObjectRenderer();
 
     private final TrackingStateHelper trackingStateHelper = new TrackingStateHelper(this);
 
     // Whether an error was thrown during session creation.
     private boolean errorCreatingSession = false;
 
-    // Linear layout that contains preview image and status text.
-    private LinearLayout imageTextLinearLayout;
-
     // Text view for displaying on screen status message.
     private TextView statusTextView;
 
-
-    private GeospatialPose ourCurrentLocation;
-
     private Earth earth;
-
-    private VpsAvailabilityFuture future;
-
-    private boolean geospatialModeSupported;
 
     enum State {
         /** The Geospatial API has not yet been initialized. */
@@ -233,16 +221,81 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
 
     private boolean mushroomsPlaced = false;
 
+    private boolean hasSetTextureNames = false;
+
+    private SampleRender render;
+
+    // Provides device location.
+    private FusedLocationProviderClient fusedLocationClient;
+    private Framebuffer virtualSceneFramebuffer;
+    // Virtual object (ARCore geospatial)
+    private Mesh virtualObjectMesh;
+    private Shader geospatialAnchorVirtualObjectShader;
+    // Virtual object (ARCore geospatial terrain)
+    private Shader terrainAnchorVirtualObjectShader;
+
+    // Point Cloud
+    private VertexBuffer pointCloudVertexBuffer;
+    private Mesh pointCloudMesh;
+    private Shader pointCloudShader;
+    private final float[] modelMatrix = new float[16];
+    private final float[] viewMatrix = new float[16];
+    private final float[] projectionMatrix = new float[16];
+    private final float[] modelViewMatrix = new float[16]; // view x model
+    private final float[] modelViewProjectionMatrix = new float[16]; // projection x view x model
+
+    // Keep track of the last point cloud rendered to avoid updating the VBO if point cloud
+    // was not changed.  Do this using the timestamp since we can't compare PointCloud objects.
+    private long lastPointCloudTimestamp = 0;
+    private final float[] identityQuaternion = {0, 0, 0, 1};
+
+    private static final float Z_NEAR = 0.1f;
+    private static final float Z_FAR = 1000f;
+    private boolean mySpotanchored = false;
+
+    // Locks needed for synchronization
+    private final Object singleTapLock = new Object();
+    @GuardedBy("singleTapLock")
+    private MotionEvent queuedSingleTap;
+
+    private static final int MAXIMUM_ANCHORS = 100;
+
+    enum AnchorType {
+        // Set WGS84 anchor.
+        GEOSPATIAL,
+        // Set Terrain anchor.
+        TERRAIN,
+        // Set Rooftop anchor.
+        ROOFTOP
+    }
+    private AnchorType anchorType = AnchorType.TERRAIN;
+
+    private Button clearAnchorsButton;
+
+    private Integer clearedAnchorsAmount = null;
+    private SharedPreferences sharedPreferences;
+    private static final String SHARED_PREFERENCES_SAVED_ANCHORS = "SHARED_PREFERENCES_SAVED_ANCHORS";
+
+    private GestureDetector gestureDetector;
+
+    private static final String ALLOW_GEOSPATIAL_ACCESS_KEY = "ALLOW_GEOSPATIAL_ACCESS";
     /** ---------------------------------------------------------------------------------
      * METHODE AREA
      */
 
 
+    /**
+     * Copied and modified from the example projects geospatial_java -> <a href="https://github.com/google-ar/arcore-android-sdk/tree/master/samples/geospatial_java">Git-Hub</a>
+     * and shared_camera_java -> <a href="https://github.com/google-ar/arcore-android-sdk/tree/master/samples/shared_camera_java">Git-Hub</a>
+     */
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.i("ARCore:", "Creating ARActivity");
         super.onCreate(savedInstanceState);
+        sharedPreferences = getPreferences(Context.MODE_PRIVATE);
         setContentView(R.layout.activity_check_ar_availability);
+        surfaceView = findViewById(R.id.surfaceview);
 
         //Sets up timer for decreasing hunger meter;
         hungerBar = findViewById(R.id.hungerBar);
@@ -255,30 +308,39 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
             }
         }, 0, GameData.getHungerDecreaseInterval());
 
-
-
-        Bundle extraBundle = getIntent().getExtras();
-        if (extraBundle != null && 1 == extraBundle.getShort("automator", (short) 0)) {
-            automatorRun.set(true);
-        }
-
-        // GL surface view that renders camera preview image.
-        surfaceView = findViewById(R.id.glsurfaceview);
-        surfaceView.setPreserveEGLContextOnPause(true);
-        surfaceView.setEGLContextClientVersion(2);
-        surfaceView.setEGLConfigChooser(8, 8, 8, 8, 16, 0);
-        surfaceView.setRenderer(this);
-        surfaceView.setRenderMode(GLSurfaceView.RENDERMODE_CONTINUOUSLY);
-
         displayRotationHelper = new DisplayRotationHelper(this);
-        tapHelper = new TapHelper(this);
-        surfaceView.setOnTouchListener(tapHelper);
 
-        imageTextLinearLayout = findViewById(R.id.image_text_layout);
+        // Set up renderer
+        render = new SampleRender(surfaceView, this, getAssets());
+
+        installRequested = false;
+
         statusTextView = findViewById(R.id.text_view);
 
+        // Set up touch listener.
+        gestureDetector =
+                new GestureDetector(
+                        this,
+                        new GestureDetector.SimpleOnGestureListener() {
+                            @Override
+                            public boolean onSingleTapUp(MotionEvent e) {
+                                synchronized (singleTapLock) {
+                                    queuedSingleTap = e;
+                                }
+                                return true;
+                            }
+
+                            @Override
+                            public boolean onDown(MotionEvent e) {
+                                return true;
+                            }
+                        });
+        surfaceView.setOnTouchListener((v, event) -> gestureDetector.onTouchEvent(event));
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(/* context= */ this);
+
+
         // Switch to allow pausing and resuming of ARCore.
-        Switch arcoreSwitch = findViewById(R.id.arcore_switch);
+        @SuppressLint("UseSwitchCompatOrMaterialCode") Switch arcoreSwitch = findViewById(R.id.arcore_switch);
         // Ensure initial switch position is set based on initial value of `arMode` variable.
         Log.i("GameData:", String.valueOf(GameData.getIsArActivity()));
         arcoreSwitch.setChecked(GameData.getIsArActivity());
@@ -290,16 +352,15 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
                 if (compoundButton.isChecked()) {
                     statusTextView.setText("ARCore is activated");
                     Log.i("ARCore:", "ARCore is activated");
-                    resumeARCore();
+                    //resumeARCore();
                 } else {
                     statusTextView.setText("ARCore was paused");
                     Log.i("ARCore:", "ARCore was paused");
-                    pauseARCore();
+                    //pauseARCore();
                     GameData.setIsArActivity(false);
                     startActivity(new Intent(ArActivity.this, MapActivity.class));
                 }
             });
-
     }
 
     @Override
@@ -316,22 +377,21 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
         super.onDestroy();
     }
 
+    /**
+     * Copied and modified from the example shared_camera_java -> <a href="https://github.com/google-ar/arcore-android-sdk/tree/master/samples/shared_camera_java">Git-Hub</a>
+     */
     @Override
     protected void onResume() {
         super.onResume();
-        waitUntilCameraCaptureSessionIsActive();
-        startBackgroundThread();
-        surfaceView.onResume();
-        // When the activity starts and resumes for the first time, openCamera() will be called
-        // from onSurfaceCreated(). In subsequent resumes we call openCamera() here.
-        if(surfaceCreated) {
-            openCamera();
+        if (sharedPreferences.getBoolean(ALLOW_GEOSPATIAL_ACCESS_KEY, /* defValue= */ false)) {
+            createSession();
+        }else {
+            Log.i(TAG, "on Resume no Session created");
         }
+
+        surfaceView.onResume();
         displayRotationHelper.onResume();
-        //How to get latitude of first marker that has been generated:
-        statusTextView.setText("Mushroom:\nLatitude: " +
-                        GameData.getMarkerData().get(0).getPosition().latitude +
-                "\nLongitude: " + GameData.getMarkerData().get(0).getPosition().longitude);
+        statusTextView.setText("Session is resuming");
         /*
         BTW the markers have IDs in their ".title" keys. IDs are given to markers when they are
         first generated. They are numbers starting from 0 and their type is String.
@@ -341,59 +401,18 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
          */
     }
 
-    private void placeMushroomAnchors() {
-        if(earth != null) {
-            updateGeospatialState(earth);
-            if(earth.getTrackingState() == TrackingState.TRACKING) {
-                // cameraGeospatialPose contains geodetic location, rotation, and confidences values.
-                ourCurrentLocation = earth.getCameraGeospatialPose();
-                /*future = session.checkVpsAvailabilityAsync(ourCurrentLocation.getLatitude(),
-                        ourCurrentLocation.getLongitude(), null);
-                Log.i("Shroomy:", future.toString());*/
-                //checkVpsState(future);
-               /* if (future.getState() == FutureState.DONE) {
-                    switch (future.getResult()) {
-                        case AVAILABLE:
-                            Log.i("Shroomy:", "VPS is available at this location");*/
-                            if(anchors.size() < 100) {
-                                for(MarkerOptions marker : GameData.getMarkerData()) {
-                                    Log.i("Anchor:", "Anchor size is: " + anchors.size());
-                                   /* if (anchors.size() >= 100) {
-                                        anchors.get(0).detach();
-                                        anchors.remove(0);
-                                        Log.i("Anchor:", "Anchor size after removable is " + anchors.size());
-                                    }*/
-                                    createTerrainAnchor(marker.getPosition());
-                                }
-                            }
-                            /*break;
-                        case UNAVAILABLE:
-                            Log.i("Shroomy", "VPS is unavailable at this location");
-                            break;
-                        case ERROR_NETWORK_CONNECTION:
-                            Log.i("Shroomy:", "The external service could not be reached due to a network connection error.");
-                            break;
-                    }
-                } else {
-                    Log.i("Shroomy:", String.valueOf(future.getState()));
-                }*/
-            }
-        } else {
-            Log.i("Shroomy:", "GeospatialMode not supported");
-        }
-    }
-
-    /**
-     * Creates a new TerrainAnchor. For a preciser Anchor VPS is needed...
-     * @param mushroomPosition
-     */
-    public void createTerrainAnchor(LatLng mushroomPosition) {
-        final ResolveAnchorOnTerrainFuture terrainFuture =
-            earth.resolveAnchorOnTerrainAsync(mushroomPosition.latitude,
-            mushroomPosition.longitude, earth.getCameraGeospatialPose().getAltitude() - 1, 0, 0, 0, 1, (anchor, state) -> {
-                Log.i("TerrainAnchor:", String.valueOf(state));
+   /** Create a terrain anchor at a specific geodetic location using a EUS quaternion. */
+    private void createTerrainAnchor(Earth earth, double latitude, double longitude, float[] quaternion) {
+        final ResolveAnchorOnTerrainFuture future = earth.resolveAnchorOnTerrainAsync(
+            latitude,
+            longitude,
+            /* altitudeAboveTerrain= */ 0.0f,
+            quaternion[0],
+            quaternion[1],
+            quaternion[2],
+            quaternion[3],
+            (anchor, state) -> {
                 if (state == Anchor.TerrainAnchorState.SUCCESS) {
-
                     synchronized (anchorsLock) {
                         anchors.add(anchor);
                         terrainAnchors.add(anchor);
@@ -429,6 +448,7 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
     }
 
     /**
+     * TODO REMOVE IF NOT NEEDED
      * Checks the state of our Visual Positioning System (VPS).
      * @param future
      */
@@ -444,9 +464,6 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
         }
     }
 
-    private void resolveVpsAvailabilityFutureState(VpsAvailabilityFuture future) {
-
-    }
 
     /**
      * Copied and modified from ARCores example geospatial_java ->
@@ -500,57 +517,73 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
                 && geospatialPose.getOrientationYawAccuracy()
                 <= LOCALIZING_ORIENTATION_YAW_ACCURACY_THRESHOLD_DEGREES) {
             state = State.LOCALIZED;
-        }
-    }
-
-    @Override
-    public void onPause() {
-        shouldUpdateSurfaceTexture.set(false);
-        surfaceView.onPause();
-        waitUntilCameraCaptureSessionIsActive();
-        displayRotationHelper.onPause();
-        if (GameData.getIsArActivity()) {
-            pauseARCore();
-        }
-        closeCamera();
-        stopBackgroundThread();
-        super.onPause();
-    }
-
-    private synchronized void waitUntilCameraCaptureSessionIsActive() {
-        while (!captureSessionChangesPossible) {
-            try {
-                this.wait();
-            } catch (InterruptedException e) {
-                Log.e(TAG, "Unable to wait for a safe time to make changes to the capture session", e);
+            synchronized (anchorsLock) {
+                final int anchorNum = anchors.size();
+                if (anchorNum == 0) {
+                    createAnchorFromSharedPreferences(earth);
+                }
             }
         }
     }
 
-    private void startBackgroundThread() {
-        backgroundThread = new HandlerThread("sharedCameraBackground");
-        backgroundThread.start();
-        backgroundHandler = new Handler(backgroundThread.getLooper());
-    }
+    private void createAnchorFromSharedPreferences(Earth earth) {
+        Set<String> anchorParameterSet =
+                sharedPreferences.getStringSet(SHARED_PREFERENCES_SAVED_ANCHORS, null);
+        if (anchorParameterSet == null) {
+            return;
+        }
 
-    // Stop background handler thread.
-    private void stopBackgroundThread() {
-        if (backgroundThread != null) {
-            backgroundThread.quitSafely();
-            try {
-                backgroundThread.join();
-                backgroundThread = null;
-                backgroundHandler = null;
-            } catch (InterruptedException e) {
-                Log.e(TAG, "Interrupted while trying to join background handler thread", e);
+        for (String anchorParameters : anchorParameterSet) {
+            AnchorType type = AnchorType.GEOSPATIAL;
+            if (anchorParameters.contains("Terrain")) {
+                type = AnchorType.TERRAIN;
+                anchorParameters = anchorParameters.replace("Terrain", "");
+            } else if (anchorParameters.contains("Rooftop")) {
+                type = AnchorType.ROOFTOP;
+                anchorParameters = anchorParameters.replace("Rooftop", "");
+            }
+            String[] parameters = anchorParameters.split(",");
+            if (parameters.length != 7) {
+                Log.d(
+                        TAG, "Invalid number of anchor parameters. Expected four, found " + parameters.length);
+                continue;
+            }
+            double latitude = Double.parseDouble(parameters[0]);
+            double longitude = Double.parseDouble(parameters[1]);
+            double altitude = Double.parseDouble(parameters[2]);
+            float[] quaternion =
+                    new float[] {
+                            Float.parseFloat(parameters[3]),
+                            Float.parseFloat(parameters[4]),
+                            Float.parseFloat(parameters[5]),
+                            Float.parseFloat(parameters[6])
+                    };
+            switch (type) {
+                case TERRAIN:
+                    createTerrainAnchor(earth, latitude, longitude, quaternion);
+                    break;
             }
         }
     }
 
     /**
+     * Copied from the example shared_camera_java -> <a href="https://github.com/google-ar/arcore-android-sdk/tree/master/samples/shared_camera_java">Git-Hub</a>
+     */
+    @Override
+    public void onPause() {
+        surfaceView.onPause();
+        displayRotationHelper.onPause();
+        if (GameData.getIsArActivity()) {
+            pauseARCore();
+        }
+        closeCamera();
+        super.onPause();
+    }
+
+    /**
      * Verifies that ARCore is installed and using the current version.
      */
-    public boolean checkARCoreStatus() {
+    public boolean checkARCoreInstallationStatus() {
         // Make sure ARCore is installed and supported on this device.
         ArCoreApk.Availability availability = ArCoreApk.getInstance().checkAvailability(this);
         switch (availability) {
@@ -605,119 +638,101 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
     }
 
     /**
+     * Copied from example project geospatial_java -> <a href="https://github.com/google-ar/arcore-android-sdk/tree/master/samples/geospatial_java">Git-Hub</a>
+     * @param latitude
+     * @param longitude
+     */
+    private void checkVpsAvailability(double latitude, double longitude) {
+        final VpsAvailabilityFuture future =
+                session.checkVpsAvailabilityAsync(
+                        latitude,
+                        longitude,
+                        availability -> {
+                            if (availability != VpsAvailability.AVAILABLE) {
+                               Log.i("VPS:", "Vps is not available.");
+                            }
+                        });
+    }
+
+    /**
      * Creates a new ARCore Session, in case ARCore is installed
      */
     public void createSession() {
-        try {
-            // Create an ARCore session that supports camera sharing.
-            session = new Session(this, EnumSet.of(Session.Feature.SHARED_CAMERA));
-        } catch (UnavailableArcoreNotInstalledException e) {
-            errorCreatingSession = true;
-            Log.i(TAG, "Please install ARCore");
-            return;
-        } catch (UnavailableApkTooOldException e) {
-            errorCreatingSession = true;
-            Log.i(TAG, "Please update ARCore");
-            return;
-        } catch (UnavailableSdkTooOldException e) {
-            errorCreatingSession = true;
-            Log.i(TAG, "Please update this app");
-            return;
-        } catch (UnavailableDeviceNotCompatibleException e) {
-            errorCreatingSession = true;
-            Log.i(TAG, "This device does not support AR");
-            return;
-        } catch (Exception e) {
-            errorCreatingSession = true;
-            Log.e(TAG, "Failed to create ARCore session that supports camera sharing", e);
-            return;
-        }
-
-        errorCreatingSession = false;
-
-        // Earth mode may not be supported on this device due to insufficient sensor quality.
-        if (!session.isGeospatialModeSupported(Config.GeospatialMode.ENABLED)) {
-            state = State.UNSUPPORTED;
-            return;
-        }else {
-            Log.i("Shroomy:", "Device supports GeospatialMode.");
-        }
-
-        // Enable auto focus mode while ARCore is running.
-        Config sessionConfig = session.getConfig();
-        sessionConfig = sessionConfig.setFocusMode(Config.FocusMode.AUTO).setGeospatialMode(Config.GeospatialMode.ENABLED);
-
-        /*
-        Enables Geospatial capabilities. Needed for placing mushrooms.
-        ENABLED -> App can gain geo information from the Visual Positioning System (VPS)
-         */
-
-        Log.i("ShroomyInSession:", String.valueOf(geospatialModeSupported));
-        session.configure(sessionConfig);
-        state = State.PRETRACKING;
-    }
-
-        public void openCamera() {
-        // Our camera is already opened and doesn't have to be opened again
-        if (cameraDevice != null) {
-            return;
-        }
-
-        // Checks our camera permissions
-        if (checkIfCameraPermissionHasBeenGranted()) {
-            requestCameraPermission();
-            return;
-        }
-
-        // Checks if ARCore ist installed
-        if (!checkARCoreStatus()) {
-            return;
-        }
-
         if(session == null) {
-            createSession();
-            Log.i("ARSession:", "A new ARSession was created.");
-           // placeMushrooms();
-        }
-
-        // Store the ARCore shared camera reference.
-        sharedCamera = session.getSharedCamera();
-
-        // Store the ID of the camera that ARCore uses.
-        cameraId = session.getCameraConfig().getCameraId();
-
-        try {
-
-            // Wrap the callback in a shared camera callback.
-            CameraDevice.StateCallback wrappedCallback = sharedCamera.createARDeviceStateCallback(
-                    cameraDeviceCallback, backgroundHandler);
-
-            // Store a reference to the camera system service.
-            cameraManager = (CameraManager) this.getSystemService(Context.CAMERA_SERVICE);
-
-            // Get the characteristics for the ARCore camera.
-            CameraCharacteristics characteristics = cameraManager.getCameraCharacteristics(this.cameraId);
-
-            // On Android P and later, get list of keys that are difficult to apply per-frame and can
-            // result in unexpected delays when modified during the capture session lifetime.
-            if (Build.VERSION.SDK_INT >= 28) {
-                keysThatCanCauseCaptureDelaysWhenModified = characteristics.getAvailableSessionKeys();
-                if (keysThatCanCauseCaptureDelaysWhenModified == null) {
-                    // Initialize the list to an empty list if getAvailableSessionKeys() returns null.
-                    keysThatCanCauseCaptureDelaysWhenModified = new ArrayList<>();
-                }
+            // Checks if ARCore is installed
+            if (!checkARCoreInstallationStatus()) {
+                return;
             }
 
-            // Prevent app crashes due to quick operations on camera open / close by waiting for the
-            // capture session's onActive() callback to be triggered.
-            captureSessionChangesPossible = false;
+            // Checks our camera permissions
+            if (checkIfCameraPermissionHasBeenGranted()) {
+                requestCameraPermission();
+                return;
+            }
 
-            // Open the camera device using the ARCore wrapped callback.
-            cameraManager.openCamera(cameraId, wrappedCallback, backgroundHandler);
-        } catch (CameraAccessException | IllegalArgumentException | SecurityException e) {
-            Log.e(TAG, "Failed to open camera", e);
+            if(!LocationPermissionHelper.hasFineLocationPermission(this)) {
+                LocationPermissionHelper.requestFineLocationPermission(this);
+                return;
+            }
+
+            try {
+                session = new Session(this);
+            } catch (UnavailableArcoreNotInstalledException e) {
+                errorCreatingSession = true;
+                Log.i(TAG, "Please install ARCore");
+                return;
+            } catch (UnavailableApkTooOldException e) {
+                errorCreatingSession = true;
+                Log.i(TAG, "Please update ARCore");
+                return;
+            } catch (UnavailableSdkTooOldException e) {
+                errorCreatingSession = true;
+                Log.i(TAG, "Please update this app");
+                return;
+            } catch (UnavailableDeviceNotCompatibleException e) {
+                errorCreatingSession = true;
+                Log.i(TAG, "This device does not support AR");
+                return;
+            } catch (Exception e) {
+                errorCreatingSession = true;
+                Log.e(TAG, "Failed to create ARCore session that supports camera sharing", e);
+                return;
+            }
+
+            errorCreatingSession = false;
+
+          /*  // Check VPS availability before configure and resume session.
+            if (session != null) {
+                getLastLocation();
+            }*/
+
+            try {
+                // Earth mode may not be supported on this device due to insufficient sensor quality.
+                if (!session.isGeospatialModeSupported(Config.GeospatialMode.ENABLED)) {
+                    state = State.UNSUPPORTED;
+                    return;
+                }else {
+                    Log.i("Geospatial:", "Device supports GeospatialMode.");
+                }
+
+                // Enable auto focus mode while ARCore is running.
+                Config sessionConfig = session.getConfig();
+                sessionConfig = sessionConfig.setGeospatialMode(Config.GeospatialMode.ENABLED);
+
+                /*
+                Enables Geospatial capabilities. Needed for placing mushrooms.
+                ENABLED -> App can gain geo information from the Visual Positioning System (VPS)
+                 */
+
+                session.configure(sessionConfig);
+                state = State.PRETRACKING;
+                 session.resume();
+            } catch (CameraNotAvailableException e) {
+                Log.i(TAG, "Camera not available. Try restarting the app.");
+            }
         }
     }
+
 
     // Close the camera device.
     private void closeCamera() {
@@ -725,142 +740,7 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
             captureSession.close();
             captureSession = null;
         }
-        if (cameraDevice != null) {
-            waitUntilCameraCaptureSessionIsActive();
-            safeToExitApp.close();
-            cameraDevice.close();
-            safeToExitApp.block();
-        }
     }
-
-    /**
-     * Creates a new capture session. TEMPLATE_RECORD makes shure that our capture request is
-     * compatible with ARCore.
-     * Through this we can switch between non-AR and AR mode at runtime
-     */
-    public void createCameraPreviewSession() {
-        try {
-            session.setCameraTextureName(backgroundRenderer.getTextureId());
-            sharedCamera.getSurfaceTexture().setOnFrameAvailableListener(this);
-
-            // Create an ARCore-compatible capture request using `TEMPLATE_RECORD`.
-            previewCaptureRequestBuilder = cameraDevice.createCaptureRequest(CameraDevice.TEMPLATE_RECORD);
-
-            // Build a list of surfaces, starting with ARCore provided surfaces.
-            List<Surface> surfaceList = sharedCamera.getArCoreSurfaces();
-
-            // Add ARCore surfaces and CPU image surface targets.
-
-            // Surface list should now contain two surfaces:
-            // 0. sharedCamera.getSurfaceTexture()
-            // 1. …
-
-            for (Surface surface : surfaceList) {
-                Log.i("My Surface: ",surface.toString());
-                previewCaptureRequestBuilder.addTarget(surface);
-            }
-
-            // Wrap our callback in a shared camera callback.
-            CameraCaptureSession.StateCallback wrappedCallback =
-                    sharedCamera.createARSessionStateCallback(cameraSessionStateCallback, backgroundHandler);
-
-            // Create a camera capture session for camera preview using an ARCore wrapped callback.
-            cameraDevice.createCaptureSession(surfaceList, wrappedCallback, backgroundHandler);
-
-        } catch (CameraAccessException e) {
-            Log.e(TAG, "CameraAccessException", e);
-        }
-    }
-
-
-    /**
-     * Called when starting non-AR mode or switching to non-AR mode.
-     * Also called when app starts in AR mode, or resumes in AR mode.
-     */
-    private void setRepeatingCaptureRequest() {
-        try {
-            setCameraEffects(previewCaptureRequestBuilder);
-
-            captureSession.setRepeatingRequest(
-                    previewCaptureRequestBuilder.build(), cameraCaptureCallback, backgroundHandler);
-        } catch (CameraAccessException e) {
-            Log.e(TAG, "Failed to set repeating request", e);
-        }
-    }
-
-    private <T> boolean checkIfKeyCanCauseDelay(CaptureRequest.Key<T> key) {
-        if (Build.VERSION.SDK_INT >= 28) {
-            // On Android P and later, return true if key is difficult to apply per-frame.
-            return keysThatCanCauseCaptureDelaysWhenModified.contains(key);
-        } else {
-            // On earlier Android versions, log a warning since there is no API to determine whether
-            // the key is difficult to apply per-frame. Certain keys such as CONTROL_AE_TARGET_FPS_RANGE
-            // are known to cause a noticeable delay on certain devices.
-            // If avoiding unexpected capture delays when switching between non-AR and AR modes is
-            // important, verify the runtime behavior on each pre-Android P device on which the app will
-            // be distributed. Note that this device-specific runtime behavior may change when the
-            // device's operating system is updated.
-            Log.w(
-                    TAG,
-                    "Changing "
-                            + key
-                            + " may cause a noticeable capture delay. Please verify actual runtime behavior on"
-                            + " specific pre-Android P devices that this app will be distributed on.");
-            // Allow the change since we're unable to determine whether it can cause unexpected delays.
-            return false;
-        }
-    }
-
-    // If possible, apply effect in non-AR mode, to help visually distinguish between from AR mode.
-    private void setCameraEffects(CaptureRequest.Builder captureBuilder) {
-        if (checkIfKeyCanCauseDelay(CaptureRequest.CONTROL_EFFECT_MODE)) {
-            Log.w(TAG, "Not setting CONTROL_EFFECT_MODE since it can cause delays between transitions.");
-        } else {
-            Log.d(TAG, "Setting CONTROL_EFFECT_MODE to SEPIA in non-AR mode.");
-            captureBuilder.set(
-                    CaptureRequest.CONTROL_EFFECT_MODE, CaptureRequest.CONTROL_EFFECT_MODE_SEPIA);
-        }
-    }
-
-    /**
-     * Uses the camera device state callback.
-     * There is a reference of the camera device stored. We can start here a new capture session
-     * for AR switching
-     *
-     * @param cameraDevice
-     */
-    private final CameraDevice.StateCallback cameraDeviceCallback = new CameraDevice.StateCallback() {
-
-        @Override
-        public void onOpened(@NonNull CameraDevice cameraDevice) {
-            Log.d(TAG, "Camera device ID " + cameraDevice.getId() + " opened.");
-            ArActivity.this.cameraDevice = cameraDevice;
-            createCameraPreviewSession();
-        }
-
-        @Override
-        public void onClosed(@NonNull CameraDevice cameraDevice) {
-            Log.d(TAG, "Camera device ID " + cameraDevice.getId() + " closed.");
-            ArActivity.this.cameraDevice = null;
-            safeToExitApp.open();
-        }
-
-        @Override
-        public void onDisconnected(@NonNull CameraDevice cameraDevice) {
-            Log.w(TAG, "Camera device ID " + cameraDevice.getId() + " disconnected.");
-            cameraDevice.close();
-            ArActivity.this.cameraDevice = cameraDevice;
-        }
-
-        @Override
-        public void onError(@NonNull CameraDevice cameraDevice, int error) {
-            Log.e(TAG, "Camera device ID " + cameraDevice.getId() + " error " + error);
-            cameraDevice.close();
-            ArActivity.this.cameraDevice = null;
-            // Fatal error. Quit application.
-            finish();
-        }
-    };
 
     private void resumeARCore() {
         // Ensure that session is valid before triggering ARCore resume. Handles the case where the user
@@ -873,13 +753,11 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
             try {
                 // To avoid flicker when resuming ARCore mode inform the renderer to not suppress rendering
                 // of the frames with zero timestamp.
-                backgroundRenderer.suppressTimestampZeroRendering(false);
+              //  backgroundRenderer.suppressTimestampZeroRendering(false);
                 // Resume ARCore.
                 session.resume();
                 arcoreActive = true;
 
-                // Set capture session callback while in AR mode.
-                sharedCamera.setCaptureCallback(cameraCaptureCallback, backgroundHandler);
             } catch (CameraNotAvailableException e) {
                 Log.e(TAG, "Failed to resume ARCore session", e);
                 return;
@@ -896,82 +774,94 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
         }
     }
 
+    /**
+     * Copied and modified from example project geospatial_java -> <a href="https://github.com/google-ar/arcore-android-sdk/tree/master/samples/geospatial_java">Git-Hub</a>
+     * @param render
+     */
     @Override
-    public void onSurfaceCreated(GL10 gl10, EGLConfig eglConfig) {
-        surfaceCreated = true;
-
-        // Set GL clear color to black.
-        GLES20.glClearColor(0f, 0f, 0f, 1.0f);
-
-        // Prepare the rendering objects. This involves reading shaders, so may throw an IOException.
+    public void onSurfaceCreated(SampleRender render) {
+        // Prepare the rendering objects. This involves reading shaders and 3D model files, so may throw
+        // an IOException.
         try {
-            // Create the camera preview image texture. Used in non-AR and AR mode.
-            backgroundRenderer.createOnGlThread(this);
-            planeRenderer.createOnGlThread(this, "models/trigrid.png");
-            pointCloudRenderer.createOnGlThread(this);
+            planeRenderer = new PlaneRenderer(render);
+            backgroundRenderer = new BackgroundRenderer(render);
+            virtualSceneFramebuffer = new Framebuffer(render, /* width= */ 1, /* height= */ 1);
 
-            virtualObject.createOnGlThread(this, "models/andy.obj", "models/andy.png");
-            virtualObject.setMaterialProperties(0.0f, 2.0f, 0.5f, 6.0f);
+            // Virtual object to render (ARCore geospatial)
+            Texture virtualObjectTexture =
+                    Texture.createFromAsset(
+                            render,
+                            "models/spatial_marker_baked.png",
+                            Texture.WrapMode.CLAMP_TO_EDGE,
+                            Texture.ColorFormat.SRGB);
 
-            virtualObjectShadow.createOnGlThread(
-                    this, "models/andy_shadow.obj", "models/andy_shadow.png");
-            virtualObjectShadow.setBlendMode(ObjectRenderer.BlendMode.Shadow);
-            virtualObjectShadow.setMaterialProperties(1.0f, 0.0f, 0.0f, 1.0f);
+            virtualObjectMesh = Mesh.createFromAsset(render, "models/geospatial_marker.obj");
+            geospatialAnchorVirtualObjectShader =
+                    Shader.createFromAssets(
+                                    render,
+                                    "shaders/ar_unlit_object.vert",
+                                    "shaders/ar_unlit_object.frag",
+                                    /* defines= */ null)
+                            .setTexture("u_Texture", virtualObjectTexture);
 
-            openCamera();
+            // Virtual object to render (Terrain anchor marker)
+            Texture terrainAnchorVirtualObjectTexture =
+                    Texture.createFromAsset(
+                            render,
+                            "models/spatial_marker_yellow.png",
+                            Texture.WrapMode.CLAMP_TO_EDGE,
+                            Texture.ColorFormat.SRGB);
+            terrainAnchorVirtualObjectShader =
+                    Shader.createFromAssets(
+                                    render,
+                                    "shaders/ar_unlit_object.vert",
+                                    "shaders/ar_unlit_object.frag",
+                                    /* defines= */ null)
+                            .setTexture("u_Texture", terrainAnchorVirtualObjectTexture);
+
+            backgroundRenderer.setUseDepthVisualization(render, false);
+            backgroundRenderer.setUseOcclusion(render, false);
+
+            // Point cloud
+            pointCloudShader =
+                    Shader.createFromAssets(
+                                    render,
+                                    "shaders/point_cloud.vert",
+                                    "shaders/point_cloud.frag",
+                                    /* defines= */ null)
+                            .setVec4(
+                                    "u_Color", new float[] {31.0f / 255.0f, 188.0f / 255.0f, 210.0f / 255.0f, 1.0f})
+                            .setFloat("u_PointSize", 5.0f);
+            // four entries per vertex: X, Y, Z, confidence
+            pointCloudVertexBuffer =
+                    new VertexBuffer(render, /* numberOfEntriesPerVertex= */ 4, /* entries= */ null);
+            final VertexBuffer[] pointCloudVertexBuffers = {pointCloudVertexBuffer};
+            pointCloudMesh =
+                    new Mesh(
+                            render, Mesh.PrimitiveMode.POINTS, /* indexBuffer= */ null, pointCloudVertexBuffers);
+
         } catch (IOException e) {
             Log.e(TAG, "Failed to read an asset file", e);
         }
+
+
+
     }
 
-    // GL surface changed callback. Will be called on the GL thread.
+    /**
+     * Copied from example project geospatial_java -> <a href="https://github.com/google-ar/arcore-android-sdk/tree/master/samples/geospatial_java">Git-Hub</a>
+     *  surface changed callback.
+     */
     @Override
-    public void onSurfaceChanged(GL10 gl, int width, int height) {
-        GLES20.glViewport(0, 0, width, height);
+    public void onSurfaceChanged(SampleRender render, int width, int height) {
         displayRotationHelper.onSurfaceChanged(width, height);
-
-        runOnUiThread(
-            () -> {
-                // Adjust layout based on display orientation.
-                imageTextLinearLayout.setOrientation(
-                        width > height ? LinearLayout.HORIZONTAL : LinearLayout.VERTICAL);
-            });
+        virtualSceneFramebuffer.resize(width, height);
     }
 
-    // GL draw callback. Will be called each frame on the GL thread.
+
+    // Draw frame when in AR mode.
     @Override
-    public void onDrawFrame(GL10 gl) {
-        // Use the cGL clear color specified in onSurfaceCreated() to erase the GL surface.
-        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
-
-        if (!shouldUpdateSurfaceTexture.get()) {
-            // Not ready to draw.
-            return;
-        }
-
-        // Handle display rotations.
-        displayRotationHelper.updateSessionIfNeeded(session);
-
-        try {
-            if (GameData.getIsArActivity()) {
-                onDrawFrameARCore();
-            }
-        } catch (Throwable t) {
-            // Avoid crashing the application due to unhandled exceptions.
-            Log.e(TAG, "Exception on the OpenGL thread", t);
-        }
-    }
-
-
-    // Surface texture on frame available callback, used only in non-AR mode.
-    // We need to keep this method because of the class implementation
-    @Override
-    public void onFrameAvailable(SurfaceTexture surfaceTexture) {
-        // Log.d(TAG, "onFrameAvailable()");
-    }
-
-    // Draw frame when in AR mode. Called on the GL thread.
-    public void onDrawFrameARCore() throws CameraNotAvailableException {
+    public void onDrawFrame(SampleRender render) {
         if (!arcoreActive) {
             // ARCore not yet active, so nothing to draw yet.
             return;
@@ -982,203 +872,297 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
             return;
         }
 
-        // Perform ARCore per-frame update.
-        Frame frame = session.update();
+        // Texture names should only be set once on a GL thread unless they change. This is done during
+        // onDrawFrame rather than onSurfaceCreated since the session is not guaranteed to have been
+        // initialized during the execution of onSurfaceCreated.
+        if (!hasSetTextureNames) {
+            session.setCameraTextureNames(
+                    new int[] {backgroundRenderer.getCameraColorTexture().getTextureId()});
+            hasSetTextureNames = true;
+        }
+
+        displayRotationHelper.updateSessionIfNeeded(session);
+
+        // Obtain the current frame from ARSession. When the configuration is set to
+        // UpdateMode.BLOCKING (it is by default), this will throttle the rendering to the
+        // camera framerate.
+        Frame frame;
+        try {
+            frame = session.update();
+        } catch (CameraNotAvailableException e) {
+            Log.e("Shroomy:", "Camera not available during onDrawFrame", e);
+            return;
+        }
         Camera camera = frame.getCamera();
 
-        // If frame is ready, render camera preview image to the GL surface.
-        backgroundRenderer.draw(frame);
+        // BackgroundRenderer.updateDisplayGeometry must be called every frame to update the coordinates
+        // used to draw the background camera image.
+        backgroundRenderer.updateDisplayGeometry(frame);
 
         // Keep the screen unlocked while tracking, but allow it to lock when tracking stops.
         trackingStateHelper.updateKeepScreenOnFlag(camera.getTrackingState());
 
-        // If not tracking, don't draw 3D objects.
-        if (camera.getTrackingState() == TrackingState.PAUSED) {
-            return;
-        }
-
         earth = session.getEarth();
         if(earth != null) {
             updateGeospatialState(earth);
+            checkVpsAvailability(earth.getCameraGeospatialPose().getLatitude(), earth.getCameraGeospatialPose().getLongitude());
         }
 
+
+        //TODO REMOVE TEST EXAMPLE
+        // Anchors camera position. Keeps tracking the camera. Means anchor is moving along
+        if(!mySpotanchored) {
+            createTerrainAnchor(earth, 53.057609, 8.800950, identityQuaternion);
+            mySpotanchored = true;
+        }
+
+        // Places all the anchors for mushroom locations
         if(!mushroomsAnchorPlaced) {
             for(MarkerOptions marker : GameData.getMarkerData()) {
-                createTerrainAnchor(marker.getPosition());
+                createTerrainAnchor(earth, marker.getPosition().latitude, marker.getPosition().longitude, identityQuaternion);
             }
             mushroomsAnchorPlaced = true;
         }
 
+        //TODO REMOVE AFTER TESTING
+        // Handle user input.
+        handleTap(frame, camera.getTrackingState());
 
-       /* // Get projection matrix.
-        float[] projmtx = new float[16];
-        camera.getProjectionMatrix(projmtx, 0, 0.1f, 100.0f);
+
+        /*
+        STARTING HERE BACKGROUND IS DRAWN!!
+         */
+
+        if (frame.getTimestamp() != 0) {
+            // Suppress rendering if the camera did not produce the first frame yet. This is to avoid
+            // drawing possible leftover data from previous sessions if the texture is reused.
+            backgroundRenderer.drawBackground(render);
+        }
+
+        // If not tracking, don't draw 3D objects.
+        if (camera.getTrackingState() != TrackingState.TRACKING || state != State.LOCALIZED) {
+            return;
+        }
+
+        /*
+         * STARTING HERE VIRTUAL OBJECTS ARE DRAWN!!
+         */
+
+        // Get projection matrix.
+        camera.getProjectionMatrix(projectionMatrix, 0, Z_NEAR, Z_FAR);
 
         // Get camera matrix and draw.
-        float[] viewmtx = new float[16];
-        camera.getViewMatrix(viewmtx, 0);
-
-        // Compute lighting from average intensity of the image.
-        // The first three components are color scaling factors.
-        // The last one is the average pixel intensity in gamma space.
-        final float[] colorCorrectionRgba = new float[4];
-        frame.getLightEstimate().getColorCorrection(colorCorrectionRgba, 0);
+        camera.getViewMatrix(viewMatrix, 0);
 
         // Visualize tracked points.
         // Use try-with-resources to automatically release the point cloud.
         try (PointCloud pointCloud = frame.acquirePointCloud()) {
-            pointCloudRenderer.update(pointCloud);
-            pointCloudRenderer.draw(viewmtx, projmtx);
+            if (pointCloud.getTimestamp() > lastPointCloudTimestamp) {
+                pointCloudVertexBuffer.set(pointCloud.getPoints());
+                lastPointCloudTimestamp = pointCloud.getTimestamp();
+            }
+            Matrix.multiplyMM(modelViewProjectionMatrix, 0, projectionMatrix, 0, viewMatrix, 0);
+            pointCloudShader.setMat4("u_ModelViewProjection", modelViewProjectionMatrix);
+            render.draw(pointCloudMesh, pointCloudShader);
         }
 
-        // Visualize planes.
+        // Visualize planes. -> The white mesh where anchors can be placed on top
         planeRenderer.drawPlanes(
-                session.getAllTrackables(Plane.class), camera.getDisplayOrientedPose(), projmtx);
+                render,
+                session.getAllTrackables(Plane.class),
+                camera.getDisplayOrientedPose(),
+                projectionMatrix);
+
+        //TODO visualize Shroomy anchors extra?
 
         // Visualize anchors created by touch.
-        float scaleFactor = 1.0f;
+        render.clear(virtualSceneFramebuffer, 0f, 0f, 0f, 0f);
 
-        //All Mushroom anchors
-        if(!mushroomsPlaced) {
-            for (Anchor myAnchor : anchors) {
-                if (myAnchor.getTrackingState() != TrackingState.TRACKING) {
+        synchronized (anchorsLock) {
+            for (Anchor anchor : anchors) {
+
+                //TODO NEED TO REMOVE THIS MENTIONED UPDATING. SHROOMY SHOULD STAY WHERE IT WAS PLACED!
+
+                // Get the current pose of an Anchor in world space. The Anchor pose is updated
+                // during calls to session.update() as ARCore refines its estimate of the world.
+                // Only render resolved Terrain & Rooftop anchors and Geospatial anchors.
+                if (anchor.getTrackingState() != TrackingState.TRACKING) {
                     continue;
                 }
-                // Get the current pose of an Anchor in world space. The Anchor pose is updated
-                // during calls to sharedSession.update() as ARCore refines its estimate of the world.
-                myAnchor.getPose().toMatrix(anchorMatrix, 0);
+                anchor.getPose().toMatrix(modelMatrix, 0);
+                float[] scaleMatrix = new float[16];
+                Matrix.setIdentityM(scaleMatrix, 0);
+                float scale = getScale(anchor.getPose(), camera.getDisplayOrientedPose());
+                scaleMatrix[0] = scale;
+                scaleMatrix[5] = scale;
+                scaleMatrix[10] = scale;
+                Matrix.multiplyMM(modelMatrix, 0, modelMatrix, 0, scaleMatrix, 0);
+                // Rotate the virtual object 180 degrees around the Y axis to make the object face the GL
+                // camera -Z axis, since camera Z axis faces toward users.
+                float[] rotationMatrix = new float[16];
+                Matrix.setRotateM(rotationMatrix, 0, 180, 0.0f, 1.0f, 0.0f);
+                float[] rotationModelMatrix = new float[16];
+                Matrix.multiplyMM(rotationModelMatrix, 0, modelMatrix, 0, rotationMatrix, 0);
+                // Calculate model/view/projection matrices
+                Matrix.multiplyMM(modelViewMatrix, 0, viewMatrix, 0, rotationModelMatrix, 0);
+                Matrix.multiplyMM(modelViewProjectionMatrix, 0, projectionMatrix, 0, modelViewMatrix, 0);
 
-                // Update and draw the model and its shadow.
-                virtualObject.updateModelMatrix(anchorMatrix, scaleFactor);
-                virtualObjectShadow.updateModelMatrix(anchorMatrix, scaleFactor);
-                float[] objColor = new float[]{66.0f, 240.0f, 0.0f, 232.0f};
-                virtualObject.draw(viewmtx, projmtx, colorCorrectionRgba, objColor);
-                virtualObjectShadow.draw(viewmtx, projmtx, colorCorrectionRgba, objColor);
-                Log.i("Shroomy:", "Shroomy " + myAnchor + " was drawn!");
-                mushroomsPlaced = true;
+                // Update shader properties and draw
+                if (terrainAnchors.contains(anchor)) {
+                    terrainAnchorVirtualObjectShader.setMat4(
+                            "u_ModelViewProjection", modelViewProjectionMatrix);
+
+                    render.draw(virtualObjectMesh, terrainAnchorVirtualObjectShader, virtualSceneFramebuffer);
+                    //TODO NEED TO REMOVE GEO ANCHORS
+                } else {
+                    geospatialAnchorVirtualObjectShader.setMat4(
+                            "u_ModelViewProjection", modelViewProjectionMatrix);
+                    render.draw(
+                            virtualObjectMesh, geospatialAnchorVirtualObjectShader, virtualSceneFramebuffer);
+                }
             }
-        }*/
+        }
+        // Compose the virtual scene with the background.
+        backgroundRenderer.drawVirtualScene(render, virtualSceneFramebuffer, Z_NEAR, Z_FAR);
     }
 
     /**
-     * Repeating camera capture session state callback
+     * Copied from example project geospatial_java -> <a href="https://github.com/google-ar/arcore-android-sdk/tree/master/samples/geospatial_java">Git-Hub</a>
+     * @param anchorPose
+     * @param cameraPose
+     * @return
+     */
+    // Return the scale in range [1, 2] after mapping a distance between camera and anchor to [2, 20].
+    private float getScale(Pose anchorPose, Pose cameraPose) {
+        double distance =
+                Math.sqrt(
+                        Math.pow(anchorPose.tx() - cameraPose.tx(), 2.0)
+                                + Math.pow(anchorPose.ty() - cameraPose.ty(), 2.0)
+                                + Math.pow(anchorPose.tz() - cameraPose.tz(), 2.0));
+        double mapDistance = Math.min(Math.max(2, distance), 20);
+        return (float) (mapDistance - 2) / (20 - 2) + 1;
+    }
+
+    /**
+     * TODO REMOVE THIS AFTER TESTING
+     * Copied from example project geospatial_java -> <a href="https://github.com/google-ar/arcore-android-sdk/tree/master/samples/geospatial_java">Git-Hub</a>
+     * Handles the most recent user tap.
      *
-     * @param session
+     * <p>We only ever handle one tap at a time, since this app only allows for a single anchor.
+     *
+     * @param frame the current AR frame
+     * @param cameraTrackingState the current camera tracking state
      */
-    CameraCaptureSession.StateCallback cameraSessionStateCallback = new CameraCaptureSession.StateCallback() {
-        // Called when the camera capture session is first configured after the app
-        // is initialized, and again each time the activity is resumed.
-        @Override
-        public void onConfigured(@NonNull CameraCaptureSession session) {
-            Log.d(TAG, "Camera capture session configured.");
-            captureSession = session;
-            if (GameData.getIsArActivity()) {
-                setRepeatingCaptureRequest();
-            // Note, resumeARCore() must be called in onActive(), not here.
+    private void handleTap(Frame frame, TrackingState cameraTrackingState) {
+        // Handle taps. Handling only one tap per frame, as taps are usually low frequency
+        // compared to frame rate.
+        synchronized (singleTapLock) {
+            synchronized (anchorsLock) {
+                if (queuedSingleTap == null
+                        || anchors.size() >= MAXIMUM_ANCHORS
+                        || cameraTrackingState != TrackingState.TRACKING) {
+                    queuedSingleTap = null;
+                    return;
+                }
             }
-        }
-
-        @Override
-        public void onSurfacePrepared(
-                @NonNull CameraCaptureSession session, @NonNull Surface surface) {
-            Log.d(TAG, "Camera capture surface prepared.");
-        }
-
-        @Override
-        public void onReady(@NonNull CameraCaptureSession session) {
-            Log.d(TAG, "Camera capture session ready.");
-        }
-
-        @Override
-        public void onActive(@NonNull CameraCaptureSession session) {
-            Log.d(TAG, "Camera capture session active.");
-            if (GameData.getIsArActivity() && !arcoreActive) {
-                resumeARCore();
+            earth = session.getEarth();
+            if (earth == null || earth.getTrackingState() != TrackingState.TRACKING) {
+                queuedSingleTap = null;
+                return;
             }
-            synchronized (ArActivity.this) {
-                captureSessionChangesPossible = true;
-                ArActivity.this.notify();
+
+            for (HitResult hit : frame.hitTest(queuedSingleTap)) {
+                if (shouldCreateAnchorWithHit(hit)) {
+                    Pose hitPose = hit.getHitPose();
+                    GeospatialPose geospatialPose = earth.getGeospatialPose(hitPose);
+                    createAnchorWithGeospatialPose(earth, geospatialPose);
+                    break; // Only handle the first valid hit.
+                }
             }
+            queuedSingleTap = null;
+        }
+    }
+
+    /**
+     * TODO REMOVE THIS AFTER TESTING
+     * Copied from example project geospatial_java -> <a href="https://github.com/google-ar/arcore-android-sdk/tree/master/samples/geospatial_java">Git-Hub</a>
+     * Creates anchor with the provided GeospatialPose, either from camera or HitResult.
+     */
+    private void createAnchorWithGeospatialPose(Earth earth, GeospatialPose geospatialPose) {
+        double latitude = geospatialPose.getLatitude();
+        double longitude = geospatialPose.getLongitude();
+        double altitude = geospatialPose.getAltitude();
+        float[] quaternion = geospatialPose.getEastUpSouthQuaternion();
+        switch (anchorType) {
+            case TERRAIN:
+                createTerrainAnchor(earth, latitude, longitude, identityQuaternion);
+                storeAnchorParameters(latitude, longitude, 0, identityQuaternion);
+                break;
+        }
+        runOnUiThread(
+                () -> {
+                    clearAnchorsButton.setVisibility(View.VISIBLE);
+                });
+        if (clearedAnchorsAmount != null) {
+            clearedAnchorsAmount = null;
         }
 
-        @Override
-        public void onCaptureQueueEmpty(@NonNull CameraCaptureSession session) {
-            Log.w(TAG, "Camera capture queue empty.");
-        }
 
-        @Override
-        public void onClosed(@NonNull CameraCaptureSession session) {
-            Log.d(TAG, "Camera capture session closed.");
+    }
+
+    /**
+     * TODO REMOVE THIS AFTER TESTING
+     * Copied from example project geospatial_java -> <a href="https://github.com/google-ar/arcore-android-sdk/tree/master/samples/geospatial_java">Git-Hub</a>
+     * Helper function to store the parameters used in anchor creation in {@link SharedPreferences}.
+     */
+    private void storeAnchorParameters(
+            double latitude, double longitude, double altitude, float[] quaternion) {
+        Set<String> anchorParameterSet =
+                sharedPreferences.getStringSet(SHARED_PREFERENCES_SAVED_ANCHORS, new HashSet<>());
+        HashSet<String> newAnchorParameterSet = new HashSet<>(anchorParameterSet);
+
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        String type = "";
+        switch (anchorType) {
+            case TERRAIN:
+                type = "Terrain";
+                break;
+            case ROOFTOP:
+                type = "Rooftop";
+                break;
+            default:
+                type = "";
+                break;
         }
-        @Override
-        public void onConfigureFailed(@NonNull CameraCaptureSession session) {
-            Log.e(TAG, "Failed to configure camera capture session.");
-        }
-    };
+        newAnchorParameterSet.add(
+                String.format(
+                        type + "%.6f,%.6f,%.6f,%.6f,%.6f,%.6f,%.6f",
+                        latitude,
+                        longitude,
+                        altitude,
+                        quaternion[0],
+                        quaternion[1],
+                        quaternion[2],
+                        quaternion[3]));
+        editor.putStringSet(SHARED_PREFERENCES_SAVED_ANCHORS, newAnchorParameterSet);
+        editor.commit();
+    }
 
 
     /**
-     * Repeating camera capture session capture callback.
-     */
-    private final CameraCaptureSession.CaptureCallback cameraCaptureCallback = new CameraCaptureSession.CaptureCallback() {
-
-        @Override
-        public void onCaptureCompleted(
-                @NonNull CameraCaptureSession session,
-                @NonNull CaptureRequest request,
-                @NonNull TotalCaptureResult result) {
-            shouldUpdateSurfaceTexture.set(true);
+     * TODO REMOVE THIS AFTER TESTING
+     * Copied from example project geospatial_java -> <a href="https://github.com/google-ar/arcore-android-sdk/tree/master/samples/geospatial_java">Git-Hub</a>
+     * Returns {@code true} if and only if the hit can be used to create an Anchor reliably. */
+    private boolean shouldCreateAnchorWithHit(HitResult hit) {
+        Trackable trackable = hit.getTrackable();
+        if (trackable instanceof Plane) {
+            // Check if the hit was within the plane's polygon.
+            return ((Plane) trackable).isPoseInPolygon(hit.getHitPose());
+        } else if (trackable instanceof Point) {
+            // Check if the hit was against an oriented point.
+            return ((Point) trackable).getOrientationMode() == Point.OrientationMode.ESTIMATED_SURFACE_NORMAL;
         }
-
-        @Override
-        public void onCaptureBufferLost(
-                @NonNull CameraCaptureSession session,
-                @NonNull CaptureRequest request,
-                @NonNull Surface target,
-                long frameNumber) {
-            Log.e(TAG, "onCaptureBufferLost: " + frameNumber);
-        }
-
-        @Override
-        public void onCaptureFailed(
-                @NonNull CameraCaptureSession session,
-                @NonNull CaptureRequest request,
-                @NonNull CaptureFailure failure) {
-            Log.e(TAG, "onCaptureFailed: " + failure.getFrameNumber() + " " + failure.getReason());
-        }
-
-        @Override
-        public void onCaptureSequenceAborted(
-                @NonNull CameraCaptureSession session, int sequenceId) {
-            Log.e(TAG, "onCaptureSequenceAborted: " + sequenceId + " " + session);
-        }
-    };
-
-
-    /** Check to see if we need to show the rationale for this permission. */
-    public static boolean shouldShowRequestPermissionRationale(Activity activity) {
-        return ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission.CAMERA);
-    }
-
-    /** Launch Application Setting to grant permission. */
-    public static void launchPermissionSettings(Activity activity) {
-        Intent intent = new Intent();
-        intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-        intent.setData(Uri.fromParts("package", activity.getPackageName(), null));
-        activity.startActivity(intent);
-    }
-
-    /** Callback for the result from requesting permissions. This method is invoked for every call on requestPermission */
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, int[] results) {
-        super.onRequestPermissionsResult(requestCode, permissions, results);
-        if(checkIfCameraPermissionHasBeenGranted()) {
-            Log.i(TAG, "Camera permission is needed to run this application.");
-            if(!shouldShowRequestPermissionRationale(this)) {
-                launchPermissionSettings(this);
-            }
-            finish();
-        }
+        return false;
     }
 
     public static void setFullScreenOnWindowFocusChanged(Activity activity, boolean hasFocus) {
@@ -1196,6 +1180,14 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
                                     | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         }
     }
+
+    /**
+     * Handles the button that creates an anchor.
+     *
+     * <p>Ensure Earth is in the proper state, then create the anchor. Persist the parameters used to
+     * create the anchors so that the anchors will be loaded next time the app is launched.
+     */
+    private void handleSetAnchorButton() {}
 
     // Android focus change callback.
     @Override

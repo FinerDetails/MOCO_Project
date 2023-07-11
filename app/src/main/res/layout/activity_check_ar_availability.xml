@@ -8,9 +8,9 @@
     tools:context="com.example.moco_project.ArActivity" >
 
     <android.opengl.GLSurfaceView
-        android:id="@+id/glsurfaceview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/surfaceview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_gravity="top" />
 
     <!-- Layout is set to `horizontal` at runtime whenever display orientation is landscape. -->

@@ -291,8 +291,8 @@ public class MapActivity extends AppCompatActivity
         fusedLocationClient.getLastLocation().addOnSuccessListener(this, location ->  {
             // Got last known location. In some rare situations this can be null.
             if (location != null) {
-                // Create Zone based on the location
-                zone = new Zone(location,map,300);
+                // Create Zone based on the location value is 300
+                zone = new Zone(location,map,20);
                 generateMarkers();
             }
         });

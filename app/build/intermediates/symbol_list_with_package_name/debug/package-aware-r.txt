@@ -3283,7 +3283,6 @@ id frost
 id fullscreen_header
 id ghost_view
 id ghost_view_holder
-id glsurfaceview
 id gone
 id graph
 id graph_wrap
@@ -3517,6 +3516,7 @@ id stretch
 id submenuarrow
 id submit_area
 id supportScrollUp
+id surfaceview
 id tabMode
 id tag_accessibility_actions
 id tag_accessibility_clickable_spans

@@ -34,8 +34,8 @@ public class Zone {
     private void createZones() {
         double currentLat = userLocation.getLatitude();
         double currentLng = userLocation.getLongitude();
-        // location = generatePoints(currentLat, currentLng, zoneRadius + 100, zoneRadius + 200);
-        location = generatePoints(currentLat, currentLng, zoneRadius -150, zoneRadius -150);
+        // location = generatePoints(currentLat, currentLng, zoneRadius + 100, zoneRadius + 200); -150
+        location = generatePoints(currentLat, currentLng, zoneRadius -10, zoneRadius -10);
         map.addCircle(new CircleOptions()
                 .center(location)
                 .radius(zoneRadius) // Set radius of circle

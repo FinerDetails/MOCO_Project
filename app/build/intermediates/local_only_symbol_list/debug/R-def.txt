@@ -17,13 +17,13 @@ drawable mushroom_icon_edited
 drawable mushroom_icon_edited3
 id arcore_switch
 id end
-id glsurfaceview
 id hungerBar
 id imageView
 id image_text_layout
 id map
 id mapContainer
 id start
+id surfaceview
 id text_view
 id toolbar
 layout activity_check_ar_availability

@@ -3282,7 +3282,6 @@ int id frost 0x7f0800cb
 int id fullscreen_header 0x7f0800cc
 int id ghost_view 0x7f0800cd
 int id ghost_view_holder 0x7f0800ce
-int id glsurfaceview 0x7f0800cf
 int id gone 0x7f0800d0
 int id graph 0x7f0800d1
 int id graph_wrap 0x7f0800d2
@@ -3516,6 +3515,7 @@ int id stretch 0x7f0801b3
 int id submenuarrow 0x7f0801b4
 int id submit_area 0x7f0801b5
 int id supportScrollUp 0x7f0801b6
+int id surfaceview 0x7f080202
 int id tabMode 0x7f0801b7
 int id tag_accessibility_actions 0x7f0801b8
 int id tag_accessibility_clickable_spans 0x7f0801b9
