@@ -22,7 +22,7 @@ public class GameData {
 
 
 
-    private static double mushroomClickDistance = 20.0;
+    private static double mushroomClickDistance = 45.0;
 
     public static int getHunger() {
         return hunger;
@@ -86,10 +86,12 @@ public class GameData {
 
             if (distanceBetweenZoneAndUser < mushroomClickDistance && !markerData.isUserInsideZone()) {
                 markerData.getCircle().setStrokeColor(Color.rgb(255, 138, 101));
+                markerData.getMarker().setVisible(true);
                 markerData.setUserInsideZone(true);
             }
             else if(distanceBetweenZoneAndUser > mushroomClickDistance && markerData.isUserInsideZone()){
                 markerData.getCircle().setStrokeColor(Color.TRANSPARENT);
+                markerData.getMarker().setVisible(false);
                 markerData.setUserInsideZone(false);
             }
         }

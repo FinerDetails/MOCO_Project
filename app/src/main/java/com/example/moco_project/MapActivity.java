@@ -179,8 +179,10 @@ public class MapActivity extends AppCompatActivity
         // We return false to indicate that we have not consumed the event and that we wish
         // for the default behavior to occur (which is for the camera to move such that the
         // marker is centered and for the marker's info window to open, if it has one).
-        GameData.incrementHunger();
-        GameData.deleteMarkerById(marker.getTitle());
+        if(marker.isVisible()){
+            GameData.incrementHunger();
+            GameData.deleteMarkerById(marker.getTitle());
+        }
         return true;
     }
 
@@ -352,7 +354,8 @@ public class MapActivity extends AppCompatActivity
             MarkerOptions markerOptions = new MarkerOptions()
                     .position(generationLocation)
                     .flat(true)
-                    .icon(bitmapDescriptor).title(String.valueOf(i));
+                    .icon(bitmapDescriptor).title(String.valueOf(i))
+                    .visible(false);
 
             // Add the marker to the map
 
