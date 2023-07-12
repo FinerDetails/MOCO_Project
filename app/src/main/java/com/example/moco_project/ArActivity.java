@@ -46,8 +46,6 @@ import com.example.moco_project.rendering.BackgroundRenderer;
 import com.example.moco_project.rendering.ObjectRenderer;
 import com.example.moco_project.rendering.PlaneRenderer;
 import com.example.moco_project.rendering.PointCloudRenderer;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.ar.core.Anchor;
 import com.google.ar.core.ArCoreApk;
 import com.google.ar.core.Camera;
@@ -56,6 +54,8 @@ import com.google.ar.core.Earth;
 import com.google.ar.core.Frame;
 import com.google.ar.core.FutureState;
 import com.google.ar.core.GeospatialPose;
+import com.google.ar.core.Plane;
+import com.google.ar.core.PointCloud;
 import com.google.ar.core.ResolveAnchorOnTerrainFuture;
 import com.google.ar.core.Session;
 import com.google.ar.core.SharedCamera;
@@ -962,7 +962,7 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
             updateGeospatialState(earth);
         }
 
-      /*  if(!mySpotanchored) {
+        /*if(!mySpotanchored) {
             createTerrainAnchor(earth.getCameraGeospatialPose().getLatitude(),
                     earth.getCameraGeospatialPose().getLongitude());
             mySpotanchored = true;
@@ -971,7 +971,7 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
 
 
         if(!mushroomsAnchorPlaced) {
-            Log.i("Shroomy:", "There are " + GameData.getMarkerData().size() + "mushrooms to anchor.");
+            Log.i("Shroomy:", "There are " + GameData.getMarkerData().size() + " mushrooms to anchor.");
             for(MarkerData markerData : GameData.getMarkerData()) {
                 createTerrainAnchor(markerData.getMarkerOption().getPosition().latitude,
                         markerData.getMarkerOption().getPosition().longitude);
@@ -979,7 +979,7 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
             mushroomsAnchorPlaced = true;
         }
 
-       /* // Get projection matrix.
+        // Get projection matrix.
         float[] projmtx = new float[16];
         camera.getProjectionMatrix(projmtx, 0, 0.1f, 100.0f);
 
@@ -1026,7 +1026,7 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
                 Log.i("Shroomy:", "Shroomy " + myAnchor + " was drawn!");
                 mushroomsPlaced = true;
             }
-        }*/
+        }
     }
 
     /**
