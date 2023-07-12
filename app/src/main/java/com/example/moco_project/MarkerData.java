@@ -6,6 +6,8 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MarkerData {
+
+    //This class is used to hold the information required for both Map and AR side manipulation of markers.
     public Marker getMarker() {
         return marker;
     }

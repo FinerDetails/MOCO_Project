@@ -7,6 +7,8 @@ import java.util.Iterator;
 import java.util.List;
 
 public class GameData {
+
+    //This class holds shared data and methods meant to be accessed by both MapActivity and ArActivity
     private static boolean isArActivity = false;
     private static int mushrooms = 0;
     private static List<MarkerData> markerDataList = new ArrayList<>();
@@ -59,6 +61,9 @@ public class GameData {
         GameData.isArActivity = isArActivity;
     }
 
+
+    //The unused methods were meant for getting and keeping track of collected mushrooms that could work as a score system
+    //This was never implemented however
     public static int getMushrooms() {
         return mushrooms;
     }
@@ -67,6 +72,7 @@ public class GameData {
         GameData.mushrooms = GameData.mushrooms + mushrooms;
     }
 
+
     public static List<MarkerData> getMarkerData() {
         return markerDataList;
     }
@@ -74,6 +80,8 @@ public class GameData {
     public static void addMarker(MarkerData markerData) {
         markerDataList.add(markerData);
     }
+
+    //Checks if the user is within the zone of a marker in MapActivity and sets visibility based on that
     static public void checkMarkerLocation(Location location){
         Iterator<MarkerData> iterator = markerDataList.iterator();
         while (iterator.hasNext()) {
