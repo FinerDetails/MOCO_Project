@@ -3,7 +3,6 @@ package com.example.moco_project;
 import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
 import androidx.activity.result.ActivityResultLauncher;
-import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -14,7 +13,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.graphics.SurfaceTexture;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCaptureSession;
@@ -34,7 +32,6 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.provider.Settings;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.Surface;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -45,11 +42,12 @@ import android.widget.TextView;
 import com.example.moco_project.helpers.DisplayRotationHelper;
 import com.example.moco_project.helpers.TapHelper;
 import com.example.moco_project.helpers.TrackingStateHelper;
+import com.example.moco_project.rendering.BackgroundRenderer;
 import com.example.moco_project.rendering.ObjectRenderer;
 import com.example.moco_project.rendering.PlaneRenderer;
 import com.example.moco_project.rendering.PointCloudRenderer;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Marker;
 import com.google.ar.core.Anchor;
 import com.google.ar.core.ArCoreApk;
 import com.google.ar.core.Camera;
@@ -58,14 +56,9 @@ import com.google.ar.core.Earth;
 import com.google.ar.core.Frame;
 import com.google.ar.core.FutureState;
 import com.google.ar.core.GeospatialPose;
-import com.google.ar.core.HitResult;
-import com.google.ar.core.Plane;
-import com.google.ar.core.Point;
-import com.google.ar.core.PointCloud;
 import com.google.ar.core.ResolveAnchorOnTerrainFuture;
 import com.google.ar.core.Session;
 import com.google.ar.core.SharedCamera;
-import com.google.ar.core.Trackable;
 import com.google.ar.core.TrackingState;
 import com.google.ar.core.VpsAvailabilityFuture;
 import com.google.ar.core.exceptions.CameraNotAvailableException;
@@ -233,6 +226,8 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
 
     private boolean mushroomsPlaced = false;
 
+    private boolean mySpotanchored = false;
+
     /** ---------------------------------------------------------------------------------
      * METHODE AREA
      */
@@ -341,63 +336,22 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
          */
     }
 
-    private void placeMushroomAnchors() {
-        if(earth != null) {
-            updateGeospatialState(earth);
-            if(earth.getTrackingState() == TrackingState.TRACKING) {
-                // cameraGeospatialPose contains geodetic location, rotation, and confidences values.
-                ourCurrentLocation = earth.getCameraGeospatialPose();
-                /*future = session.checkVpsAvailabilityAsync(ourCurrentLocation.getLatitude(),
-                        ourCurrentLocation.getLongitude(), null);
-                Log.i("Shroomy:", future.toString());*/
-                //checkVpsState(future);
-               /* if (future.getState() == FutureState.DONE) {
-                    switch (future.getResult()) {
-                        case AVAILABLE:
-                            Log.i("Shroomy:", "VPS is available at this location");*/
-                            if(anchors.size() < 100) {
-                                for(MarkerData markerData : GameData.getMarkerData()) {
-                                    Log.i("Anchor:", "Anchor size is: " + anchors.size());
-                                   /* if (anchors.size() >= 100) {
-                                        anchors.get(0).detach();
-                                        anchors.remove(0);
-                                        Log.i("Anchor:", "Anchor size after removable is " + anchors.size());
-                                    }*/
-                                    createTerrainAnchor(markerData.getMarker().getPosition());
-                                }
-                            }
-                            /*break;
-                        case UNAVAILABLE:
-                            Log.i("Shroomy", "VPS is unavailable at this location");
-                            break;
-                        case ERROR_NETWORK_CONNECTION:
-                            Log.i("Shroomy:", "The external service could not be reached due to a network connection error.");
-                            break;
-                    }
-                } else {
-                    Log.i("Shroomy:", String.valueOf(future.getState()));
-                }*/
-            }
-        } else {
-            Log.i("Shroomy:", "GeospatialMode not supported");
-        }
-    }
-
     /**
      * Creates a new TerrainAnchor. For a preciser Anchor VPS is needed...
-     * @param mushroomPosition
      */
-    public void createTerrainAnchor(LatLng mushroomPosition) {
+    public void createTerrainAnchor(double latitude, double longitude) {
+        float[] quaternion = {0, 0, 0, 1};
         final ResolveAnchorOnTerrainFuture terrainFuture =
-            earth.resolveAnchorOnTerrainAsync(mushroomPosition.latitude,
-            mushroomPosition.longitude, earth.getCameraGeospatialPose().getAltitude() - 1, 0, 0, 0, 1, (anchor, state) -> {
+            earth.resolveAnchorOnTerrainAsync(latitude, longitude, 0, quaternion[0], quaternion[1],
+            quaternion[2], quaternion[3], (anchor, state) -> {
                 Log.i("TerrainAnchor:", String.valueOf(state));
                 if (state == Anchor.TerrainAnchorState.SUCCESS) {
 
                     synchronized (anchorsLock) {
                         anchors.add(anchor);
                         terrainAnchors.add(anchor);
-                        Log.i("Shroomy:", "TerrainAnchor was created");
+                        Log.i("Shroomy:", "TerrainAnchor was created\n" +
+                                "Pose: " + anchor.getPose());
                     }
                 } else {
                     Log.i("Shroomy:", "The anchor failed to resolve");
@@ -517,6 +471,9 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
         super.onPause();
     }
 
+    /**
+     * Copied from
+     */
     private synchronized void waitUntilCameraCaptureSessionIsActive() {
         while (!captureSessionChangesPossible) {
             try {
@@ -527,6 +484,9 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
         }
     }
 
+    /**
+     * Copied from
+     */
     private void startBackgroundThread() {
         backgroundThread = new HandlerThread("sharedCameraBackground");
         backgroundThread.start();
@@ -652,9 +612,9 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
         ENABLED -> App can gain geo information from the Visual Positioning System (VPS)
          */
 
-        Log.i("ShroomyInSession:", String.valueOf(geospatialModeSupported));
         session.configure(sessionConfig);
         state = State.PRETRACKING;
+        Log.i("ShroomyInSession:", String.valueOf(geospatialModeSupported));
     }
 
         public void openCamera() {
@@ -1002,13 +962,22 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
             updateGeospatialState(earth);
         }
 
+      /*  if(!mySpotanchored) {
+            createTerrainAnchor(earth.getCameraGeospatialPose().getLatitude(),
+                    earth.getCameraGeospatialPose().getLongitude());
+            mySpotanchored = true;
+            Log.i("MyPosition", "My position was anchored as terrain anchor.");
+        }*/
+
+
         if(!mushroomsAnchorPlaced) {
+            Log.i("Shroomy:", "There are " + GameData.getMarkerData().size() + "mushrooms to anchor.");
             for(MarkerData markerData : GameData.getMarkerData()) {
-                createTerrainAnchor(markerData.getMarker().getPosition());
+                createTerrainAnchor(markerData.getMarkerOption().getPosition().latitude,
+                        markerData.getMarkerOption().getPosition().longitude);
             }
             mushroomsAnchorPlaced = true;
         }
-
 
        /* // Get projection matrix.
         float[] projmtx = new float[16];

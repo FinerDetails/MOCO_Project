@@ -3,6 +3,7 @@ package com.example.moco_project;
 
 import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MarkerData {
     public Marker getMarker() {
@@ -13,8 +14,12 @@ public class MarkerData {
         return circle;
     }
 
+    public MarkerOptions getMarkerOption() {return markerOption;}
+
     private Marker marker;
     private Circle circle;
+
+    private MarkerOptions markerOption;
 
     public boolean isUserInsideZone() {
         return isUserInsideZone;
@@ -32,9 +37,10 @@ public class MarkerData {
 
     private String id;
 
-    public MarkerData(Marker marker, Circle circle) {
+    public MarkerData(Marker marker, Circle circle, MarkerOptions markerOption) {
         this.marker = marker;
         this.circle = circle;
+        this.markerOption = markerOption;
         this.id = marker.getTitle();
     }
 

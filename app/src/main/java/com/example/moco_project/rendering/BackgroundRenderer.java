@@ -1,10 +1,12 @@
-package com.example.moco_project;
+package com.example.moco_project.rendering;
 
 import android.content.Context;
 import android.opengl.GLES11Ext;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import androidx.annotation.NonNull;
+
+import com.example.moco_project.ShaderUtil;
 import com.google.ar.core.Coordinates2d;
 import com.google.ar.core.Frame;
 import java.io.IOException;

@@ -361,7 +361,8 @@ public class MapActivity extends AppCompatActivity
 
             Marker marker = map.addMarker(markerOptions);
             map.setOnMarkerClickListener(this);
-            MarkerData markerData = new MarkerData(marker,circle);
+
+            MarkerData markerData = new MarkerData(marker,circle, markerOptions);
             GameData.addMarker(markerData);
 
         }
