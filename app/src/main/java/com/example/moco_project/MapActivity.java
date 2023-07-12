@@ -29,12 +29,12 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -42,7 +42,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 import android.view.View;
-import android.widget.CompoundButton;
 import android.widget.ProgressBar;
 import android.widget.Switch;
 import android.widget.Toast;
@@ -87,6 +86,7 @@ public class MapActivity extends AppCompatActivity
     private Switch arcoreSwitch;
     private ProgressBar hungerBar;
     private Timer timer;
+    private ConstraintLayout loadingScreen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,7 +95,7 @@ public class MapActivity extends AppCompatActivity
         MapsInitializer.initialize(getApplicationContext(), Renderer.LATEST, this);
 
         setContentView(R.layout.activity_map);
-
+        loadingScreen = findViewById(R.id.loadingContainer);
         //Switch to allow pausing and resuming of ArActivity
         arcoreSwitch = findViewById(R.id.arcore_switch);
         arcoreSwitch.setVisibility(View.GONE);
@@ -364,6 +364,7 @@ public class MapActivity extends AppCompatActivity
 
             MarkerData markerData = new MarkerData(marker,circle, markerOptions);
             GameData.addMarker(markerData);
+            loadingScreen.setVisibility(View.GONE);
 
         }
     }

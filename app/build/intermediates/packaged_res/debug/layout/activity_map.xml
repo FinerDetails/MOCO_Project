@@ -18,6 +18,8 @@
         android:layout_height="match_parent"
         tools:context="com.example.moco_project.MapActivity"
         map:mapId="@string/map_id"
+        map:uiZoomControls="false"
+        map:uiZoomGestures="false"
         map:uiCompass="false"
         map:uiRotateGestures="false"
         map:uiScrollGestures="false"
@@ -48,6 +50,7 @@
                 android:padding="5dp"
                 android:switchPadding="4dp"
                 android:text="@string/ar"
+                android:textColor="#2A0748"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 tools:layout_editor_absoluteX="16dp"
                 tools:layout_editor_absoluteY="18dp" />
@@ -71,6 +74,52 @@
                 tools:layout_editor_absoluteY="108dp" />
         </androidx.appcompat.widget.Toolbar>
     </fragment>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/loadingContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:foregroundTint="#0C0023"
+        android:visibility="visible">
 
+        <ImageView
+            android:id="@+id/loadingImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/moco_shroomy"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/loadingProgress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:indeterminate="true"
+            android:indeterminateTint="#2A0748"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.31" />
+
+        <TextView
+            android:id="@+id/loadingText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/loadingProgress"
+            android:layout_centerHorizontal="true"
+            android:text="Loading..."
+            android:textSize="18sp"
+            android:textColor="#2A0748"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.39" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
