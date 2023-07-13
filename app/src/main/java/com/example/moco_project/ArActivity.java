@@ -1074,7 +1074,7 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
             updateGeospatialState(earth);
         }
 
-        // anchores the camera position
+        // anchores the camera position as terrain anchor
         /*if(!mySpotanchored) {
             createTerrainAnchor(earth.getCameraGeospatialPose().getLatitude(),
                     earth.getCameraGeospatialPose().getLongitude());
@@ -1082,9 +1082,13 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
             Log.i("MyPosition", "My position was anchored as terrain anchor.");
         }*/
 
-        //anchores all the mushrooms from MapActivity
+        /*
+        for testing purposes the anchors are only placed once. // mushroomsAnchorPlaced = true;
+        for continues update of the anchors. Dont forget to detach then. It can happen that the anchors end up with 0 value in position
+         */
         if(!mushroomsAnchorPlaced) {
             Log.i("Shroomy:", "There are " + GameData.getMarkerData().size() + " mushrooms to anchor.");
+            //anchores all the mushrooms from MapActivity
             for(MarkerData markerData : GameData.getMarkerData()) {
                 createTerrainAnchor(markerData.getMarkerOption().getPosition().latitude,
                         markerData.getMarkerOption().getPosition().longitude);
@@ -1120,7 +1124,10 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
         // Visualize anchors created by touch.
         float scaleFactor = 1.0f;
 
-        //All Mushroom anchors
+        /*
+         Draws all mushroom anchors one time for testing purpose. to keep drawing (makes sence because position might update)
+         // mushroomsPlaced = true;
+         */
         if(!mushroomsPlaced) {
             for (Anchor myAnchor : anchors) {
                 if (myAnchor.getTrackingState() != TrackingState.TRACKING) {
