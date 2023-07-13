@@ -19,11 +19,9 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.opengl.GLES20;
-import android.opengl.GLSurfaceView;
 import android.opengl.GLUtils;
 import android.opengl.Matrix;
 
-import com.example.moco_project.ShaderUtil;
 import com.google.ar.core.Camera;
 import com.google.ar.core.Plane;
 import com.google.ar.core.Pose;
@@ -42,7 +40,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/** Renders the detected AR planes. */
+/** Renders the detected AR planes.
+ * Whole class copied from ARCores example shared_camera_java ->
+ * <a href="https://github.com/google-ar/arcore-android-sdk/tree/master/samples/shared_camera_java">Github</a>
+ */
 public class PlaneRenderer {
   private static final String TAG = PlaneRenderer.class.getSimpleName();
 

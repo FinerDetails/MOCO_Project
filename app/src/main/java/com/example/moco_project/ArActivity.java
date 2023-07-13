@@ -81,6 +81,9 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
+/**
+ * Copied and modified from ARCores example shared_camera_java -> <a href="https://github.com/google-ar/arcore-android-sdk/tree/master/samples/shared_camera_java">Github</a>
+ */
 public class ArActivity extends AppCompatActivity implements GLSurfaceView.Renderer,
  SurfaceTexture.OnFrameAvailableListener {
 
@@ -228,11 +231,15 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
 
     private boolean mySpotanchored = false;
 
-    /** ---------------------------------------------------------------------------------
-     * METHODE AREA
+
+
+
+
+
+    /**
+     * Copied and modified from ARCores example shared_camera_java ->
+     * <a href="https://github.com/google-ar/arcore-android-sdk/tree/master/samples/shared_camera_java">Github</a>
      */
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.i("ARCore:", "Creating ARActivity");
@@ -297,6 +304,10 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
 
     }
 
+    /**
+     * Copied and modified from ARCores example shared_camera_java ->
+     * <a href="https://github.com/google-ar/arcore-android-sdk/tree/master/samples/shared_camera_java">Github</a>
+     */
     @Override
     protected void onDestroy() {
         if (session != null) {
@@ -311,6 +322,10 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
         super.onDestroy();
     }
 
+    /**
+     * Copied and modified from ARCores example shared_camera_java ->
+     * <a href="https://github.com/google-ar/arcore-android-sdk/tree/master/samples/shared_camera_java">Github</a>
+     */
     @Override
     protected void onResume() {
         super.onResume();
@@ -338,6 +353,13 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
 
     /**
      * Creates a new TerrainAnchor. For a preciser Anchor VPS is needed...
+     * If VPS is not available GPS will be used instead but the location can end up pretty far off
+     *
+     * Copied and modified from ARCores example geospatial_java ->
+     * <a href="https://github.com/google-ar/arcore-android-sdk/tree/master/samples/geospatial_java">GitHub</a>
+     *
+     * @param latitude latitude coordinate of the new anchor
+     * @param longitude longitude coordinate of the new anchor
      */
     public void createTerrainAnchor(double latitude, double longitude) {
         float[] quaternion = {0, 0, 0, 1};
@@ -361,7 +383,7 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
 
     /**
      * Copied from ARCores example geospatial_java ->
-     * <a href="https://github.com/google-ar/arcore-android-sdk/blob/master/samples/geospatial_java/app/src/main/java/com/google/ar/core/examples/java/geospatial/GeospatialActivity.java">GitHub</a>
+     * <a href="https://github.com/google-ar/arcore-android-sdk/tree/master/samples/geospatial_java">GitHub</a>
      * @param earth An image of the real world
      */
     private void updateGeospatialState(Earth earth) {
@@ -384,7 +406,7 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
 
     /**
      * Checks the state of our Visual Positioning System (VPS).
-     * @param future
+     * @param future eventual completion of an asynchronous operation
      */
     private void checkVpsState(VpsAvailabilityFuture future)  {
         if(future.getState() != FutureState.DONE) {
@@ -398,17 +420,14 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
         }
     }
 
-    private void resolveVpsAvailabilityFutureState(VpsAvailabilityFuture future) {
-
-    }
-
     /**
      * Copied and modified from ARCores example geospatial_java ->
-     * <a href="https://github.com/google-ar/arcore-android-sdk/blob/master/samples/geospatial_java/app/src/main/java/com/google/ar/core/examples/java/geospatial/GeospatialActivity.java">GitHub</a>
+     * <a href="https://github.com/google-ar/arcore-android-sdk/blob/master/samples/geospatial_java">GitHub</a>
      *
      * Handles the updating for @link State.PRETRACKING. In this state, wait for {@link Earth} to
-     * have @link TrackingState.TRACKING. If it hasn't been enabled by now, then we've encountered
-     * an unrecoverable @link State.EARTH_STATE_ERROR.
+     * have TrackingState.TRACKING. If it hasn't been enabled by now, then we've encountered
+     * an unrecoverable State.EARTH_STATE_ERROR.
+     * @param earth An image of the real world
      */
     private void updatePretrackingState(Earth earth) {
         if (earth.getTrackingState() == TrackingState.TRACKING) {
@@ -420,11 +439,12 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
 
     /**
      * Copied and modified from ARCores example geospatial_java ->
-     * <a href="https://github.com/google-ar/arcore-android-sdk/blob/master/samples/geospatial_java/app/src/main/java/com/google/ar/core/examples/java/geospatial/GeospatialActivity.java">GitHub</a>
+     * <a href="https://github.com/google-ar/arcore-android-sdk/blob/master/samples/geospatial_java">GitHub</a>
      *
-     * Handles the updating for @link State.LOCALIZED. In this state, check the accuracy for
-     * degradation and return to @link State.LOCALIZING if the position accuracies have dropped too
+     * Handles the updating for State.LOCALIZED. In this state, check the accuracy for
+     * degradation and return to State.LOCALIZING if the position accuracies have dropped too
      * low.
+     * @param earth An image of the real world
      */
     private void updateLocalizedState(Earth earth) {
         GeospatialPose geospatialPose = earth.getCameraGeospatialPose();
@@ -443,10 +463,11 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
 
     /**
      * Copied and modified from ARCores example geospatial_java ->
-     * <a href="https://github.com/google-ar/arcore-android-sdk/blob/master/samples/geospatial_java/app/src/main/java/com/google/ar/core/examples/java/geospatial/GeospatialActivity.java">GitHub</a>
+     * <a href="https://github.com/google-ar/arcore-android-sdk/blob/master/samples/geospatial_java">GitHub</a>
      *
-     * Handles the updating for @link State.LOCALIZING. In this state, wait for the horizontal and
+     * Handles the updating for State.LOCALIZING. In this state, wait for the horizontal and
      * orientation threshold to improve until it reaches your threshold.
+     * @param earth An image of the real world
      */
     private void updateLocalizingState(Earth earth) {
         GeospatialPose geospatialPose = earth.getCameraGeospatialPose();
@@ -457,6 +478,10 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
         }
     }
 
+    /**
+     * Copied and modified from ARCores example shared_camera_java ->
+     * <a href="https://github.com/google-ar/arcore-android-sdk/tree/master/samples/shared_camera_java">Github</a>
+     */
     @Override
     public void onPause() {
         shouldUpdateSurfaceTexture.set(false);
@@ -472,7 +497,8 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
     }
 
     /**
-     * Copied from
+     * Copied from ARCores example shared_camera_java ->
+     * <a href="https://github.com/google-ar/arcore-android-sdk/tree/master/samples/shared_camera_java">Github</a>
      */
     private synchronized void waitUntilCameraCaptureSessionIsActive() {
         while (!captureSessionChangesPossible) {
@@ -485,7 +511,8 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
     }
 
     /**
-     * Copied from
+     * Copied from ARCores example shared_camera_java ->
+     * <a href="https://github.com/google-ar/arcore-android-sdk/tree/master/samples/shared_camera_java">Github</a>
      */
     private void startBackgroundThread() {
         backgroundThread = new HandlerThread("sharedCameraBackground");
@@ -493,6 +520,10 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
         backgroundHandler = new Handler(backgroundThread.getLooper());
     }
 
+    /**
+     * Copied from ARCores example shared_camera_java ->
+     * <a href="https://github.com/google-ar/arcore-android-sdk/tree/master/samples/shared_camera_java">Github</a>
+     */
     // Stop background handler thread.
     private void stopBackgroundThread() {
         if (backgroundThread != null) {
@@ -509,6 +540,10 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
 
     /**
      * Verifies that ARCore is installed and using the current version.
+     *
+     * Copied and modified from ARCores example shared_camera_java ->
+     * <a href="https://github.com/google-ar/arcore-android-sdk/tree/master/samples/shared_camera_java">Github</a>
+     * The method name there is isARCoreSupportedAndUpToDate()
      */
     public boolean checkARCoreStatus() {
         // Make sure ARCore is installed and supported on this device.
@@ -549,6 +584,10 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
     /**
      * Checks, if the camera permission has been granted before or not
      * @return true --> was granted; false --> wasn't  granted
+     *
+     * Copied and modified from ARCores example shared_camera_java ->
+     * <a href="https://github.com/google-ar/arcore-android-sdk/tree/master/samples/shared_camera_java">Github</a>
+     * The class name is CameraPermissionHelper. Method name is hasCameraPermission()
      */
     public boolean checkIfCameraPermissionHasBeenGranted() {
         Log.i(TAG, "PERMISSION has been granted before.");
@@ -558,6 +597,10 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
 
     /**
      * Requests to use the camera. A pop up window will appear and asks for usage permission
+     *
+     * Copied and modified from ARCores example shared_camera_java ->
+     * <a href="https://github.com/google-ar/arcore-android-sdk/tree/master/samples/shared_camera_java">Github</a>
+     * The class name is CameraPermissionHelper. Method name is hasCameraPermission()
      */
     public void requestCameraPermission() {
         Log.i(TAG, "REQUESTING PERMISSION.");
@@ -566,6 +609,11 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
 
     /**
      * Creates a new ARCore Session, in case ARCore is installed
+     *
+     * Based on the examples shared_camera_java ->
+     * <a href="https://github.com/google-ar/arcore-android-sdk/tree/master/samples/shared_camera_java">Github</a>
+     * and geospatial_java ->
+     * <a href="https://github.com/google-ar/arcore-android-sdk/blob/master/samples/geospatial_java">GitHub</a>
      */
     public void createSession() {
         try {
@@ -617,7 +665,14 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
         Log.i("ShroomyInSession:", String.valueOf(geospatialModeSupported));
     }
 
-        public void openCamera() {
+    /**
+     * Opens the camera of the phone if permission was granted and ARCore is installed.
+     * In case that there's no current session a new one is created
+     *
+     * Copied and modified from ARCores example shared_camera_java ->
+     * <a href="https://github.com/google-ar/arcore-android-sdk/tree/master/samples/shared_camera_java">Github</a>
+     */
+    public void openCamera() {
         // Our camera is already opened and doesn't have to be opened again
         if (cameraDevice != null) {
             return;
@@ -679,7 +734,14 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
         }
     }
 
-    // Close the camera device.
+
+    /**
+     *  Close the camera device.
+     *
+     * Copied and modified from ARCores example shared_camera_java ->
+     * <a href="https://github.com/google-ar/arcore-android-sdk/tree/master/samples/shared_camera_java">Github</a>
+     */
+
     private void closeCamera() {
         if (captureSession != null) {
             captureSession.close();
@@ -694,9 +756,12 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
     }
 
     /**
-     * Creates a new capture session. TEMPLATE_RECORD makes shure that our capture request is
+     * Creates a new capture session. TEMPLATE_RECORD makes sure that our capture request is
      * compatible with ARCore.
      * Through this we can switch between non-AR and AR mode at runtime
+     *
+     * Copied and modified from ARCores example shared_camera_java ->
+     * <a href="https://github.com/google-ar/arcore-android-sdk/tree/master/samples/shared_camera_java">Github</a>
      */
     public void createCameraPreviewSession() {
         try {
@@ -732,10 +797,12 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
         }
     }
 
-
     /**
      * Called when starting non-AR mode or switching to non-AR mode.
      * Also called when app starts in AR mode, or resumes in AR mode.
+     *
+     * Copied from ARCores example shared_camera_java ->
+     * <a href="https://github.com/google-ar/arcore-android-sdk/tree/master/samples/shared_camera_java">Github</a>
      */
     private void setRepeatingCaptureRequest() {
         try {
@@ -748,6 +815,10 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
         }
     }
 
+    /**
+     * Copied from ARCores example shared_camera_java ->
+     * <a href="https://github.com/google-ar/arcore-android-sdk/tree/master/samples/shared_camera_java">Github</a>
+     */
     private <T> boolean checkIfKeyCanCauseDelay(CaptureRequest.Key<T> key) {
         if (Build.VERSION.SDK_INT >= 28) {
             // On Android P and later, return true if key is difficult to apply per-frame.
@@ -771,6 +842,11 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
         }
     }
 
+    /**
+     * Copied from ARCores example shared_camera_java ->
+     * <a href="https://github.com/google-ar/arcore-android-sdk/tree/master/samples/shared_camera_java">Github</a>
+     * @param captureBuilder
+     */
     // If possible, apply effect in non-AR mode, to help visually distinguish between from AR mode.
     private void setCameraEffects(CaptureRequest.Builder captureBuilder) {
         if (checkIfKeyCanCauseDelay(CaptureRequest.CONTROL_EFFECT_MODE)) {
@@ -787,6 +863,8 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
      * There is a reference of the camera device stored. We can start here a new capture session
      * for AR switching
      *
+     * Copied from ARCores example shared_camera_java ->
+     * <a href="https://github.com/google-ar/arcore-android-sdk/tree/master/samples/shared_camera_java">Github</a>
      * @param cameraDevice
      */
     private final CameraDevice.StateCallback cameraDeviceCallback = new CameraDevice.StateCallback() {
@@ -822,6 +900,10 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
         }
     };
 
+    /**
+     * Copied from ARCores example shared_camera_java ->
+     * <a href="https://github.com/google-ar/arcore-android-sdk/tree/master/samples/shared_camera_java">Github</a>
+     */
     private void resumeARCore() {
         // Ensure that session is valid before triggering ARCore resume. Handles the case where the user
         // manually uninstalls ARCore while the app is paused and then resumes.
@@ -847,6 +929,10 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
         }
     }
 
+    /**
+     * Copied from ARCores example shared_camera_java ->
+     * <a href="https://github.com/google-ar/arcore-android-sdk/tree/master/samples/shared_camera_java">Github</a>
+     */
     private void pauseARCore() {
         if (arcoreActive) {
             // Pause ARCore.
@@ -856,6 +942,14 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
         }
     }
 
+    /**
+     * GL surface created callback. Will be called on the GL thread.
+     *
+     * Copied from ARCores example shared_camera_java ->
+     * <a href="https://github.com/google-ar/arcore-android-sdk/tree/master/samples/shared_camera_java">Github</a>
+     * @param gl10
+     * @param eglConfig
+     */
     @Override
     public void onSurfaceCreated(GL10 gl10, EGLConfig eglConfig) {
         surfaceCreated = true;
@@ -884,7 +978,12 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
         }
     }
 
-    // GL surface changed callback. Will be called on the GL thread.
+    /**
+     *  GL surface changed callback. Will be called on the GL thread.
+     *
+     * Copied from ARCores example shared_camera_java ->
+     * <a href="https://github.com/google-ar/arcore-android-sdk/tree/master/samples/shared_camera_java">Github</a>
+      */
     @Override
     public void onSurfaceChanged(GL10 gl, int width, int height) {
         GLES20.glViewport(0, 0, width, height);
@@ -898,7 +997,12 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
             });
     }
 
-    // GL draw callback. Will be called each frame on the GL thread.
+    /**
+     * GL draw callback. Will be called each frame on the GL thread.
+     * Copied and modified from ARCores example shared_camera_java ->
+     * <a href="https://github.com/google-ar/arcore-android-sdk/tree/master/samples/shared_camera_java">Github</a>
+     * @param gl
+     */
     @Override
     public void onDrawFrame(GL10 gl) {
         // Use the cGL clear color specified in onSurfaceCreated() to erase the GL surface.
@@ -923,14 +1027,22 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
     }
 
 
-    // Surface texture on frame available callback, used only in non-AR mode.
-    // We need to keep this method because of the class implementation
+    /** Surface texture on frame available callback, used only in non-AR mode.
+     * We need to keep this method because of the class implementation
+     */
     @Override
     public void onFrameAvailable(SurfaceTexture surfaceTexture) {
-        // Log.d(TAG, "onFrameAvailable()");
     }
 
-    // Draw frame when in AR mode. Called on the GL thread.
+    /**
+     * Draw frame when in AR mode. Called on the GL thread.
+     *
+     * Based on the examples shared_camera_java ->
+     * <a href="https://github.com/google-ar/arcore-android-sdk/tree/master/samples/shared_camera_java">Github</a>
+     * and geospatial_java ->
+     * <a href="https://github.com/google-ar/arcore-android-sdk/blob/master/samples/geospatial_java">GitHub</a>
+     * @throws CameraNotAvailableException
+     */
     public void onDrawFrameARCore() throws CameraNotAvailableException {
         if (!arcoreActive) {
             // ARCore not yet active, so nothing to draw yet.
@@ -962,6 +1074,7 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
             updateGeospatialState(earth);
         }
 
+        // anchores the camera position
         /*if(!mySpotanchored) {
             createTerrainAnchor(earth.getCameraGeospatialPose().getLatitude(),
                     earth.getCameraGeospatialPose().getLongitude());
@@ -969,7 +1082,7 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
             Log.i("MyPosition", "My position was anchored as terrain anchor.");
         }*/
 
-
+        //anchores all the mushrooms from MapActivity
         if(!mushroomsAnchorPlaced) {
             Log.i("Shroomy:", "There are " + GameData.getMarkerData().size() + " mushrooms to anchor.");
             for(MarkerData markerData : GameData.getMarkerData()) {
@@ -1032,6 +1145,8 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
     /**
      * Repeating camera capture session state callback
      *
+     * Copied from ARCores example shared_camera_java ->
+     * <a href="https://github.com/google-ar/arcore-android-sdk/tree/master/samples/shared_camera_java">Github</a>
      * @param session
      */
     CameraCaptureSession.StateCallback cameraSessionStateCallback = new CameraCaptureSession.StateCallback() {
@@ -1088,6 +1203,9 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
 
     /**
      * Repeating camera capture session capture callback.
+     *
+     * Copied from ARCores example shared_camera_java ->
+     * <a href="https://github.com/google-ar/arcore-android-sdk/tree/master/samples/shared_camera_java">Github</a>
      */
     private final CameraCaptureSession.CaptureCallback cameraCaptureCallback = new CameraCaptureSession.CaptureCallback() {
 
@@ -1124,12 +1242,22 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
     };
 
 
-    /** Check to see if we need to show the rationale for this permission. */
+    /** Check to see if we need to show the rationale for this permission.
+     *
+     * Copied from ARCores example shared_camera_java ->
+     * <a href="https://github.com/google-ar/arcore-android-sdk/tree/master/samples/shared_camera_java">Github</a>
+     * Classname CameraPermissionHelper
+     */
     public static boolean shouldShowRequestPermissionRationale(Activity activity) {
         return ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission.CAMERA);
     }
 
-    /** Launch Application Setting to grant permission. */
+    /** Launch Application Setting to grant permission.
+     *
+     * Copied from ARCores example shared_camera_java ->
+     * <a href="https://github.com/google-ar/arcore-android-sdk/tree/master/samples/shared_camera_java">Github</a>
+     * Classname CameraPermissionHelper
+     */
     public static void launchPermissionSettings(Activity activity) {
         Intent intent = new Intent();
         intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
@@ -1137,7 +1265,11 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
         activity.startActivity(intent);
     }
 
-    /** Callback for the result from requesting permissions. This method is invoked for every call on requestPermission */
+    /** Callback for the result from requesting permissions. This method is invoked for every call on requestPermission
+     *
+     * Copied and modified from ARCores example shared_camera_java ->
+     * <a href="https://github.com/google-ar/arcore-android-sdk/tree/master/samples/shared_camera_java">Github</a>
+     */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, int[] results) {
         super.onRequestPermissionsResult(requestCode, permissions, results);
@@ -1150,6 +1282,16 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
         }
     }
 
+
+    /**
+     * Sets the Android fullscreen flags.
+     *
+     * Copied from ARCores example shared_camera_java ->
+     * <a href="https://github.com/google-ar/arcore-android-sdk/tree/master/samples/shared_camera_java">Github</a>
+     * Classname FullScreenHelper
+     * @param activity
+     * @param hasFocus
+     */
     public static void setFullScreenOnWindowFocusChanged(Activity activity, boolean hasFocus) {
         if (hasFocus) {
             // https://developer.android.com/training/system-ui/immersive.html#sticky
@@ -1166,7 +1308,12 @@ public class ArActivity extends AppCompatActivity implements GLSurfaceView.Rende
         }
     }
 
-    // Android focus change callback.
+    /**
+     * Android focus change callback.
+     *
+     * Copied from ARCores example shared_camera_java ->
+     * <a href="https://github.com/google-ar/arcore-android-sdk/tree/master/samples/shared_camera_java">Github</a>
+     */
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);

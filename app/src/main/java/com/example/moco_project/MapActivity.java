@@ -45,7 +45,8 @@ import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
-
+/** This class uses Google maps as background and orientation point.
+ * It handles the */
 public class MapActivity extends AppCompatActivity
         implements
         OnMapsSdkInitializedCallback,
@@ -57,16 +58,23 @@ public class MapActivity extends AppCompatActivity
 
     private boolean permissionDenied = false;
 
+    // A fresh copy of the google map
     private GoogleMap map;
     private boolean cameraInitialized = false;
+
+    // An adventure zone on top of the map
     private Zone zone;
 
+    // Devines if user is inside the zone or not
     private boolean userInsideZone = false;
     private LocationCallback locationCallback;
     private FusedLocationProviderClient fusedLocationClient;
 
-
+    // Switch for changing between ArActivity and MapActivity
+    @SuppressLint("UseSwitchCompatOrMaterialCode")
     private Switch arcoreSwitch;
+
+    // The bar that displays the current hunger status of the user
     private ProgressBar hungerBar;
     private Timer timer;
     private ConstraintLayout loadingScreen;
@@ -148,7 +156,7 @@ public class MapActivity extends AppCompatActivity
         super.onDestroy();
     }
 
-    //Callback for rendered map
+    /** Callback for rendered map*/
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         map = googleMap;
@@ -160,13 +168,15 @@ public class MapActivity extends AppCompatActivity
         waitForCameraAndCallgetLocation();
     }
 
+    /**
+     * We return false to indicate that we have not consumed the event and that we wish
+     * for the default behavior to occur (which is for the camera to move such that the
+     * marker is centered and for the marker's info window to open, if it has one).
+     * @param marker the mushroom on map
+     * @return true -> mushroom was eaten. lesser hungry; false -> mushroom is not visible and cant be consumed
+     */
     @Override
     public boolean onMarkerClick(final Marker marker) {
-
-        // We return false to indicate that we have not consumed the event and that we wish
-        // for the default behavior to occur (which is for the camera to move such that the
-        // marker is centered and for the marker's info window to open, if it has one).
-
         //Only increments hunger if the clicked Marker has been set to visible
         if(marker.isVisible()){
             GameData.incrementHunger();
@@ -201,7 +211,7 @@ public class MapActivity extends AppCompatActivity
         map.animateCamera(cameraUpdate);
     }
 
-    //Requests user location results
+    /** Requests user location results*/
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
@@ -233,15 +243,16 @@ public class MapActivity extends AppCompatActivity
         }
     }
 
-    /**
-     * Displays a dialog with error message explaining that the location permission is missing.
-     */
+    /** Displays a dialog with error message explaining that the location permission is missing.*/
     private void showMissingPermissionError() {
         PermissionUtils.PermissionDeniedDialog
                 .newInstance(true).show(getSupportFragmentManager(), "dialog");
     }
-    //Creates a request for continuous location updates
-    //Methods for LocationRequest became depricated since the start of development, but they still work.
+
+    /**
+     * Creates a request for continuous location updates
+     * Methods for LocationRequest became depricated since the start of development, but they still work.
+     */
     private LocationRequest createLocationRequest() {
         LocationRequest locationRequest = LocationRequest.create();
         locationRequest.setInterval(3000);
@@ -250,7 +261,7 @@ public class MapActivity extends AppCompatActivity
         return locationRequest;
     }
 
-    //Requests continuous location updates
+    /** Requests continuous location updates*/
     @SuppressLint("MissingPermission")
     private void startLocationUpdates() {
         fusedLocationClient.requestLocationUpdates(createLocationRequest(),
@@ -258,12 +269,12 @@ public class MapActivity extends AppCompatActivity
                 Looper.getMainLooper());
     }
 
-    //Stops continuous location updates
+    /** Stops continuous location updates*/
     private void stopLocationUpdates() {
         fusedLocationClient.removeLocationUpdates(locationCallback);
     }
 
-    //Waits for the map camera to be ready before requesting the last known location.
+    /** Waits for the map camera to be ready before requesting the last known location.*/
     private void waitForCameraAndCallgetLocation() {
         final Handler handler = new Handler();
         final int delay = 500; // Delay in milliseconds
@@ -283,7 +294,7 @@ public class MapActivity extends AppCompatActivity
     }
 
 
-    //Requests the last known location one time.
+    /** Requests the last known location one time.*/
     @SuppressLint("MissingPermission")
     private void getLocation() {
         fusedLocationClient.getLastLocation().addOnSuccessListener(this, location ->  {
@@ -296,7 +307,7 @@ public class MapActivity extends AppCompatActivity
         });
     }
 
-    //Logs the use of the map renderer
+    /** Logs the use of the map renderer*/
     @Override
     public void onMapsSdkInitialized(@NonNull Renderer renderer) {
         switch (renderer) {
@@ -308,8 +319,11 @@ public class MapActivity extends AppCompatActivity
                 break;
         }
     }
-    //Detects if the user is in the zone and sets the visibility of the AR switch based on that.
-    //Detection is based on radius of Zone compared to calculated distance of users location to center of the Zone
+
+    /**
+     * Detects if the user is in the zone and sets the visibility of the AR switch based on that.
+     * Detection is based on radius of Zone compared to calculated distance of users location to center of the Zone
+     */
     public void whenUserInsidePurpleZone(Location location) {
         Location centerLocation = new Location("");
         centerLocation.setLatitude(zone.getLocation().latitude);
@@ -331,7 +345,7 @@ public class MapActivity extends AppCompatActivity
             arcoreSwitch.setVisibility(View.GONE);
         }
     }
-    // Randomly generates new Markers on the map based on values in GameData and saves it to a list.
+    /** Randomly generates new Markers on the map based on values in GameData and saves it to a list.*/
     private void generateMarkers(){
         int width = 50; //In pixels
         int height = 50;

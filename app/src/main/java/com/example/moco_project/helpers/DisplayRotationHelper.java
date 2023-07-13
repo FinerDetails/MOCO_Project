@@ -32,6 +32,9 @@ import com.google.ar.core.Session;
  * Helper to track the display rotations. In particular, the 180 degree rotations are not notified
  * by the onSurfaceChanged() callback, and thus they require listening to the android display
  * events.
+ *
+ * Whole class copied from ARCores example shared_camera_java ->
+ * <a href="https://github.com/google-ar/arcore-android-sdk/tree/master/samples/shared_camera_java">Github</a>
  */
 public final class DisplayRotationHelper implements DisplayListener {
   private boolean viewportChanged;

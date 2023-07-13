@@ -3021,6 +3021,7 @@ drawable material_ic_keyboard_arrow_previous_black_24dp
 drawable material_ic_keyboard_arrow_right_black_24dp
 drawable material_ic_menu_arrow_down_black_24dp
 drawable material_ic_menu_arrow_up_black_24dp
+drawable moco_shroomy
 drawable mtrl_bottomsheet_drag_handle
 drawable mtrl_checkbox_button
 drawable mtrl_checkbox_button_checked_unchecked
@@ -3328,6 +3329,10 @@ id line3
 id linear
 id listMode
 id list_item
+id loadingContainer
+id loadingImage
+id loadingProgress
+id loadingText
 id m3_side_sheet
 id map
 id mapContainer

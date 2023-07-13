@@ -10,22 +10,19 @@ import com.google.android.gms.maps.model.LatLng;
 import java.util.Random;
 
 
-//Class for the big purple Zone.
+/**
+ * Class for the big purple Zone. --> Adventure zone in which the activation of the AR mode is possible
+ */
 public class Zone {
-    public LatLng getLocation() {
-        return location;
-    }
 
+    // Latitude and Longitude position of the zone
     private static LatLng location;
+    // the map on which the Zone is going to be drawn
     private static GoogleMap map;
-
-
-    public double getZoneRadius() {
-        return zoneRadius;
-    }
-
+    // stores the radius for the zone -> defines how big the zone circle will be
     private static double zoneRadius;
 
+    /** Constructor for the adventure zone*/
     public Zone(Location userLocation, GoogleMap map, double zoneRadius) {
         this.map = map;
         this.zoneRadius = zoneRadius;
@@ -33,7 +30,17 @@ public class Zone {
         createZones(true, userLatLng);
     }
 
-    //Creates circles on the map
+    /** returns the current location of the zone*/
+    public LatLng getLocation() {
+        return location;
+    }
+
+    /** returns the radius of the zone*/
+    public double getZoneRadius() {
+        return zoneRadius;
+    }
+
+    /** Creates the zone circle on the map*/
     public static Circle createZones(Boolean isPurpleZone, LatLng zoneLocation) {
         double currentLat;
         double currentLng;
@@ -68,7 +75,7 @@ public class Zone {
     }
 
 
-    //Randomly generates a LatLng object to a wanted distance
+    /** Randomly generates a LatLng object to a wanted distance*/
     public static LatLng generatePoints(double currentLat, double currentLng, double minDistance, double maxDistance) {
         Random random = new Random();
         final double conversionRate = 0.000009;

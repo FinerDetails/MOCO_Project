@@ -6,7 +6,6 @@ import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import androidx.annotation.NonNull;
 
-import com.example.moco_project.ShaderUtil;
 import com.google.ar.core.Coordinates2d;
 import com.google.ar.core.Frame;
 import java.io.IOException;
@@ -19,6 +18,9 @@ import javax.microedition.khronos.opengles.GL10;
 /**
  * This class renders the AR background from camera feed. It creates and hosts the texture given to
  * ARCore to be filled with the camera image.
+ *
+ * Whole class copied from ARCores example shared_camera_java ->
+ * <a href="https://github.com/google-ar/arcore-android-sdk/tree/master/samples/shared_camera_java">Github</a>
  */
 public class BackgroundRenderer {
     private static final String TAG = BackgroundRenderer.class.getSimpleName();

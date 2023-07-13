@@ -13,6 +13,7 @@ color orange
 color white
 drawable ic_launcher_background
 drawable ic_launcher_foreground
+drawable moco_shroomy
 drawable mushroom_icon_edited
 drawable mushroom_icon_edited3
 id arcore_switch
@@ -21,6 +22,10 @@ id glsurfaceview
 id hungerBar
 id imageView
 id image_text_layout
+id loadingContainer
+id loadingImage
+id loadingProgress
+id loadingText
 id map
 id mapContainer
 id start

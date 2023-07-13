@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Switch;
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
@@ -32,6 +33,18 @@ public final class ActivityMapBinding implements ViewBinding {
   public final ImageView imageView;
 
   @NonNull
+  public final ConstraintLayout loadingContainer;
+
+  @NonNull
+  public final ImageView loadingImage;
+
+  @NonNull
+  public final ProgressBar loadingProgress;
+
+  @NonNull
+  public final TextView loadingText;
+
+  @NonNull
   public final ConstraintLayout mapContainer;
 
   @NonNull
@@ -39,11 +52,17 @@ public final class ActivityMapBinding implements ViewBinding {
 
   private ActivityMapBinding(@NonNull ConstraintLayout rootView, @NonNull Switch arcoreSwitch,
       @NonNull ProgressBar hungerBar, @NonNull ImageView imageView,
+      @NonNull ConstraintLayout loadingContainer, @NonNull ImageView loadingImage,
+      @NonNull ProgressBar loadingProgress, @NonNull TextView loadingText,
       @NonNull ConstraintLayout mapContainer, @NonNull Toolbar toolbar) {
     this.rootView = rootView;
     this.arcoreSwitch = arcoreSwitch;
     this.hungerBar = hungerBar;
     this.imageView = imageView;
+    this.loadingContainer = loadingContainer;
+    this.loadingImage = loadingImage;
+    this.loadingProgress = loadingProgress;
+    this.loadingText = loadingText;
     this.mapContainer = mapContainer;
     this.toolbar = toolbar;
   }
@@ -93,6 +112,30 @@ public final class ActivityMapBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.loadingContainer;
+      ConstraintLayout loadingContainer = ViewBindings.findChildViewById(rootView, id);
+      if (loadingContainer == null) {
+        break missingId;
+      }
+
+      id = R.id.loadingImage;
+      ImageView loadingImage = ViewBindings.findChildViewById(rootView, id);
+      if (loadingImage == null) {
+        break missingId;
+      }
+
+      id = R.id.loadingProgress;
+      ProgressBar loadingProgress = ViewBindings.findChildViewById(rootView, id);
+      if (loadingProgress == null) {
+        break missingId;
+      }
+
+      id = R.id.loadingText;
+      TextView loadingText = ViewBindings.findChildViewById(rootView, id);
+      if (loadingText == null) {
+        break missingId;
+      }
+
       ConstraintLayout mapContainer = (ConstraintLayout) rootView;
 
       id = R.id.toolbar;
@@ -102,7 +145,7 @@ public final class ActivityMapBinding implements ViewBinding {
       }
 
       return new ActivityMapBinding((ConstraintLayout) rootView, arcoreSwitch, hungerBar, imageView,
-          mapContainer, toolbar);
+          loadingContainer, loadingImage, loadingProgress, loadingText, mapContainer, toolbar);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

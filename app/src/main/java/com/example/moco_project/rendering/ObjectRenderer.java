@@ -22,8 +22,6 @@ import android.opengl.GLES20;
 import android.opengl.GLUtils;
 import android.opengl.Matrix;
 
-import com.example.moco_project.ShaderUtil;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
@@ -39,7 +37,10 @@ import de.javagl.obj.ObjData;
 import de.javagl.obj.ObjReader;
 import de.javagl.obj.ObjUtils;
 
-/** Renders an object loaded from an OBJ file in OpenGL. */
+/** Renders an object loaded from an OBJ file in OpenGL.
+ * Whole class copied from ARCores example shared_camera_java ->
+ * <a href="https://github.com/google-ar/arcore-android-sdk/tree/master/samples/shared_camera_java">Github</a>
+ */
 public class ObjectRenderer {
   private static final String TAG = ObjectRenderer.class.getSimpleName();
 

@@ -17,15 +17,16 @@ package com.example.moco_project.rendering;
 
 import android.content.Context;
 import android.opengl.GLES20;
-import android.opengl.GLSurfaceView;
 import android.opengl.Matrix;
 
-import com.example.moco_project.ShaderUtil;
 import com.google.ar.core.PointCloud;
 
 import java.io.IOException;
 
-/** Renders a point cloud. */
+/** Renders a point cloud.
+ * Whole class copied from ARCores example shared_camera_java ->
+ * <a href="https://github.com/google-ar/arcore-android-sdk/tree/master/samples/shared_camera_java">Github</a>
+ */
 public class PointCloudRenderer {
   private static final String TAG = PointCloud.class.getSimpleName();
 

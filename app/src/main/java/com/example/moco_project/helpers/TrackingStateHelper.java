@@ -22,7 +22,11 @@ import com.google.ar.core.Camera;
 import com.google.ar.core.TrackingFailureReason;
 import com.google.ar.core.TrackingState;
 
-/** Gets human readibly tracking failure reasons and suggested actions. */
+/** Gets human readibly tracking failure reasons and suggested actions.
+ *
+ * Whole class copied from ARCores example shared_camera_java ->
+ * <a href="https://github.com/google-ar/arcore-android-sdk/tree/master/samples/shared_camera_java">Github</a>
+ */
 public final class TrackingStateHelper {
   private static final String INSUFFICIENT_FEATURES_MESSAGE =
       "Can't find anything. Aim device at a surface with more texture or color.";

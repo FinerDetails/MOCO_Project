@@ -27,6 +27,9 @@ import java.util.concurrent.BlockingQueue;
 /**
  * Helper to detect taps using Android GestureDetector, and pass the taps between UI thread and
  * render thread.
+ *
+ * Whole class copied from ARCores example shared_camera_java ->
+ * <a href="https://github.com/google-ar/arcore-android-sdk/tree/master/samples/shared_camera_java">Github</a>
  */
 public final class TapHelper implements OnTouchListener {
   private final GestureDetector gestureDetector;
