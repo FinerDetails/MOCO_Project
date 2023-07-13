@@ -40,12 +40,18 @@ manifestPlaceholders = [MAPS_API_KEY: "${properties.getProperty('MAPS_API_KEY')}
 
 Using a physical device instead of an emulator is highly recommended.
 
+Please check the file local.properties as well and change the SDK path to wherever your Android SDK is stored.
 
 Some references used in the creation of the code:
 https://developers.google.com/maps/documentation/android-sdk/map
 https://developers.google.com/maps/documentation/android-sdk/location *this demo is closely followed in the code*
 https://developers.google.com/maps/documentation/android-sdk/marker
 https://developers.google.com/maps/documentation/android-sdk/cloud-customization/overview
+
+The ArActivity is build around the ARCore examples shared_camera_java and geospatial_java.
+Both Github repos can be found here:
+https://github.com/google-ar/arcore-android-sdk/tree/master/samples/shared_camera_java
+https://github.com/google-ar/arcore-android-sdk/tree/master/samples/geospatial_java
 
 
 
