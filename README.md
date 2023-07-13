@@ -24,6 +24,8 @@ The MapActivity takes advantage of Googles updated map renderer that allows the 
 instead of the default map.
 The app requires and prompts the use of fine location data and the use of camera.
 
+ArActivity uses openGL to visualize 3D objects and surfaces.
+
 
 TESTING THE APP
 
@@ -41,6 +43,12 @@ manifestPlaceholders = [MAPS_API_KEY: "${properties.getProperty('MAPS_API_KEY')}
 Using a physical device instead of an emulator is highly recommended.
 
 Please check the file local.properties as well and change the SDK path to wherever your Android SDK is stored.
+
+Please be aware as well that the ArActivity uses geospatial anchors -> Terrain Anchor.
+This means that the activity requires a bright area where its possible to track points, otherwise the creation of an earth image will fail.
+The activity also requires VPS to place the Anchors precisely. It is possible to place anchors just through the GPS signal but the anchors could end up extremely off the original position.
+In the worst case all anchor Positions will be around 0 altiude, 0 longitude, 0, latitude.
+Therefore it is recommended to test this with an open log panel to actually see if the anchors were placed properly.
 
 Some references used in the creation of the code:
 https://developers.google.com/maps/documentation/android-sdk/map
